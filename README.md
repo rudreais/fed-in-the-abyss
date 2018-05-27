@@ -3,7 +3,9 @@
 # Getting started
 
 ## prerequisites
-ncurses
+as the game is console based, you'll need to install `ncurses` for C.
+
+to compile the game, make sure you have `premake5` (for creating the makefile) and `make` (for running it).
 
 ## installing
 ```bash
