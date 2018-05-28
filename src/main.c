@@ -80,9 +80,6 @@ void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
 		if (first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
 			pos->x = old_pos->x;
 			pos->y = old_pos->y;
-			mvprintw(15,15, "%c", first_floor->design[pos->y][pos->x]);
-		} else {
-			mvprintw(15,15, "%c", first_floor->design[pos->y][pos->x]);
 		}
 	}
 }
