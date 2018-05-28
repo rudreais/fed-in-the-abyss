@@ -22,7 +22,7 @@ cursor_t get_start(floor_t *f_floor)
 
 	for (int i = 0; i < f_floor->ymax - 1; i++) {
 		for (int j = 0; f_floor->design[i][j]; j++) {
-			if (f_floor->design[i][j] == '*') {
+			if (f_floor->design[i][j] == START_FLOOR) {
 				startxy.x = j;
 				startxy.y = i;
 				mvprintw(28,0,"%d %d\n", j, i);
@@ -34,7 +34,6 @@ cursor_t get_start(floor_t *f_floor)
 
 void get_map(floor_t *f_floor)
 {
-	char *path = "../../../maps/1_1";
 	FILE * fp;
     char * line = NULL;
     size_t len = 0;
@@ -43,7 +42,7 @@ void get_map(floor_t *f_floor)
 
 	f_floor->design = malloc(sizeof(char *) * 1);
 	fp = fopen(path, "r");
-	while (read = getline(&line, &len, fp) != -1) {
+	while ((read = getline(&line, &len, fp)) != -1) {
 		f_floor->design = realloc(f_floor->design, sizeof(char *) * i + 1);
 		f_floor->design[i - 1] = strdup(line);
 		i++;
@@ -52,17 +51,10 @@ void get_map(floor_t *f_floor)
 	f_floor->ymax = i;
 }
 
-void print_map(floor_t *f_floor, cursor_t *pos)
-{
-	move(0, 0);
-	for (int i = 0; i < f_floor->ymax - 1; i++) {
-		printw("%s", f_floor->design[i]);
-	}
-	mvprintw(pos->y, pos->x, "@");
-}
-
 void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 {
+	old_pos->x = pos->x;
+	old_pos->y = pos->y;
 	mvdelch(old_pos->y, old_pos->x);
 	switch (c) {
 		case KEY_DOWN:
@@ -79,6 +71,19 @@ void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 			break;
 		default:
 			break;
+	}
+}
+
+void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
+{
+	for (int i = 0; hard_tiles[i]; i++) {
+		if (first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
+			pos->x = old_pos->x;
+			pos->y = old_pos->y;
+			mvprintw(15,15, "%c", first_floor->design[pos->y][pos->x]);
+		} else {
+			mvprintw(15,15, "%c", first_floor->design[pos->y][pos->x]);
+		}
 	}
 }
 
@@ -101,14 +106,14 @@ int main(void)
 	while (c != 'q') {
 		c = getch();
 		move_char(&pos, &old_pos, c);
-		old_pos = pos;
+		collision(&pos, &old_pos, &first_floor);
 		print_map(&first_floor, &pos);
-		mvprintw(25, 0, "%d | %d\n", startxy.x, startxy.y);
+		mvprintw(25, 0, "%d | %d\n", pos.x, pos.y);
 		mvprintw(26, 0, "%d | %d\n", COLS, LINES);
 		refresh();
 	}
 	endwin();
-	for (int i = 0; hard_tiles[i]; i++) {
-		printf("%c\n", hard_tiles[i]);
+	for (int i = 0; transparent_tiles[i]; i++) {
+		printf("%c\n", transparent_tiles[i]);
 	}
 }
