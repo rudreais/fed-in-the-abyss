@@ -61,8 +61,9 @@ void print_map(floor_t *f_floor, cursor_t *pos)
 	mvprintw(pos->y, pos->x, "@");
 }
 
-void move_char(cursor_t *pos, int c)
+void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 {
+	mvdelch(old_pos->y, old_pos->x);
 	switch (c) {
 		case KEY_DOWN:
 			pos->y++;
@@ -99,7 +100,7 @@ int main(void)
 	pos = startxy;
 	while (c != 'q') {
 		c = getch();
-		move_char(&pos, c);
+		move_char(&pos, &old_pos, c);
 		old_pos = pos;
 		print_map(&first_floor, &pos);
 		mvprintw(25, 0, "%d | %d\n", startxy.x, startxy.y);
@@ -107,4 +108,7 @@ int main(void)
 		refresh();
 	}
 	endwin();
+	for (int i = 0; hard_tiles[i]; i++) {
+		printf("%c\n", hard_tiles[i]);
+	}
 }
