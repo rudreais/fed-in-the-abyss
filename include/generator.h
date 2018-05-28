@@ -9,15 +9,11 @@
 
 #pragma once
 
-const char hard_tiles[] = {
-    '#',
-    '\0',
-};
+#define START_FLOOR '>'
 
-const char transparent_tiles[] = {
-    '.',
-    '\0',
-};
+extern const char *path;
+extern const char hard_tiles[];
+extern const char transparent_tiles[];
 
 typedef struct floor {
     int xmax;
@@ -43,3 +39,7 @@ enum {
 // main.c
 void map_generator(void);
 int main_map_gen(void);
+
+//src/map/
+// prints.c
+void print_map(floor_t *f_floor, cursor_t *pos);
