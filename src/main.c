@@ -16,12 +16,6 @@
 #include "character.h"
 #include "generator.h"
 
-void update_pos(cursor_t *pos, cursor_t *old_pos)
-{
-	mvdelch(old_pos->y, old_pos->x);
-	mvprintw(pos->y, pos->x, "@");
-}
-
 cursor_t get_start(floor_t *f_floor)
 {
 	cursor_t startxy = {0};
@@ -58,10 +52,32 @@ void get_map(floor_t *f_floor)
 	f_floor->ymax = i;
 }
 
-void print_map(floor_t *f_floor)
+void print_map(floor_t *f_floor, cursor_t *pos)
 {
+	move(0, 0);
 	for (int i = 0; i < f_floor->ymax - 1; i++) {
 		printw("%s", f_floor->design[i]);
+	}
+	mvprintw(pos->y, pos->x, "@");
+}
+
+void move_char(cursor_t *pos, int c)
+{
+	switch (c) {
+		case KEY_DOWN:
+			pos->y++;
+			break;
+		case KEY_UP:
+			pos->y--;
+			break;
+		case KEY_LEFT:
+			pos->x--;
+			break;
+		case KEY_RIGHT:
+			pos->x++;
+			break;
+		default:
+			break;
 	}
 }
 
@@ -71,37 +87,21 @@ int main(void)
 	cursor_t startxy;
 	floor_t first_floor;
 	int c;
+	cursor_t initial_pos = {0};
 
 	initscr();
 	noecho();
 	keypad(stdscr, TRUE);
 	curs_set(0);
 	get_map(&first_floor);
-	print_map(&first_floor);
 	startxy = get_start(&first_floor);
-	pos.x = COLS / 2;
-	pos.y = LINES / 2;
-	mvprintw(startxy.y, startxy.x, "@");
+	print_map(&first_floor, &startxy);
+	pos = startxy;
 	while (c != 'q') {
-		switch (c) {
-			case KEY_DOWN:
-				startxy.y++;
-				break;
-			case KEY_UP:
-				startxy.y--;
-				break;
-			case KEY_LEFT:
-				startxy.x--;
-				break;
-			case KEY_RIGHT:
-				startxy.x++;
-				break;
-			default:
-				break;
-		}
-		update_pos(&startxy, &old_pos);
-		old_pos = startxy;
 		c = getch();
+		move_char(&pos, c);
+		old_pos = pos;
+		print_map(&first_floor, &pos);
 		mvprintw(25, 0, "%d | %d\n", startxy.x, startxy.y);
 		mvprintw(26, 0, "%d | %d\n", COLS, LINES);
 		refresh();
