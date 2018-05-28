@@ -8,6 +8,11 @@
 #pragma once
 
 typedef struct {
+    int x;
+    int y;
+} cursor_t;
+
+typedef struct {
     int str;
     int intel;
     int wis;

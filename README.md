@@ -12,6 +12,6 @@ to compile the game, make sure you have `premake5` (for creating the makefile) a
 > premake5 gmake
 > cd build
 > make
-> cd bin/Releases
+> cd bin/Release
 > ./roguelike
 ```
