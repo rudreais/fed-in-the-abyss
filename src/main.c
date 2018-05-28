@@ -28,8 +28,11 @@ cursor_t get_start(floor_t *f_floor)
 
 	for (int i = 0; i < f_floor->ymax - 1; i++) {
 		for (int j = 0; f_floor->design[i][j]; j++) {
-			if (f_floor->design[i][j] == '*')
+			if (f_floor->design[i][j] == '*') {
+				startxy.x = j;
+				startxy.y = i;
 				mvprintw(28,0,"%d %d\n", j, i);
+			}
 		}
 	}
 	return startxy;
@@ -78,28 +81,28 @@ int main(void)
 	startxy = get_start(&first_floor);
 	pos.x = COLS / 2;
 	pos.y = LINES / 2;
-	mvprintw(pos.y, pos.x, "@");
+	mvprintw(startxy.y, startxy.x, "@");
 	while (c != 'q') {
 		switch (c) {
 			case KEY_DOWN:
-				pos.y++;
+				startxy.y++;
 				break;
 			case KEY_UP:
-				pos.y--;
+				startxy.y--;
 				break;
 			case KEY_LEFT:
-				pos.x--;
+				startxy.x--;
 				break;
 			case KEY_RIGHT:
-				pos.x++;
+				startxy.x++;
 				break;
 			default:
 				break;
 		}
-		update_pos(&pos, &old_pos);
-		old_pos = pos;
+		update_pos(&startxy, &old_pos);
+		old_pos = startxy;
 		c = getch();
-		mvprintw(25, 0, "%d | %d\n", pos.x, pos.y);
+		mvprintw(25, 0, "%d | %d\n", startxy.x, startxy.y);
 		mvprintw(26, 0, "%d | %d\n", COLS, LINES);
 		refresh();
 	}
