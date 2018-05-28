@@ -6,6 +6,12 @@
 */
 
 #include <ncurses.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "character.h"
 #include "generator.h"
 
@@ -19,11 +25,20 @@ int main(void)
 {
 	cursor_t pos, old_pos;
 	int c;
+	char *path = "../../../maps/1_1";
+	FILE * fp;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
 
+	fp = fopen(path, "r");
 	initscr();
 	noecho();
 	keypad(stdscr, TRUE);
 	curs_set(0);
+	while (read = getline(&line, &len, fp) != -1) {
+		printw("%s", line);
+	}
 	pos.x = COLS / 2;
 	pos.y = LINES / 2;
 	mvprintw(pos.y, pos.x, "@");
