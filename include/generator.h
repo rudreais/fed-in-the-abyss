@@ -5,6 +5,20 @@
 ** map generator header
 */
 
+#include <stdlib.h>
+
+#pragma once
+
+const char hard_tiles[] = {
+    '#',
+    '\0',
+};
+
+const char transparent_tiles[] = {
+    '.',
+    '\0',
+};
+
 typedef struct floor {
     int xmax;
     int ymax;
