@@ -5,6 +5,7 @@
 ** vars for map
 */
 
+// will contains anything that has to be a collision-block as enemies, walls, etc
 const char hard_tiles[] = {
     '#',
     ' ',

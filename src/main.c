@@ -86,6 +86,14 @@ int main(void)
 	wrefresh(main_tab.win);
 	wmove(main_tab.win, 1, 1);
 	while (c != 'q') {
+		if ((map_pos.x + pos.x) == (main_tab.size->width - 10))
+			map_pos.x = map_pos.x - 15;
+		else if ((map_pos.x + pos.x) == 10)
+			map_pos.x = map_pos.x + 15;
+		else if ((map_pos.y + pos.y) == (main_tab.size->height - 10))
+			map_pos.y = map_pos.y - 15;
+		else if ((map_pos.y + pos.y) == 10)
+			map_pos.y = map_pos.y + 15;
 		wclear(main_tab.win);
 		print_map_window(&main_tab, &f_floor, &map_pos, &pos);
 		print_window(&main_tab, &pos);
