@@ -54,3 +54,13 @@ void init_tab(tab_t *tab, cursor_t *pos, dim_t *size)
 	tab->initial_pos = pos;
 	tab->size = size;
 }
+
+void init_curse(void)
+{
+	initscr();
+	noecho();
+	keypad(stdscr, TRUE);
+	curs_set(0);
+	refresh();
+
+}

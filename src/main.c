@@ -79,12 +79,8 @@ int main(void)
 	pos.x++;
 	size.width = 46;
 	size.height = 16;
-	initscr();
-	noecho();
-	keypad(stdscr, TRUE);
-	curs_set(0);
+	init_curse();
 	init_tab(&main_tab, &initial_pos, &size);
-	refresh();
 	mvwprintw(main_tab.win, pos.y, pos.x, "@");
 	wrefresh(main_tab.win);
 	wmove(main_tab.win, 1, 1);
