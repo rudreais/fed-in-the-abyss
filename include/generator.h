@@ -18,4 +18,4 @@ int main_map_gen(void);
 // prints.c
 void print_map(floor_t *f_floor, cursor_t *pos);
 void print_window(tab_t *tab, cursor_t *pos);
-void print_map_window(tab_t *tab, floor_t *f_floor, cursor_t *pos);
+void print_map_window(tab_t *tab, floor_t *f_floor, cursor_t *map_pos, cursor_t *pos);

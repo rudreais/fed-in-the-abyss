@@ -30,7 +30,7 @@ typedef struct {
     int height;
 } dim_t;
 
-typedef struct floor {
+typedef struct {
     int xmax;
     int ymax;
     int xsize;
