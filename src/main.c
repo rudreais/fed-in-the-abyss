@@ -77,8 +77,20 @@ void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
 {
 	for (int i = 0; hard_tiles[i]; i++) {
-		if (pos->y == -1 || pos->y == (first_floor->ymax - 1) ||
+		if (pos->y == -1 || (pos->y - 1) == (first_floor->ymax - 1) ||
 			pos->x == -1 ||	first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
+			pos->x = old_pos->x;
+			pos->y = old_pos->y;
+		}
+	}
+}
+
+void collision_win(cursor_t *pos, cursor_t *old_pos, floor_t *f_floor)
+{
+	for (int i = 0; hard_tiles[i]; i++) {
+		if (((pos->y > 0 && pos->x > 0) && f_floor->design[pos->y - 1][pos->x - 1] == hard_tiles[i]) || 
+			(pos->y == 0 || pos->x == 0) ||
+			(pos->y == (f_floor->ymax))) {
 			pos->x = old_pos->x;
 			pos->y = old_pos->y;
 		}
@@ -94,7 +106,12 @@ int main(void)
 	dim_t size;
 	WINDOW *main_win;
 	tab_t main_tab;
+	floor_t f_floor;
 
+	get_map(&f_floor);
+	pos = get_start(&f_floor);
+	pos.y++;
+	pos.x++;
 	size.width = 46;
 	size.height = 16;
 	initscr();
@@ -110,10 +127,15 @@ int main(void)
 	wrefresh(main_tab.win);
 	wmove(main_tab.win, 1, 1);
 	while (c != 'q') {
+		print_map_window(&main_tab, &f_floor, &pos);
+		print_window(&main_tab, &pos);
 		c = getch();
 		move_char(&pos, &old_pos, c);
 		mvwdelch(main_tab.win, old_pos.y, old_pos.x);
-		print_window(&main_tab, &pos);
+		collision_win(&pos, &old_pos, &f_floor);
+		mvprintw(25, 0, "%d | %d\n", pos.y, pos.x);
+		mvprintw(26, 0, "%d | %d\n", COLS, LINES);
+		mvprintw(27, 0, "%d", f_floor.ymax);
 	}
 	endwin();
 }
