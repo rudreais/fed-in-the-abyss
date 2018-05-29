@@ -9,6 +9,9 @@ characteristics for character:
 	CON constitution
 	CHR charisma
 
+	some kind of vision
+		the game has to move the window following the player's direction, for x meter's (where x is the player's vision)
+
 main plot:
 	"un papa à la recherche de sa fille dans un donjon"
 
