@@ -6,12 +6,17 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 
 #pragma once
 
+#define TMP_PATH "/fed-in-the-abyss/maps/1_1"
+#define HOME getenv("HOME")
+#define PATH strcat((HOME), (TMP_PATH))
+
 #define START_FLOOR '>'
 
-extern const char *path;
 extern const char hard_tiles[];
 extern const char transparent_tiles[];
 

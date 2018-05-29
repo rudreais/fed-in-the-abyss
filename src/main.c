@@ -41,7 +41,7 @@ void get_map(floor_t *f_floor)
 	int i = 1;
 
 	f_floor->design = malloc(sizeof(char *) * 1);
-	fp = fopen(path, "r");
+	fp = fopen((PATH), "r");
 	while ((read = getline(&line, &len, fp)) != -1) {
 		f_floor->design = realloc(f_floor->design, sizeof(char *) * i + 1);
 		f_floor->design[i - 1] = strdup(line);
@@ -78,8 +78,7 @@ void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
 {
 	for (int i = 0; hard_tiles[i]; i++) {
 		if (pos->y == -1 || pos->y == (first_floor->ymax - 1) ||
-			pos->x == -1 ||
-			first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
+			pos->x == -1 ||	first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
 			pos->x = old_pos->x;
 			pos->y = old_pos->y;
 		}
@@ -113,7 +112,4 @@ int main(void)
 		refresh();
 	}
 	endwin();
-	for (int i = 0; transparent_tiles[i]; i++) {
-		printf("%c\n", transparent_tiles[i]);
-	}
 }
