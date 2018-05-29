@@ -5,7 +5,7 @@
 ** vars for map
 */
 
-const char *path = "../../../maps/1_1";
+const char *path = "~/red-in-the-abyss/maps/1_1";
 const char hard_tiles[] = {
     '#',
     ' ',
