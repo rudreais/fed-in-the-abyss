@@ -6,9 +6,7 @@
 */
 
 #include <ncurses.h>
-#include "windows.h"
-#include "character.h"
-#include "generator.h"
+#include "board.h"
 
 void print_map(floor_t *f_floor, cursor_t *pos)
 {

@@ -13,44 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "board.h"
 #include "windows.h"
-#include "character.h"
 #include "generator.h"
-
-cursor_t get_start(floor_t *f_floor)
-{
-	cursor_t startxy = {0};
-
-	for (int i = 0; i < f_floor->ymax - 1; i++) {
-		for (int j = 0; f_floor->design[i][j]; j++) {
-			if (f_floor->design[i][j] == START_FLOOR) {
-				startxy.x = j;
-				startxy.y = i;
-				mvprintw(28,0,"%d %d\n", j, i);
-			}
-		}
-	}
-	return startxy;
-}
-
-void get_map(floor_t *f_floor)
-{
-	FILE * fp;
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
-	int i = 1;
-
-	f_floor->design = malloc(sizeof(char *) * 1);
-	fp = fopen((PATH), "r");
-	while ((read = getline(&line, &len, fp)) != -1) {
-		f_floor->design = realloc(f_floor->design, sizeof(char *) * i + 1);
-		f_floor->design[i - 1] = strdup(line);
-		i++;
-	}
-	f_floor->design[i] = NULL;
-	f_floor->ymax = i;
-}
 
 void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 {
@@ -105,7 +70,6 @@ int main(void)
 	cursor_t old_pos;
 	int c;
 	dim_t size;
-	WINDOW *main_win;
 	tab_t main_tab;
 	floor_t f_floor;
 
@@ -119,11 +83,8 @@ int main(void)
 	noecho();
 	keypad(stdscr, TRUE);
 	curs_set(0);
+	init_tab(&main_tab, &initial_pos, &size);
 	refresh();
-	main_win = create_window(&initial_pos, &size);
-	main_tab.win = main_win;
-	main_tab.initial_pos = &initial_pos;
-	main_tab.size = &size;
 	mvwprintw(main_tab.win, pos.y, pos.x, "@");
 	wrefresh(main_tab.win);
 	wmove(main_tab.win, 1, 1);
@@ -139,20 +100,3 @@ int main(void)
 	}
 	endwin();
 }
-
-/*
-get_map(&first_floor);
-startxy = get_start(&first_floor);
-print_map(&first_floor, &startxy);
-pos = startxy;
-mvprintw(27, 0, "%d\n", first_floor.ymax);
-while (c != 'q') {
-	c = getch();
-	move_char(&pos, &old_pos, c);
-	collision(&pos, &old_pos, &first_floor);
-	print_map(&first_floor, &pos);
-	mvprintw(25, 0, "%d | %d\n", pos.x, pos.y);
-	mvprintw(26, 0, "%d | %d\n", COLS, LINES);
-	refresh();
-}
-*/
