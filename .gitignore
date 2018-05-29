@@ -5,3 +5,5 @@ build/bin/Release/roguelike
 **.o
 build/*
 vgcore**
+build/roguelike.make
+.vscode/launch.json
