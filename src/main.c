@@ -77,7 +77,9 @@ void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
 {
 	for (int i = 0; hard_tiles[i]; i++) {
-		if (first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
+		if (pos->y == -1 || pos->y == (first_floor->ymax - 1) ||
+			pos->x == -1 ||
+			first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
 			pos->x = old_pos->x;
 			pos->y = old_pos->y;
 		}
@@ -100,6 +102,7 @@ int main(void)
 	startxy = get_start(&first_floor);
 	print_map(&first_floor, &startxy);
 	pos = startxy;
+	mvprintw(27, 0, "%d\n", first_floor.ymax);
 	while (c != 'q') {
 		c = getch();
 		move_char(&pos, &old_pos, c);
