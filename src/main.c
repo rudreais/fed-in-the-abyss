@@ -7,15 +7,10 @@
 
 #include <ncurses.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "board.h"
 #include "windows.h"
-#include "generator.h"
 
 void game_loop()
 {
@@ -26,17 +21,13 @@ void game_loop()
 	}
 }
 
-void init_dungeon(dungeon_t *dungeon)
-{
-	
-}
-
 int main(void)
 {
 	dungeon_t abyss;
+	tab_t **tabs = calloc(1, sizeof(tab_t *));
 
-	abyss.floors = calloc(1, sizeof(floor_t *) * 1);
 	init_dungeon(&abyss);
+	init_tabs(tabs);
 	init_curse();
 	game_loop();
 	endwin();

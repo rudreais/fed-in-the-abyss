@@ -7,5 +7,5 @@
 
 int main_char_create(void)
 {
-    
+    return 0;  
 }
