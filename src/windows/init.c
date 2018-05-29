@@ -33,15 +33,15 @@ void get_map(floor_t *f_floor)
     ssize_t read;
 	int i = 1;
 
-	f_floor->design = malloc(sizeof(char *) * 1);
+	f_floor->design = calloc(1, sizeof(char *));
 	fp = fopen((PATH), "r");
 	while ((read = getline(&line, &len, fp)) != -1) {
-		f_floor->design = realloc(f_floor->design, sizeof(char *) * i + 1);
+		f_floor->design = realloc(f_floor->design, sizeof(char *) * (i + 1));
 		f_floor->design[i - 1] = strdup(line);
 		i++;
 	}
-	f_floor->design[i] = NULL;
-	f_floor->ymax = i;
+	f_floor->design[i - 1] = NULL;
+	f_floor->ymax = i - 1;
 }
 
 void init_tab(tab_t *tab, cursor_t *pos, dim_t *size)

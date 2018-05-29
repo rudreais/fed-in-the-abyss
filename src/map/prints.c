@@ -31,3 +31,9 @@ void print_map_window(tab_t *tab, floor_t *f_floor, cursor_t *map_pos, cursor_t 
 	}
 	mvwprintw(tab->win, (map_pos->y - 1) + pos->y, (map_pos->x - 1) + pos->x, "@");
 }
+
+void debug_map(char **map, int ymax)
+{
+	for (int i = 0; i < ymax; i++)
+		printf("%s", map[i]);
+}

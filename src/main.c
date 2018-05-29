@@ -110,4 +110,5 @@ int main(void)
 		mvprintw(42, 0, "DEBUG ACTUAL POS\ny=%d x=%d\n", pos.y, pos.x);
 	}
 	endwin();
+	debug_map(f_floor.design, f_floor.ymax);
 }
