@@ -6,7 +6,7 @@
 as the game is console based, you'll need to install `ncurses` for C.
 
 protips:
-``̀ bash
+```bash
 ncurses-devel.(your architecture) # fedora users
 libncurses5-dev # ubuntu/debian users
 ```
