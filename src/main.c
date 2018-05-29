@@ -93,6 +93,7 @@ int main(void)
 		move_char(&pos, &old_pos, c);
 		mvwdelch(main_tab.win, old_pos.y, old_pos.x);
 		collision_win(&pos, &old_pos, &f_floor);
+		mvprintw(38, 0, "DEBUG ABSOLUTE POS\ny=%d x=%d\n", map_pos.y + pos.y, map_pos.x + pos.x);
 		mvprintw(42, 0, "DEBUG ACTUAL POS\ny=%d x=%d\n", pos.y, pos.x);
 	}
 	endwin();
