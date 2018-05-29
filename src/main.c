@@ -87,6 +87,7 @@ void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
 
 int main(void)
 {
+	WINDOW *main;
 	cursor_t pos, old_pos;
 	cursor_t startxy;
 	floor_t first_floor;
