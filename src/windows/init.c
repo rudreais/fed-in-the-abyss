@@ -62,5 +62,4 @@ void init_curse(void)
 	keypad(stdscr, TRUE);
 	curs_set(0);
 	refresh();
-
 }
