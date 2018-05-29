@@ -90,9 +90,9 @@ int main(void)
 			map_pos.x = map_pos.x - 15;
 		else if ((map_pos.x + pos.x) == 10)
 			map_pos.x = map_pos.x + 15;
-		else if ((map_pos.y + pos.y) == (main_tab.size->height - 10))
+		else if ((map_pos.y + pos.y) == (main_tab.size->height - 5))
 			map_pos.y = map_pos.y - 15;
-		else if ((map_pos.y + pos.y) == 10)
+		else if ((map_pos.y + pos.y) == 5)
 			map_pos.y = map_pos.y + 15;
 		wclear(main_tab.win);
 		print_map_window(&main_tab, &f_floor, &map_pos, &pos);
