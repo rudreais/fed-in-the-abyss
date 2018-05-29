@@ -13,10 +13,3 @@
 // main.c
 void map_generator(void);
 int main_map_gen(void);
-
-//src/map/
-// prints.c
-void print_map(floor_t *f_floor, cursor_t *pos);
-void print_window(tab_t *tab, cursor_t *pos);
-void print_map_window(tab_t *tab, floor_t *f_floor, cursor_t *map_pos, cursor_t *pos);
-void debug_map(char **map, int ymax);

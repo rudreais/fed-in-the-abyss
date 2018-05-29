@@ -17,98 +17,27 @@
 #include "windows.h"
 #include "generator.h"
 
-void move_char(cursor_t *pos, cursor_t *old_pos, int c)
+void game_loop()
 {
-	old_pos->x = pos->x;
-	old_pos->y = pos->y;
-	switch (c) {
-		case KEY_DOWN:
-			pos->y++;
-			break;
-		case KEY_UP:
-			pos->y--;
-			break;
-		case KEY_LEFT:
-			pos->x--;
-			break;
-		case KEY_RIGHT:
-			pos->x++;
-			break;
-		default:
-			break;
+	int c;
+
+	while (c != 'q') {
+		c = getch();
 	}
 }
 
-void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
+void init_dungeon(dungeon_t *dungeon)
 {
-	for (int i = 0; hard_tiles[i]; i++) {
-		if (pos->y == -1 || (pos->y - 1) == (first_floor->ymax - 1) ||
-			pos->x == -1 ||	first_floor->design[pos->y][pos->x] == hard_tiles[i]) {
-			pos->x = old_pos->x;
-			pos->y = old_pos->y;
-		}
-	}
-}
-
-void collision_win(cursor_t *pos, cursor_t *old_pos, floor_t *f_floor)
-{
-	for (int i = 0; hard_tiles[i]; i++) {
-		if (pos->y == f_floor->ymax ||
-			((pos->y > 0 && pos->x > 0) && f_floor->design[pos->y - 1][pos->x - 1] == hard_tiles[i]) || 
-			(pos->y == 0 || pos->x == 0)) {
-				mvprintw(40, 0, "DEBUG NEXT HIT\ny=%d x=%d ymax=%d\n", pos->y, pos->x, f_floor->ymax);
-			pos->x = old_pos->x;
-			pos->y = old_pos->y;
-		}
-	}
-}
-
-void move_camera(cursor_t *map_pos, cursor_t *pos, dim_t size)
-{
-	if ((map_pos->x + pos->x) == (size.width - 10))
-		map_pos->x = map_pos->x - 15;
-	else if ((map_pos->x + pos->x) == 10)
-		map_pos->x = map_pos->x + 15;
-	else if ((map_pos->y + pos->y) == (size.height - 5))
-		map_pos->y = map_pos->y - 15;
-	else if ((map_pos->y + pos->y) == 5)
-		map_pos->y = map_pos->y + 15;
+	
 }
 
 int main(void)
 {
-	cursor_t initial_pos = {.x = 20, .y = 0};
-	cursor_t pos = {.x = 1, .y = 1};
-	cursor_t map_pos = {.x = 15, .y = 5};
-	cursor_t old_pos;
-	int c;
-	dim_t size;
-	tab_t main_tab;
-	floor_t f_floor;
+	dungeon_t abyss;
 
-	get_map(&f_floor);
-	pos = get_start(&f_floor);
-	pos.y++;
-	pos.x++;
-	size.width = 80;
-	size.height = 30;
+	abyss.floors = calloc(1, sizeof(floor_t *) * 1);
+	init_dungeon(&abyss);
 	init_curse();
-	init_tab(&main_tab, &initial_pos, &size);
-	mvwprintw(main_tab.win, pos.y, pos.x, "@");
-	wrefresh(main_tab.win);
-	wmove(main_tab.win, 1, 1);
-	while (c != 'q') {
-		move_camera(&map_pos, &pos, size);
-		wclear(main_tab.win);
-		print_map_window(&main_tab, &f_floor, &map_pos, &pos);
-		print_window(&main_tab, &pos);
-		c = getch();
-		move_char(&pos, &old_pos, c);
-		mvwdelch(main_tab.win, old_pos.y, old_pos.x);
-		collision_win(&pos, &old_pos, &f_floor);
-		mvprintw(38, 0, "DEBUG ABSOLUTE POS\ny=%d x=%d\n", map_pos.y + pos.y, map_pos.x + pos.x);
-		mvprintw(42, 0, "DEBUG ACTUAL POS\ny=%d x=%d\n", pos.y, pos.x);
-	}
+	game_loop();
 	endwin();
-	debug_map(f_floor.design, f_floor.ymax);
 }

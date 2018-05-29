@@ -44,17 +44,6 @@ void get_map(floor_t *f_floor)
 	f_floor->ymax = i - 1;
 }
 
-void init_tab(tab_t *tab, cursor_t *pos, dim_t *size)
-{
-	WINDOW *new_win;
-
-    new_win = newwin(size->height, size->width, pos->y, pos->x);
-	box(new_win, 0, 0);
-	tab->win = new_win;
-	tab->initial_pos = pos;
-	tab->size = size;
-}
-
 void init_curse(void)
 {
 	initscr();

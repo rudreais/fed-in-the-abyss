@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "board.h"
+
 typedef struct {
     int str;
     int intel;
@@ -18,4 +20,5 @@ typedef struct {
 
 typedef struct {
     stats_t characteristics;
+    cursor_t *pos;
 } character_t;
