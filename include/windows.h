@@ -5,20 +5,11 @@
 ** main
 */
 
-#include <ncurses.h>
-#include "character.h"
-
 #pragma once
 
-typedef struct {
-    int width;
-    int height;
-} dim_t;
+#include <ncurses.h>
+#include "board.h"
 
-typedef struct {
-    WINDOW *win;
-    cursor_t *initial_pos;
-    dim_t *size;
-} tab_t;
-
-WINDOW *create_window(cursor_t *pos, dim_t *size);
+cursor_t get_start(floor_t *f_floor);
+void get_map(floor_t *f_floor);
+void init_tab(tab_t *tab, cursor_t *pos, dim_t *size);

@@ -5,41 +5,9 @@
 ** map generator header
 */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include "windows.h"
-
 #pragma once
 
-#define TMP_PATH "/fed-in-the-abyss/maps/1_1"
-#define HOME getenv("HOME")
-#define PATH strcat((HOME), (TMP_PATH))
-
-#define START_FLOOR '>'
-
-extern const char hard_tiles[];
-extern const char transparent_tiles[];
-
-typedef struct floor {
-    int xmax;
-    int ymax;
-    int xsize;
-    int ysize;
-    char **design;
-} floor_t;
-
-enum {
-    tileUnused = 0,
-    tileDirtWall,
-    tileDirtFloor,
-    tileStoneWall,
-    tileCorridor,
-    tileDoor,
-    tileUpStairs,
-    tileDownStairs,
-    tileChest
-};
+#include "board.h"
 
 // src/map/generator
 // main.c
