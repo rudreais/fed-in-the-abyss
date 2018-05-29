@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "windows.h"
 #include "character.h"
 #include "generator.h"
 
@@ -55,7 +56,6 @@ void move_char(cursor_t *pos, cursor_t *old_pos, int c)
 {
 	old_pos->x = pos->x;
 	old_pos->y = pos->y;
-	mvdelch(old_pos->y, old_pos->x);
 	switch (c) {
 		case KEY_DOWN:
 			pos->y++;
@@ -87,30 +87,50 @@ void collision(cursor_t *pos, cursor_t *old_pos, floor_t *first_floor)
 
 int main(void)
 {
-	WINDOW *main;
-	cursor_t pos, old_pos;
-	cursor_t startxy;
-	floor_t first_floor;
-	int c;
 	cursor_t initial_pos = {0};
+	cursor_t pos = {.x = 1, .y = 1};
+	cursor_t old_pos;
+	int c;
+	dim_t size;
+	WINDOW *main_win;
+	tab_t main_tab;
 
+	size.width = 46;
+	size.height = 16;
 	initscr();
 	noecho();
 	keypad(stdscr, TRUE);
 	curs_set(0);
-	get_map(&first_floor);
-	startxy = get_start(&first_floor);
-	print_map(&first_floor, &startxy);
-	pos = startxy;
-	mvprintw(27, 0, "%d\n", first_floor.ymax);
+	refresh();
+	main_win = create_window(&initial_pos, &size);
+	main_tab.win = main_win;
+	main_tab.initial_pos = &initial_pos;
+	main_tab.size = &size;
+	mvwprintw(main_tab.win, pos.y, pos.x, "@");
+	wrefresh(main_tab.win);
+	wmove(main_tab.win, 1, 1);
 	while (c != 'q') {
 		c = getch();
 		move_char(&pos, &old_pos, c);
-		collision(&pos, &old_pos, &first_floor);
-		print_map(&first_floor, &pos);
-		mvprintw(25, 0, "%d | %d\n", pos.x, pos.y);
-		mvprintw(26, 0, "%d | %d\n", COLS, LINES);
-		refresh();
+		mvwdelch(main_tab.win, old_pos.y, old_pos.x);
+		print_window(&main_tab, &pos);
 	}
 	endwin();
 }
+
+/*
+get_map(&first_floor);
+startxy = get_start(&first_floor);
+print_map(&first_floor, &startxy);
+pos = startxy;
+mvprintw(27, 0, "%d\n", first_floor.ymax);
+while (c != 'q') {
+	c = getch();
+	move_char(&pos, &old_pos, c);
+	collision(&pos, &old_pos, &first_floor);
+	print_map(&first_floor, &pos);
+	mvprintw(25, 0, "%d | %d\n", pos.x, pos.y);
+	mvprintw(26, 0, "%d | %d\n", COLS, LINES);
+	refresh();
+}
+*/

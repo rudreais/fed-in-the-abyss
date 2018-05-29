@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "windows.h"
 
 #pragma once
 
@@ -48,3 +49,4 @@ int main_map_gen(void);
 //src/map/
 // prints.c
 void print_map(floor_t *f_floor, cursor_t *pos);
+void print_window(tab_t *tab, cursor_t *pos);
