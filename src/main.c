@@ -63,6 +63,18 @@ void collision_win(cursor_t *pos, cursor_t *old_pos, floor_t *f_floor)
 	}
 }
 
+void move_camera(cursor_t *map_pos, cursor_t *pos, dim_t size)
+{
+	if ((map_pos->x + pos->x) == (size.width - 10))
+		map_pos->x = map_pos->x - 15;
+	else if ((map_pos->x + pos->x) == 10)
+		map_pos->x = map_pos->x + 15;
+	else if ((map_pos->y + pos->y) == (size.height - 5))
+		map_pos->y = map_pos->y - 15;
+	else if ((map_pos->y + pos->y) == 5)
+		map_pos->y = map_pos->y + 15;
+}
+
 int main(void)
 {
 	cursor_t initial_pos = {.x = 20, .y = 0};
@@ -86,14 +98,7 @@ int main(void)
 	wrefresh(main_tab.win);
 	wmove(main_tab.win, 1, 1);
 	while (c != 'q') {
-		if ((map_pos.x + pos.x) == (main_tab.size->width - 10))
-			map_pos.x = map_pos.x - 15;
-		else if ((map_pos.x + pos.x) == 10)
-			map_pos.x = map_pos.x + 15;
-		else if ((map_pos.y + pos.y) == (main_tab.size->height - 5))
-			map_pos.y = map_pos.y - 15;
-		else if ((map_pos.y + pos.y) == 5)
-			map_pos.y = map_pos.y + 15;
+		move_camera(&map_pos, &pos, size);
 		wclear(main_tab.win);
 		print_map_window(&main_tab, &f_floor, &map_pos, &pos);
 		print_window(&main_tab, &pos);
