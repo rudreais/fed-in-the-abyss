@@ -1,5 +1,7 @@
 build/bin/Release/core
 build/roguelike.make
 build/bin/Release/roguelike
-*.d
-*.o
+**.d
+**.o
+build/*
+vgcore**
