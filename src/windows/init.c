@@ -44,8 +44,10 @@ void get_map(floor_t *f_floor)
 
 	f_floor->design = calloc(1, sizeof(char *));
 	fd = open(path, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0) {
 		exit (EXIT_FAILURE);
+		endwin();
+	}
 	while ((line = my_gnl(fd)) != NULL) {
 		f_floor->design = realloc(f_floor->design, sizeof(char *) * (i + 1));
 		f_floor->design[i - 1] = my_strdup(line);
