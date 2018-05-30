@@ -14,8 +14,6 @@
 
 // not much of a choice..
 #define TMP_PATH "/fed-in-the-abyss/maps/1_1"
-#define HOME getenv("HOME")
-#define PATH strcat((HOME), (TMP_PATH))
 
 // is used to determine where the character spawns
 #define START_FLOOR '>'

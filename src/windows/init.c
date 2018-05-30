@@ -35,12 +35,16 @@ cursor_t get_start(floor_t *f_floor)
 
 void get_map(floor_t *f_floor)
 {
+	char *home = getenv("HOME");
+	char *path = strcat(home, (TMP_PATH));
 	int fd;
     char * line = NULL;
 	int i = 1;
 
 	f_floor->design = calloc(1, sizeof(char *));
-	fd = open((PATH), O_RDONLY);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		exit (EXIT_FAILURE);
 	while ((line = my_gnl(fd)) != NULL) {
 		f_floor->design = realloc(f_floor->design, sizeof(char *) * (i + 1));
 		f_floor->design[i - 1] = my_strdup(line);
