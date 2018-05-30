@@ -22,20 +22,6 @@
 extern const char hard_tiles[];
 extern const char transparent_tiles[];
 
-typedef struct {
-    int str;
-    int intel;
-    int wis;
-    int dex;
-    int con;
-    int chr;
-} stats_t;
-
-typedef struct {
-    stats_t characteristics;
-    cursor_t *pos;
-} character_t;
-
 /**
  * structure to easier use positions
  */
@@ -53,6 +39,20 @@ typedef struct {
     int width;
     int height;
 } dim_t;
+
+typedef struct {
+    int str;
+    int intel;
+    int wis;
+    int dex;
+    int con;
+    int chr;
+} stats_t;
+
+typedef struct {
+    stats_t characteristics;
+    cursor_t *pos;
+} character_t;
 
 /**
  * the terminal is a block composed of "bricks" also called tabs
