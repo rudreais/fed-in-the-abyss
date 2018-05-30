@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include "board.h"
+#include "character.h"
 
 char *my_gnl(int fd);
 char *my_strdup(char *str);
@@ -60,6 +61,8 @@ void init_dungeon(dungeon_t *dungeon)
 	dungeon->floors = malloc(sizeof(floor_t *) * 1);
 	dungeon->floors[0] = malloc(sizeof(floor_t));
 	dungeon->floors[0]->design = calloc(1, sizeof(char *));
+	dungeon->floors[0]->chars = malloc(sizeof(character_t *) * 1);
+	dungeon->floors[0]->chars[0] = malloc(sizeof(character_t));
 }
 
 void init_tabs(tab_t **tabs)
