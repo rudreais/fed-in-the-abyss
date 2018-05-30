@@ -34,3 +34,8 @@ void init_tabs(tab_t **tabs);
  * in non-cannonical mode
  */
 void init_curse(void);
+
+/**
+ * prints all the tabs at given pos
+ */
+void print_tabs(tab_t **tabs, int nb_tabs);

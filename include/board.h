@@ -12,7 +12,7 @@
 #include <unistd.h>
 #include <string.h>
 
-// eventho it's dirty as fuck i hadn't a choice
+// not much of a choice..
 #define TMP_PATH "/fed-in-the-abyss/maps/1_1"
 #define HOME getenv("HOME")
 #define PATH strcat((HOME), (TMP_PATH))
