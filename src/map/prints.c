@@ -31,27 +31,9 @@ void debug_map(char **map, int ymax)
 }
 */
 
-void print_window(tab_t *tab)
+void print_tab();
+
+void print_game()
 {
 
-}
-
-void print_map_window(tab_t *tab, floor_t *f_floor, cursor_t *map_pos)
-{
-
-}
-
-void print_game(tab_t *tab, floor_t *f_floor, cursor_t *map_pos, cursor_t *pos)
-{
-		wclear(tab->win);
-		print_map_window(tab, f_floor, map_pos);
-		print_window(tab);
-}
-
-void print_tabs(tab_t **tabs, int nb_tab)
-{
-	for (int i = 0; i < nb_tab; i++) {
-		box(tabs[i]->win, 0, 0);
-		wrefresh(tabs[i]->win);
-	}
 }
