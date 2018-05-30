@@ -19,6 +19,7 @@ void game_loop(dungeon_t *abyss, tab_t **tabs, int index)
 
 	get_map(abyss->floors[index]);
 	while (c != 'q') {
+		printw("hello");
 		print_tabs(tabs, 1);
 		c = getch();
 	}
