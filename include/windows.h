@@ -36,6 +36,6 @@ void init_tabs(tab_t **tabs);
 void init_curse(void);
 
 /**
- * prints all the tabs at given pos
+ * prints the game
  */
-void print_tabs(tab_t **tabs, int nb_tabs);
+void print_game(void);

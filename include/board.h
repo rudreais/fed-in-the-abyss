@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "character.h"
 
-// not much of a choice..
 #define TMP_PATH "/fed-in-the-abyss/maps/1_1"
 
 // is used to determine where the character spawns
@@ -60,6 +60,7 @@ typedef struct {
 typedef struct {
     int ymax;
     char **design;
+    character_t **chars;
 } floor_t;
 
 /**
