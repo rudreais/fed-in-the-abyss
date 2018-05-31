@@ -7,3 +7,5 @@ build/*
 vgcore**
 build/roguelike.make
 .vscode/launch.json
+**core**
+build/**
