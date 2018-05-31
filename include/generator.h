@@ -9,7 +9,4 @@
 
 #include "board.h"
 
-// src/map/generator
-// main.c
-void map_generator(void);
-int main_map_gen(void);
+char **main_map_gen(void);

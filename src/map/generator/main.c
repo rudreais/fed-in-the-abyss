@@ -7,13 +7,9 @@
 
 #include <stdio.h>
 
-void map_generator(void)
+char **main_map_gen(void)
 {
-	printf("it does work!\n");
-}
+	char **map;
 
-int main_map_gen(void)
-{
-	map_generator();
-	return 0;
+	return map;
 }
