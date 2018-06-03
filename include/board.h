@@ -50,6 +50,8 @@ typedef struct {
 } stats_t;
 
 typedef struct {
+    char *name;
+    char appear;
     stats_t characteristics;
     cursor_t *pos;
 } character_t;
@@ -65,6 +67,13 @@ typedef struct {
     cursor_t *tab_pos;
     dim_t *tab_size;
 } tab_t;
+
+typedef struct {
+    char **map;
+	int ymax;
+    tab_t *parent_tab;
+    cursor_t *pos;
+} map_t;
 
 /**
  * each floor of the dungeon will has a certain design randomly generated

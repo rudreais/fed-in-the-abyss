@@ -18,7 +18,7 @@
 char *my_gnl(int fd);
 char *my_strdup(char *str);
 
-cursor_t get_start(floor_t *f_floor)
+cursor_t *get_start(floor_t *f_floor)
 {
 	cursor_t startxy = {0};
 
@@ -31,7 +31,7 @@ cursor_t get_start(floor_t *f_floor)
 			}
 		}
 	}
-	return startxy;
+	return &startxy;
 }
 
 void get_map(floor_t *f_floor)

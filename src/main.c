@@ -12,15 +12,31 @@
 #include "board.h"
 #include "windows.h"
 
+char *my_strdup(char *str);
+
+void add_chars(floor_t *f_floor)
+{
+	character_t my_char;
+	char *name = "player";
+	char appear = '@';
+
+	my_char.name = my_strdup(name);
+	my_char.appear = appear;
+	f_floor->chars = malloc(sizeof(character_t *) * 1);
+	my_char.pos = get_start(f_floor);
+	f_floor->chars[0] = &my_char;
+}
+
 void game_loop(dungeon_t *abyss, tab_t **tabs, int index)
 {
 	cursor_t map_pos = {.x = 10, .y = 5};
+	map_t map;
 	int c;
 
 	get_map(abyss->floors[index]);
+	add_chars(abyss->floors[index]);
 	while (c != 'q') {
-		print_game();
-		//print_tabs(tabs, 1);
+		print_game(abyss, tabs);
 		c = getch();
 	}
 }

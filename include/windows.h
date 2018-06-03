@@ -14,7 +14,7 @@
  * using macro "START_FLOOR" from board.h
  * getting the first occuring value at given coordonates and returns it
  */
-cursor_t get_start(floor_t *f_floor);
+cursor_t *get_start(floor_t *f_floor);
 
 /**
  * using macro "PATH" from board.h
@@ -38,4 +38,4 @@ void init_curse(void);
 /**
  * prints the game
  */
-void print_game(void);
+void print_game(dungeon_t *abyss, tab_t **tabs);
