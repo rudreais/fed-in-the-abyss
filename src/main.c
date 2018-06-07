@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "board.h"
-#include "windows.h"
 
 void game_loop(void)
 {

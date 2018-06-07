@@ -15,9 +15,6 @@
 #include "board.h"
 #include "character.h"
 
-char *my_gnl(int fd);
-char *my_strdup(char *str);
-
 void get_map(map_t *map)
 {
 	char **map_design = malloc(sizeof(char *) * 1);
@@ -33,8 +30,8 @@ void get_map(map_t *map)
 		endwin();
 	}
 	while ((line = my_gnl(fd)) != NULL) {
-		map_design = realloc(f_floor->design, sizeof(char *) * (i + 1));
-		[i - 1] = my_strdup(line);
+		map_design = realloc(map_design, sizeof(char *) * (i + 1));
+		map_design[i - 1] = my_strdup(line);
 		i++;
 		free(line);
 	}

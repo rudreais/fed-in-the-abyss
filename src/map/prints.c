@@ -7,4 +7,3 @@
 
 #include <ncurses.h>
 #include "board.h"
-#include "windows.h"
