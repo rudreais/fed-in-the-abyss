@@ -16,19 +16,7 @@ static int check_buffer(char *buff)
 	return (1);
 }
 
-static int my_strlen2(char *str, char c)
-{
-	int length = 0;
-
-	if (str == NULL)
-		return (-1);
-	for (; str[length] != '\0' || str[length] == c; length++)
-		if (str[length] == c)
-			return (length);
-	return (-1);
-}
-
-static char *my_strjoin2(char *begin, char *end, int i)
+static char *my_strjoin(char *begin, char *end, int i)
 {
 	char *tmp;
 
@@ -58,7 +46,7 @@ char *my_gnl(int fd)
 			buffer[0] = '\0';
 			return (ret);
 		}
-		ret = my_strjoin2(ret, buffer, i);
+		ret = my_strjoin(ret, buffer, i);
 	}
 	if (!ret[0]) {
 		free(ret);
