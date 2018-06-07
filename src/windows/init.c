@@ -18,37 +18,29 @@
 char *my_gnl(int fd);
 char *my_strdup(char *str);
 
-void get_map(floor_t *f_floor)
+void get_map(map_t *map)
 {
+	char **map_design = malloc(sizeof(char *) * 1);
 	char *home = getenv("HOME");
 	char *path = strcat(home, (TMP_PATH));
 	int fd;
     char * line = NULL;
 	int i = 1;
 
-	f_floor->design = calloc(1, sizeof(char *));
 	fd = open(path, O_RDONLY);
 	if (fd < 0) {
 		exit (EXIT_FAILURE);
 		endwin();
 	}
 	while ((line = my_gnl(fd)) != NULL) {
-		f_floor->design = realloc(f_floor->design, sizeof(char *) * (i + 1));
-		f_floor->design[i - 1] = my_strdup(line);
+		map_design = realloc(f_floor->design, sizeof(char *) * (i + 1));
+		[i - 1] = my_strdup(line);
 		i++;
 		free(line);
 	}
-	f_floor->design[i - 1] = NULL;
-	f_floor->ymax = i - 1;
-}
-
-void init_dungeon(dungeon_t *dungeon)
-{
-	dungeon->floors = malloc(sizeof(floor_t *) * 1);
-	dungeon->floors[0] = malloc(sizeof(floor_t));
-	dungeon->floors[0]->design = calloc(1, sizeof(char *));
-	dungeon->floors[0]->chars = malloc(sizeof(character_t *) * 1);
-	dungeon->floors[0]->chars[0] = malloc(sizeof(character_t));
+	map_design[i - 1] = NULL;
+	map->design = map_design;
+	map->ymax = i - 1;
 }
 
 void init_curse(void)

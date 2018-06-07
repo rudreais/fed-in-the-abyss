@@ -23,11 +23,6 @@ void game_loop(void)
 
 int main(void)
 {
-	dungeon_t abyss;
-	tab_t game;
-	tab_t history;
-	tab_t inventory;
-
 	init_curse();
 	for (int i = 0; i < 1; i++) {
 		game_loop();
