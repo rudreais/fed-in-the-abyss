@@ -103,7 +103,7 @@ tab_t create_tab(cursor_t *pos, dim_t *dim);
 
 /**********************\
 *                      *
-*        tabs.c        *
+*        maps.c        *
 *                      *
 \**********************/
 
@@ -112,4 +112,10 @@ typedef struct {
   int ymax;
 } map_t;
 
+/**
+ * @param void
+ * AS TESTING PURPOSE, THERE WON'T BE ANY PARAMETERS
+ * @return map_t newly created
+ * @purpose create map
+ */
 map_t create_map(void);

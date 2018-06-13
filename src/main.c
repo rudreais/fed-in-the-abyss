@@ -5,15 +5,27 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <ncurses.h>
 #include "libobjects.h"
+#include "tmp.h"
+
+void init_curses(void)
+{
+  initscr();
+  raw();
+  keypad(stdscr, TRUE);
+  noecho();
+}
 
 int main(void)
 {
-  dim_t dim = create_dim(50, 70);
+  map_t map = create_map();
 
-  printf("width=%d\nheight=%d\n", dim.width, dim.height);
-  printf("--------------\n");
-  modify_dim(&dim, 100, 40);
-  printf("width=%d\nheight=%d\n", dim.width, dim.height);
+  for (int i = 0; i < map.ymax; i++)
+    printf("%s\n", map.design[i]);
   return 0;
 }
