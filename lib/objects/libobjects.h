@@ -100,3 +100,16 @@ void modify_tab(tab_t *tab, cursor_t *pos, dim_t *dim);
  * @purpose create tab
  */
 tab_t create_tab(cursor_t *pos, dim_t *dim);
+
+/**********************\
+ *                      *
+ *        tabs.c        *
+ *                      *
+\**********************/
+
+typedef struct {
+  char **design;
+  int ymax;
+} map_t;
+
+map_t create_map(void);

@@ -2,8 +2,10 @@
 ** RUDREAIS, 06/13/18
 ** lib/objects
 ** File description:
-** cursor
+** tabs
 */
+
+#include "libobjects.h"
 
 void modify_tab(tab_t *tab, cursor_t *pos, dim_t *dim)
 {
