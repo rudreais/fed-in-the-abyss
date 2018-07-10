@@ -15,11 +15,9 @@ struct cursor_s {
     int x;
     int y;
     void(*init)(Cursor *, int, int);
-    void(*destroy)(Cursor *);
     void(*modify)(Cursor*, int, int);
 };
 
 void CursorInit(Cursor *self, int x, int y);
-void CursorDestroy(Cursor *self);
 
 void cursor_modify(Cursor *self, int newx, int newy);

@@ -16,14 +16,9 @@ void cursor_modify(Cursor *self, int newx, int newy)
     self->y = newy;
 }
 
-void CursorDestroy(Cursor *self)
-{
-}
-
 void CursorInit(Cursor *self, int x, int y)
 {
     self->x = x;
     self->y = y;
-    self->destroy = CursorDestroy;
     self->modify = cursor_modify;
 }
