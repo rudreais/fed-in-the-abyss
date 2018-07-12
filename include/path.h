@@ -12,6 +12,7 @@ char *getroot(void);
 /**
  * @param directory to search AND append
  * @return full path (root + directory found)
- * @purpose 
+ * @purpose
  */
 char *getpath(const char *directory);
+
