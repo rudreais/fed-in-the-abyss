@@ -13,10 +13,12 @@ DIRLIB		+=		./lib/
 DIRSRC		+=		./src/
 
 
-SRC		+=		$(DIRLIB)maps.c		\
-					$(DIRLIB)paths.c		\
-					$(DIRLIB)readline.c	\
-					$(DIRLIB)objects/*.c	\
+SRC		+=		$(DIRLIB)paths.c			\
+					$(DIRLIB)readline.c		\
+					$(DIRLIB)objects/*.c		\
+					$(DIRSRC)core/files.c		\
+					$(DIRSRC)core/parse_map.c	\
+					$(DIRSRC)core/gen_map.c	\
 					$(DIRSRC)main.c
 
 OBJ		=		$(SRC:.c=.o)

@@ -5,6 +5,7 @@ typedef struct files_s files_t;
 
 struct file_s {
 	char **map;
+	char *name;
 	int y_len;
 };
 

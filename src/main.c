@@ -12,7 +12,9 @@
 #include "cursor.h"
 #include "fita.h"
 #include "path.h"
-#include "maps.h"
+#include "files.h"
+
+//extern char **environ;
 
 void init_curses(void)
 {
@@ -20,29 +22,21 @@ void init_curses(void)
 	raw();
 	keypad(stdscr, TRUE);
 	noecho();
+	curs_set(0);
 }
 
 void loop(void)
 {
 	WINDOW *win = newwin(30, 70, 5, 5);
-	Cursor cam_ini;
-	files_t *files = malloc(sizeof(files_t));
+	files_t *maps = malloc(sizeof(files_t));
 
-	files_init(files, getpath("maps"));
-	printw("%d\n", files->size);
-	cam_ini.init = CursorInit;
-	cam_ini.init(&cam_ini, 1, 1); // starting at the very top left
-
-	box(win, 0, 0);
-	refresh();
-	wrefresh(win);
-	getch();
+	files_init(maps, getpath("maps"));
 }
 
 int main(void)
 {
-	init_curses();
-	loop();
-	endwin();
+	//	init_curses();
+	//	loop();
+	//	endwin();
 	return 0;
 }
