@@ -1,6 +1,6 @@
 #pragma once
 
-#define DIRECTORY "maps"	// the directory to search
+#define DIRECTORY "map_gen"	// the directory to search
 
 /**
  * @param nothing

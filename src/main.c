@@ -14,8 +14,6 @@
 #include "path.h"
 #include "files.h"
 
-//extern char **environ;
-
 void init_curses(void)
 {
 	initscr();

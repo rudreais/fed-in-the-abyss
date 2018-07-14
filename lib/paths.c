@@ -28,20 +28,20 @@ char *getroot(void)
 
 	getcwd(buff, 4096);
 	if (is_dir(buff)) {
-	free(tmp);
-	return buff;
+		free(tmp);
+		return buff;
 	}
 	for (int i = strlen(buff); i >= 0; i--) {
-	if (i > 0 && buff[i] == '/') {
-		free(tmp);
-		tmp = malloc(sizeof(char) * (i + 1));
-		tmp[i] = '\0';
-		strncpy(tmp, buff, i);
-		if (is_dir(tmp)) {
-		free(buff);
-		return tmp;
+		if (i > 0 && buff[i] == '/') {
+			free(tmp);
+			tmp = malloc(sizeof(char) * (i + 1));
+			tmp[i] = '\0';
+			strncpy(tmp, buff, i);
+			if (is_dir(tmp)) {
+				free(buff);
+				return tmp;
+			}
 		}
-	}
 	}
 	return NULL;
 }
@@ -74,4 +74,5 @@ char *getexec(const char *directory, const char *execname)
 	for (int i = 0; path[i]; i++)
 		full_path[i] = path[i];
 	strcat(full_path, execname);
+	return full_path;
 }
