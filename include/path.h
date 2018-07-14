@@ -16,3 +16,10 @@ char *getroot(void);
  */
 char *getpath(const char *directory);
 
+/**
+ * @param directory to search AND append
+ * @return full path (root + directory found)
+ * @purpose
+ */
+char *getexec(const char *directory, const char *execname);
+

@@ -63,3 +63,15 @@ char *getpath(const char *directory)
 	path[length + 2] = '\0';
 	return path;
 }
+
+char *getexec(const char *directory, const char *execname)
+{
+	char *path = getpath(directory);
+	int len = strlen(directory) + strlen(execname);
+	char *full_path = malloc(sizeof(char) * (len + 1));
+
+	full_path[len] = '\0';
+	for (int i = 0; path[i]; i++)
+		full_path[i] = path[i];
+	strcat(full_path, execname);
+}
