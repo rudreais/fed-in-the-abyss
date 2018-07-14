@@ -33,10 +33,13 @@ void loop(void)
 	files_init(maps, getpath("maps"));
 }
 
+void gen_map(int level);
+
 int main(void)
 {
 	//	init_curses();
 	//	loop();
 	//	endwin();
+	gen_map(1);
 	return 0;
 }
