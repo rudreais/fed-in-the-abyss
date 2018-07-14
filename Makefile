@@ -4,7 +4,7 @@
 ##
 ##
 
-CFLAGS		+=		-I include -Wall -Wextra -W
+CFLAGS		+=		-I include -Wall -Wextra -W -g3
 
 LDFLAGS	+=		-lncurses
 
