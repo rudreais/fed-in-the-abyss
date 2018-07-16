@@ -4,7 +4,7 @@
  **
  */
 
-#include <string.h>
+#include  <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
@@ -29,15 +29,14 @@ void loop(void)
 	files_t *maps = malloc(sizeof(files_t));
 
 	files_init(maps, getpath("maps"));
+	print_map(win, maps);
+	getch();
 }
-
-void gen_map(int level);
 
 int main(void)
 {
-	//	init_curses();
-	//	loop();
-	//	endwin();
-	gen_map(1);
+	init_curses();
+	loop();
+	endwin();
 	return 0;
 }

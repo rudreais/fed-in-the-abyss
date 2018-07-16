@@ -9,4 +9,8 @@
 
 #pragma once
 
+#include <ncurses.h>
+#include "files.h"
+
 char *read_line(int fd);
+void print_map(WINDOW *win, files_t *maps);

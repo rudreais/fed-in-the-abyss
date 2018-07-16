@@ -35,7 +35,6 @@ fn generate_map(file: String, seed: i32, size: i32) {
             let value = (perlin.get([x, y, z])).abs();
 
             line.push(parser(value));
-            line.push(' ');
         }
         write_in_file(file.clone(), line);
         line = String::new();
@@ -45,7 +44,7 @@ fn generate_map(file: String, seed: i32, size: i32) {
 fn parser(value: f64) -> char {
     if value < 0.025 {
         '~' // Water
-    } else if value >= 0.025 && value <= 0.7 {
+    } else if value >= 0.025 && value <= 0.55 {
         '.' // Dirt
     } else {
         '%' // Grass

@@ -4,7 +4,7 @@
  *
  */
 
-#include <time.h>
+#include  <time.h>
 #include <stdlib.h>
 #include <unistd.h> // execve()
 #include <string.h>
@@ -19,7 +19,7 @@ char *get_seed(void)
 	char *str_seed = malloc(sizeof(char) * 4);
 
 	srand(time(NULL));
-	seed = (rand() + 1) % 999;
+	seed = (int)(random() + 1) % 999;
 	sprintf(str_seed, "%d", seed);
 	return str_seed;
 }
@@ -41,7 +41,7 @@ void gen_map(int level)
 {
 	char *path = getpath("map_gen/rust_gen");
 	char *exec = "map_generator";
-	int len = strlen(path) + strlen(exec);
+	int len = (int) strlen(path) + (int) strlen(exec);
 	char *full_path = malloc(sizeof(char) * (len) + 1);
 	char **newav = malloc(sizeof(char *) * 4);
 	char *seed = get_seed();
@@ -58,3 +58,5 @@ void gen_map(int level)
 	newav[3] = size;
 	execv(full_path, newav);
 }
+
+// TODO move generated file to correct folder

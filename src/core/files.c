@@ -14,7 +14,7 @@ static void files_append(file_t *file, const char *path_to_dir, const char *name
 	char *full_path = malloc(sizeof(char) * (len + 1));
 	int fd;
 	char *line;
-	int nlines;
+	int nlines = 0;
 
 	file->map = malloc(sizeof(char *));
 	for (int i = 0; i < (int)strlen(path_to_dir); i++)

@@ -19,6 +19,7 @@ SRC		+=		$(DIRLIB)paths.c			\
 					$(DIRSRC)core/files.c		\
 					$(DIRSRC)core/parse_map.c	\
 					$(DIRSRC)core/gen_map.c	\
+					$(DIRSRC)prints.c  \
 					$(DIRSRC)main.c
 
 OBJ		=		$(SRC:.c=.o)
