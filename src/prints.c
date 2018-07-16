@@ -11,18 +11,25 @@ void print_char(char c)
 	init_pair(1, COLOR_BLUE, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);
-	if (c == '~') {
+	switch (c) {
+	case '~':
 		attron(COLOR_PAIR(1));
 		printw("%c", c);
 		attroff(COLOR_PAIR(1));
-	} else if (c == '.') {
+		break;
+	case '.':
 		attron(COLOR_PAIR(2));
 		printw("%c", c);
 		attroff(COLOR_PAIR(2));
-	} else if (c == '%') {
+		break;
+	case '%':
 		attron(COLOR_PAIR(3));
 		printw("%c", c);
 		attroff(COLOR_PAIR(3));
+		break;
+	default:
+		printw("%c", c);
+		break;
 	}
 }
 
