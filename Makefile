@@ -17,7 +17,6 @@ SRC		+=		$(DIRLIB)paths.c			\
 					$(DIRLIB)readline.c		\
 					$(DIRLIB)objects/*.c		\
 					$(DIRSRC)core/files.c		\
-					$(DIRSRC)core/parse_map.c	\
 					$(DIRSRC)core/gen_map.c	\
 					$(DIRSRC)prints.c  \
 					$(DIRSRC)main.c

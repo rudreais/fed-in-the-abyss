@@ -26,7 +26,10 @@ char *get_seed(void)
 
 char *get_name(int level)
 {
-	return "1_1";
+	char *str_lev = malloc(sizeof(char) * 5);
+
+	sprintf(str_lev, "%d_1", level);
+	return str_lev;
 }
 
 char *get_size(void)
@@ -42,21 +45,20 @@ void gen_map(int level)
 	char *path = getpath("map_gen/rust_gen");
 	char *exec = "map_generator";
 	int len = (int) strlen(path) + (int) strlen(exec);
-	char *full_path = malloc(sizeof(char) * (len) + 1);
-	char **newav = malloc(sizeof(char *) * 4);
+	char *full_path = malloc(sizeof(char) * (len + 1));
+	char **newav = malloc(sizeof(char *) * 5);
 	char *seed = get_seed();
 	char *name = get_name(level);
 	char *size = get_size();
 
 	full_path[len] = '\0';
-	for (int i = 0; i < (int)strlen(path); i++)
+	for (int i = 0; i < (int) strlen(path); i++)
 	    full_path[i] = path[i];
 	strcat(full_path, exec);
 	newav[0] = full_path;
 	newav[1] = name;
 	newav[2] = seed;
 	newav[3] = size;
+	newav[4] = NULL;
 	execv(full_path, newav);
 }
-
-// TODO move generated file to correct folder

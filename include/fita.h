@@ -13,4 +13,7 @@
 #include "files.h"
 
 char *read_line(int fd);
-void print_map(WINDOW *win, files_t *maps);
+
+void gen_map(int level);
+
+void print_map(WINDOW *win, Cursor *cam, files_t *maps);

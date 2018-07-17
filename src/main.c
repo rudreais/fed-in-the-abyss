@@ -23,20 +23,70 @@ void init_curses(void)
 	curs_set(0);
 }
 
+int get_width(void)
+{
+	int width = COLS - 40;
+
+	width = ((width % 2) == 0) ? width-- : width;
+	return width;
+}
+
+int get_height(void)
+{
+	int height = LINES - 10;
+
+    height = ((height % 2) == 0) ? height-- : height;
+	return height;
+}
+
+void camera_attr(Cursor *cam, int key)
+{
+	switch (key) {
+	case KEY_LEFT:
+		cam->x--;
+		break;
+	case KEY_RIGHT:
+		cam->x++;
+		break;
+	case KEY_UP:
+		cam->y--;
+		break;
+	case KEY_DOWN:
+		cam->y++;
+		break;
+	}
+}
+
 void loop(void)
 {
-	WINDOW *win = newwin(30, 70, 5, 5);
+	int width = get_width();
+	int height = get_height();
+	WINDOW *win = newwin(height, width, 0, 0);
 	files_t *maps = malloc(sizeof(files_t));
+	Cursor *cam = malloc(sizeof(Cursor));
+	int c = 0;
 
+	cam->init = CursorInit;
+	cam->init(cam, (width / 2) + 1, (height / 2) + 1);
 	files_init(maps, getpath("maps"));
-	print_map(win, maps);
-	getch();
+	print_map(win, cam, maps);
+	while (c != 'q') {
+		c = getch();
+		camera_attr(cam, c);
+		print_map(win, cam, maps);
+	}
+}
+
+void start_level(int level)
+{
+	//	gen_map(level);
+	init_curses();
+	loop();
+	endwin();
 }
 
 int main(void)
 {
-	init_curses();
-	loop();
-	endwin();
+	start_level(1);
 	return 0;
 }
