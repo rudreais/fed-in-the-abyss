@@ -21,3 +21,5 @@ struct cursor_s {
 void CursorInit(Cursor *self, int x, int y);
 
 void cursor_modify(Cursor *self, int newx, int newy);
+
+void cursor_copy(Cursor *dest, Cursor *src);

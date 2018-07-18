@@ -3,7 +3,7 @@
  * Path: /home/rudreais/prog/fed-in-the-abyss/src
  * Created Date: Tuesday, July 10th 2018, 1:17:36 pm
  * Author: rudreais
- * 
+ *
  * Copyright (c) 2018 Your Company
  */
 
@@ -21,4 +21,10 @@ void CursorInit(Cursor *self, int x, int y)
     self->x = x;
     self->y = y;
     self->modify = cursor_modify;
+}
+
+void cursor_copy(Cursor *dest, Cursor *src)
+{
+	dest->x = src->x;
+	dest->y = src->y;
 }

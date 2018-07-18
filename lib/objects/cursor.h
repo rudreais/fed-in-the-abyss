@@ -3,7 +3,7 @@
  * Path: /home/rudreais/prog/fed-in-the-abyss/include
  * Created Date: Tuesday, July 10th 2018, 1:17:40 pm
  * Author: rudreais
- * 
+ *
  * Copyright (c) 2018 Your Company
  */
 
@@ -21,3 +21,5 @@ struct cursor_s {
 void CursorInit(Cursor *self, int x, int y);
 
 void cursor_modify(Cursor *self, int newx, int newy);
+
+void cursor_copy(Cursor *dest, Cursor *src);
