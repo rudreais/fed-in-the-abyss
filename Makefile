@@ -4,6 +4,8 @@
 ##
 ##
 
+CC			=		gcc
+
 CFLAGS		+=		-I include -Wall -Wextra -W -g3
 
 LDFLAGS	+=		-lncurses
@@ -18,7 +20,8 @@ SRC		+=		$(DIRLIB)paths.c			\
 					$(DIRLIB)objects/*.c		\
 					$(DIRSRC)core/files.c		\
 					$(DIRSRC)core/gen_map.c	\
-					$(DIRSRC)prints.c  \
+					$(DIRSRC)prints.c			\
+					$(DIRSRC)attr.c			\
 					$(DIRSRC)main.c
 
 OBJ		=		$(SRC:.c=.o)

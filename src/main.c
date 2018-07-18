@@ -63,17 +63,17 @@ void loop(void)
 	int height = get_height();
 	WINDOW *win = newwin(height, width, 0, 0);
 	files_t *maps = malloc(sizeof(files_t));
-	Cursor *cam = malloc(sizeof(Cursor));
+	Cursor *charac = malloc(sizeof(Cursor));
 	int c = 0;
 
-	cam->init = CursorInit;
-	cam->init(cam, (width / 2) + 1, (height / 2) + 1);
+    charac->init = CursorInit;
+	charac->init(cam, (width / 2) + 1, (height / 2) + 1);
 	files_init(maps, getpath("maps"));
 	print_map(win, cam, maps);
 	while (c != 'q') {
 		c = getch();
-		camera_attr(cam, c);
-		print_map(win, cam, maps);
+		camera_attr(charac, c);
+		print_map(win, charac, maps);
 	}
 }
 
