@@ -12,8 +12,16 @@
 #include <ncurses.h>
 #include "files.h"
 
+#define N_COLS (COLS - 40)
+#define N_LINES (LINES - 10)
+
 char *read_line(int fd);
 
 void gen_map(int level);
 
-void print_map(WINDOW *win, Cursor *cam, files_t *maps);
+void print_charac(WINDOW *win, Cursor *pos);
+
+void centered_map(WINDOW *win, Cursor *cam, files_t *maps);
+
+int get_width(void);
+int get_height(void);
