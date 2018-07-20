@@ -13,7 +13,7 @@
 
 extern char **environ;
 
-char *get_seed(void)
+static char *get_seed(void)
 {
 	int seed;
 	char *str_seed = malloc(sizeof(char) * 4);
@@ -24,7 +24,7 @@ char *get_seed(void)
 	return str_seed;
 }
 
-char *get_name(int level)
+static char *get_name(int level)
 {
 	char *str_lev = malloc(sizeof(char) * 5);
 
@@ -32,7 +32,7 @@ char *get_name(int level)
 	return str_lev;
 }
 
-char *get_size(void)
+static char *get_size(void)
 {
 	char *size = malloc(sizeof(char) * 5);
 
