@@ -72,10 +72,10 @@ int border_cam(Cursor *cam)
 	int width = get_width();
 	int height = get_height();
 
-	if (cam->x < ((width / 2) + 1) && cam->y < ((height / 2) + 1) ||
-		cam->x < ((width / 2) + 1) && cam->y > 512 - (height / 2) ||
-		cam->x > 512 - (width / 2) && cam->y < ((height / 2) + 1) ||
-		cam->x > 512 - (width / 2) && cam->y > 512 - (height / 2))
+	if ((cam->x < ((width / 2) + 1) && cam->y < ((height / 2) + 1)) ||
+		(cam->x < ((width / 2) + 1) && cam->y > 512 - (height / 2)) ||
+		(cam->x > 512 - (width / 2) && cam->y < ((height / 2) + 1)) ||
+		(cam->x > 512 - (width / 2) && cam->y > 512 - (height / 2)))
 		return 5;
 	if (cam->x < ((width / 2) + 1))
 		return 4;
@@ -135,6 +135,7 @@ void start_level(int level)
 	files_t *maps = malloc(sizeof(files_t));
 	char **old_state = NULL;
 
+	(void)level;
 	files_init(maps, getpath("maps"));
 	old_state = cpy_state(maps->files[0]);
 	//	gen_map(level);
