@@ -23,7 +23,7 @@ void init_curses(void)
 	curs_set(0);
 }
 
-void move_charac(int key, Cursor *pos)
+void move_charac(int key, cursor_t *pos)
 {
 	switch (key) {
 	case KEY_LEFT:
@@ -61,13 +61,13 @@ char **cpy_state(file_t *map)
 	return old_state;
 }
 
-void assign_player(char **map, char **old_state, Cursor *charac, Cursor *cam)
+void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam)
 {
 	map[cam->y][cam->x] = old_state[cam->y][cam->x];
 	map[charac->y][charac->x] = '@';
 }
 
-int border_cam(Cursor *cam)
+int border_cam(cursor_t *cam)
 {
 	int width = get_width();
 	int height = get_height();
@@ -93,18 +93,15 @@ void loop(files_t *maps, char **old_state)
 	int width = get_width();
 	int height = get_height();
 	WINDOW *win = newwin(height, width, 0, 0);
-	Cursor *charac = malloc(sizeof(Cursor));
-	Cursor *cam = malloc(sizeof(Cursor));
-	Cursor *fixed = malloc(sizeof(Cursor));
+	cursor_t *charac = malloc(sizeof(cursor_t));
+	cursor_t *cam = malloc(sizeof(cursor_t));
+	cursor_t *fixed = malloc(sizeof(cursor_t));
 	int c = 0;
 	int border = 0;
 
-	charac->init = CursorInit;	// player position
-	cam->init = CursorInit;	// backup camera
-	fixed->init = CursorInit;
-	charac->init(charac, (width / 2) + 1, (height / 2) + 1);
-    cam->init(cam, (width / 2) + 1, (height / 2) + 1);
-    fixed->init(fixed, (width / 2) + 1, (height / 2) + 1);
+	cursor_modify(charac, (width / 2) + 1, (height / 2) + 1);
+	cursor_copy(cam, charac);
+	cursor_copy(fixed, charac);
 
 	while (c != 'q') {
 		move_charac(c, charac);

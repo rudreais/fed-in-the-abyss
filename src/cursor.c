@@ -10,20 +10,13 @@
 #include <stdlib.h>
 #include "cursor.h"
 
-void cursor_modify(Cursor *self, int newx, int newy)
+void cursor_modify(cursor_t *self, int newx, int newy)
 {
     self->x = newx;
     self->y = newy;
 }
 
-void CursorInit(Cursor *self, int x, int y)
-{
-    self->x = x;
-    self->y = y;
-    self->modify = cursor_modify;
-}
-
-void cursor_copy(Cursor *dest, Cursor *src)
+void cursor_copy(cursor_t *dest, cursor_t *src)
 {
 	dest->x = src->x;
 	dest->y = src->y;

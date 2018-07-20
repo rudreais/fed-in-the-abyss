@@ -9,17 +9,13 @@
 
 #pragma once
 
-typedef struct cursor_s Cursor;
+typedef struct cursor_s cursor_t;
 
 struct cursor_s {
     int x;
     int y;
-    void(*init)(Cursor *, int, int);
-    void(*modify)(Cursor*, int, int);
 };
 
-void CursorInit(Cursor *self, int x, int y);
+void cursor_modify(cursor_t *self, int newx, int newy);
 
-void cursor_modify(Cursor *self, int newx, int newy);
-
-void cursor_copy(Cursor *dest, Cursor *src);
+void cursor_copy(cursor_t *dest, cursor_t *src);

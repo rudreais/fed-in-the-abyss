@@ -40,7 +40,7 @@ void print_char(WINDOW *win, char c)
 	}
 }
 
-void centered_map(WINDOW *win, Cursor *cam, files_t *maps)
+void centered_map(WINDOW *win, cursor_t *cam, files_t *maps)
 {
 	file_t *map = maps->files[0];
 	int cam_i = (cam->y - (N_LINES / 2)) - 1;

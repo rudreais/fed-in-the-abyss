@@ -19,9 +19,9 @@ char *read_line(int fd);
 
 void gen_map(int level);
 
-void print_charac(WINDOW *win, Cursor *pos);
+void print_charac(WINDOW *win, cursor_t *pos);
 
-void centered_map(WINDOW *win, Cursor *cam, files_t *maps);
+void centered_map(WINDOW *win, cursor_t *cam, files_t *maps);
 
 int get_width(void);
 int get_height(void);
