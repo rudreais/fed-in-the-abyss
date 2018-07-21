@@ -14,10 +14,11 @@ static int is_dir(const char *path)
 		return -1;
 	while ((act_dir = readdir(dir)) != NULL) {
 	if (strcmp(act_dir->d_name, DIRECTORY) == 0) {
-	    free(dir);
+	    closedir(dir);
 	    return 1;
 	}
 	}
+	closedir(dir);
 	return 0;
 }
 
@@ -74,5 +75,6 @@ char *getexec(const char *directory, const char *execname)
 	for (int i = 0; path[i]; i++)
 		full_path[i] = path[i];
 	strcat(full_path, execname);
+	free(path);
 	return full_path;
 }
