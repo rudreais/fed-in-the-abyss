@@ -41,6 +41,26 @@ static char *get_size(void)
 	return size;
 }
 
+void move_file(int level)
+{
+	char *path_map = getpath("maps");
+	char *map = get_name(level);
+	char **newav = malloc(sizeof(char *) * 4);
+	char *cmd = "mv";
+
+	newav[0] = cmd;
+	newav[1] = map;
+	newav[2] = path_map;
+	newav[3] = NULL;
+	if (fork() == 0)
+		execvp(cmd, newav);
+	else
+		wait(NULL);
+	free(path_map);
+	free(map);
+	free(newav);
+}
+
 void gen_map(int level)
 {
 	char *path = getpath("map_gen/rust_gen");
@@ -67,6 +87,7 @@ void gen_map(int level)
 		execv(full_path, newav);
 	else
 		wait(NULL);
+	move_file(level);
 	free(full_path);
 	free(newav);
 	free(seed);
