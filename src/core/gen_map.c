@@ -4,6 +4,7 @@
  *
  */
 
+#include <sys/wait.h>
 #include  <time.h>
 #include <stdlib.h>
 #include <unistd.h> // execve()
@@ -50,15 +51,26 @@ void gen_map(int level)
 	char *seed = get_seed();
 	char *name = get_name(level);
 	char *size = get_size();
+	pid_t child;
 
 	full_path[len] = '\0';
 	for (int i = 0; i < (int) strlen(path); i++)
 	    full_path[i] = path[i];
-	strcat(full_path, exec);
+	for (int i = 0; i < (int) strlen(exec); i++)
+		full_path[strlen(path) + (i)] = exec[i];
 	newav[0] = full_path;
 	newav[1] = name;
 	newav[2] = seed;
 	newav[3] = size;
 	newav[4] = NULL;
-	execv(full_path, newav);
+	if ((child = fork()) == 0)
+		execv(full_path, newav);
+	else
+		wait(NULL);
+	free(full_path);
+	free(newav);
+	free(seed);
+	free(name);
+	free(size);
+	free(path);
 }
