@@ -4,6 +4,7 @@
  **
  */
 
+#include <unistd.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -125,24 +126,48 @@ void loop(files_t *maps, char **old_state)
 		wrefresh(win);
 		c = getch();
 	}
+	free(charac);
+	free(cam);
+	free(fixed);
+	delwin(win);
 }
 
-void start_level(int level)
+void destroy_files(files_t *files)
+{
+	for (int i = 0; i < files->size; i++) {
+		for (int j = 0; j < files->files[i]->y_len; j++) {
+			free(files->files[i]->map[j]);
+		}
+		free(files->files[i]->map);
+		free(files->files[i]->name);
+	}
+}
+
+void start_level(void)
 {
 	files_t *maps = malloc(sizeof(files_t));
 	char **old_state = NULL;
+	char *path = getpath("maps");
 
-	(void)level;
-	files_init(maps, getpath("maps"));
+	files_init(maps, path);
 	old_state = cpy_state(maps->files[0]);
-	//	gen_map(level);
+	for (int i = 0; i < 7; i++) {
+		gen_map(i + 1);
+		sleep(1);
+	}
 	init_curses();
 	loop(maps, old_state);//win, maps);
 	endwin();
+	for (int i = 0; i < 512; i++)
+		free(old_state[i]);
+	free(old_state);
+	destroy_files(maps);
+	free(maps);
+	free(path);
 }
 
 int main(void)
 {
-	start_level(1);
+	start_level();
 	return 0;
 }
