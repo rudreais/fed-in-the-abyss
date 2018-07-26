@@ -69,3 +69,8 @@ int get_width(void);
  * @purpose get a good height for the main WINDOW
  */
 int get_height(void);
+
+
+char **cpy_state(file_t *map);
+void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
+

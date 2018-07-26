@@ -23,6 +23,8 @@ SRC		+=		$(DIRLIB)paths.c			\
 					$(DIRSRC)prints.c			\
 					$(DIRSRC)attr.c			\
 					$(DIRSRC)cursor.c			\
+					$(DIRSRC)player.c			\
+					$(DIRSRC)enemy.c			\
 					$(DIRSRC)main.c
 
 OBJ		=		$(SRC:.c=.o)
