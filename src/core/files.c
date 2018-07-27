@@ -57,3 +57,14 @@ void files_init(files_t *files, const char *path_to_dir)
 	}
 	closedir(dir);
 }
+
+void destroy_files(files_t *files)
+{
+	for (int i = 0; i < files->size; i++) {
+		for (int j = 0; j < files->files[i]->y_len; j++) {
+			free(files->files[i]->map[j]);
+		}
+		free(files->files[i]->map);
+		free(files->files[i]->name);
+	}
+}
