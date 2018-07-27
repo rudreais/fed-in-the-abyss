@@ -68,6 +68,10 @@ void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 	default:
 		break;
 	}
+	pos->x = (pos->x < 0) ? 0 : pos->x;
+	pos->x = (pos->x > 511) ? 511 : pos->x;
+	pos->y = (pos->y < 0) ? 0 : pos->y;
+	pos->y = (pos->y > 511) ? 511 : pos->y;
     for (int i = 0; possible_enemies[i].name; i++) {
         if (map[pos->y][pos->x] == possible_enemies[i].name) {
             pos->x = cam->x;
@@ -75,10 +79,6 @@ void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
             return;
         }
     }
-	pos->x = (pos->x < 0) ? 0 : pos->x;
-	pos->x = (pos->x > 511) ? 511 : pos->x;
-	pos->y = (pos->y < 0) ? 0 : pos->y;
-	pos->y = (pos->y > 511) ? 511 : pos->y;
 }
 
 void loop(files_t *maps, char **old_state)
