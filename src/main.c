@@ -52,6 +52,8 @@ int border_cam(cursor_t *cam)
 
 void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 {
+    char c_char;
+
 	switch (key) {
 	case KEY_LEFT:
 		pos->x--;
@@ -73,7 +75,8 @@ void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 	pos->y = (pos->y < 0) ? 0 : pos->y;
 	pos->y = (pos->y > 511) ? 511 : pos->y;
     for (int i = 0; possible_enemies[i].name; i++) {
-        if (map[pos->y][pos->x] == possible_enemies[i].name) {
+        c_char = map[pos->y][pos->x];
+        if (c_char == possible_enemies[i].name || c_char == '@') {
             pos->x = cam->x;
             pos->y = cam->y;
             return;
@@ -101,6 +104,8 @@ void loop(files_t *maps, char **old_state)
 		move_charac(c, charac, cam, maps->files[0]->map);
 		assign_player(maps->files[0]->map, old_state, charac, cam);
 		cursor_copy(cam, charac);
+        enemy_turn(enemies[0]);
+        assign_enemy(maps->files[0]->map, old_state, enemies[0]);
 		if ((border = border_cam(charac)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
 				fixed->y = cam->y;
@@ -113,6 +118,8 @@ void loop(files_t *maps, char **old_state)
 			cursor_copy(fixed, cam);
 			centered_map(win, charac, maps);
 		}
+        wmove(win, 1, 1);
+        wprintw(win, "%d\t%d", charac->x, charac->y);
 		refresh();
 		wrefresh(win);
 		c = getch();
@@ -138,6 +145,7 @@ void start_level(void)
         }
     }
 	init_curses();
+    move(0, 0);
 	loop(maps, old_state);//win, maps);
 	endwin();
 	for (int i = 0; i < 512; i++)
