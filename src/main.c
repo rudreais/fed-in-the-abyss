@@ -89,43 +89,40 @@ void loop(files_t *maps, char **old_state)
 	int width = get_width();
 	int height = get_height();
 	WINDOW *win = newwin(height, width, 0, 0);
-	cursor_t *charac = malloc(sizeof(cursor_t)); // player pos
-	cursor_t *cam = malloc(sizeof(cursor_t)); // cam pos
 	cursor_t *fixed = malloc(sizeof(cursor_t)); // fixed cam pos
+    player_t *player = create_player();
     enemy_t **enemies = malloc(sizeof(enemy_t) * 10);
 	int c = 0; // key pressed
 	int border = 0; // define if fixed cam pos is used or not
 
-	cursor_modify(charac, (width / 2) + 1, (height / 2) + 1);
-	cursor_copy(cam, charac); // before the first iteration, copy everything
-	cursor_copy(fixed, charac); // between cursors
+	cursor_copy(fixed, player->pos); // between cursors
     add_enemy(enemies);
 	while (c != 'q') {
-		move_charac(c, charac, cam, maps->files[0]->map);
-		assign_player(maps->files[0]->map, old_state, charac, cam);
-		cursor_copy(cam, charac);
+		move_charac(c, player->pos, player->pos_bak, maps->files[0]->map);
+		assign_player(maps->files[0]->map, old_state, player->pos, player->pos_bak);
+		cursor_copy(player->pos_bak, player->pos);
         enemy_turn(enemies[0]);
         assign_enemy(maps->files[0]->map, old_state, enemies[0]);
-		if ((border = border_cam(charac)) > 0) {
+		if ((border = border_cam(player->pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
-				fixed->y = cam->y;
+				fixed->y = player->pos->y;
 			if (border == 1 || border == 3) // border on top/bottom
-				fixed->x = cam->x;
+				fixed->x = player->pos->x;
 			centered_map(win, fixed, maps);
 			refresh();
 			wrefresh(win);
 		} else {
-			cursor_copy(fixed, cam);
-			centered_map(win, charac, maps);
+			cursor_copy(fixed, player->pos_bak);
+			centered_map(win, player->pos, maps);
 		}
         wmove(win, 1, 1); // test purpose
-        wprintw(win, "%d\t%d", charac->x, charac->y);
+        wprintw(win, "%d\t%d", player->pos->x, player->pos->y);
 		refresh();
 		wrefresh(win);
 		c = getch();
 	}
-	free(charac);
-	free(cam);
+	free(player->pos);
+	free(player->pos_bak);
 	free(fixed);
 	delwin(win);
 }

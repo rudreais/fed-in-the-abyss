@@ -2,6 +2,7 @@
 #include <string.h>
 #include "cursor.h"
 #include "fita.h"
+#include "enemy.h"
 
 char **cpy_state(file_t *map)
 {
@@ -23,3 +24,16 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
     map[charac->y][charac->x] = '@';
 }
 
+player_t *create_player()
+{
+	int width = get_width();
+	int height = get_height();
+	cursor_t *charac = malloc(sizeof(cursor_t)); // player pos
+	cursor_t *cam = malloc(sizeof(cursor_t)); // cam pos
+    player_t *player = malloc(sizeof(player_t));
+
+	cursor_modify(charac, (width / 2) + 1, (height / 2) + 1);
+	cursor_copy(cam, charac); // before the first iteration, copy everything
+    player->pos = charac;
+    player->pos_bak = cam;
+}
