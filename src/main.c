@@ -89,17 +89,17 @@ void loop(files_t *maps, char **old_state)
 	int width = get_width();
 	int height = get_height();
 	WINDOW *win = newwin(height, width, 0, 0);
-	cursor_t *charac = malloc(sizeof(cursor_t));
-	cursor_t *cam = malloc(sizeof(cursor_t));
-	cursor_t *fixed = malloc(sizeof(cursor_t));
+	cursor_t *charac = malloc(sizeof(cursor_t)); // player pos
+	cursor_t *cam = malloc(sizeof(cursor_t)); // cam pos
+	cursor_t *fixed = malloc(sizeof(cursor_t)); // fixed cam pos
     enemy_t **enemies = malloc(sizeof(enemy_t) * 10);
-	int c = 0;
-	int border = 0;
+	int c = 0; // key pressed
+	int border = 0; // define if fixed cam pos is used or not
 
 	cursor_modify(charac, (width / 2) + 1, (height / 2) + 1);
-	cursor_copy(cam, charac);
-	cursor_copy(fixed, charac);
-    add_enemy(maps, enemies);
+	cursor_copy(cam, charac); // before the first iteration, copy everything
+	cursor_copy(fixed, charac); // between cursors
+    add_enemy(enemies);
 	while (c != 'q') {
 		move_charac(c, charac, cam, maps->files[0]->map);
 		assign_player(maps->files[0]->map, old_state, charac, cam);
@@ -109,7 +109,7 @@ void loop(files_t *maps, char **old_state)
 		if ((border = border_cam(charac)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
 				fixed->y = cam->y;
-			if (border == 1 || border == 3)
+			if (border == 1 || border == 3) // border on top/bottom
 				fixed->x = cam->x;
 			centered_map(win, fixed, maps);
 			refresh();
@@ -118,7 +118,7 @@ void loop(files_t *maps, char **old_state)
 			cursor_copy(fixed, cam);
 			centered_map(win, charac, maps);
 		}
-        wmove(win, 1, 1);
+        wmove(win, 1, 1); // test purpose
         wprintw(win, "%d\t%d", charac->x, charac->y);
 		refresh();
 		wrefresh(win);

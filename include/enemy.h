@@ -22,4 +22,4 @@ struct enemy_s {
 
 void enemy_turn(enemy_t *enemy);
 void assign_enemy(char **map, char **old_state, enemy_t *enemy);
-void add_enemy(files_t *maps, enemy_t **enemies);
+void add_enemy(enemy_t **enemies);
