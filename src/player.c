@@ -33,6 +33,13 @@ player_t *create_player()
 	cursor_t *cam = malloc(sizeof(cursor_t)); // cam pos
     player_t *player = malloc(sizeof(player_t));
 
+    player->charac = malloc(sizeof(charac_t));
+    player->charac->level = 1;
+    player->charac->hp = 10;
+    player->charac->mp = 10;
+    player->charac->str = 5;
+    player->charac->def = 3;
+    player->name = '@';
 	cursor_modify(charac, (width / 2) + 1, (height / 2) + 1);
 	cursor_copy(cam, charac); // before the first iteration, copy everything
     player->pos = charac;

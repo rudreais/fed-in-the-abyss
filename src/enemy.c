@@ -29,7 +29,7 @@ enemy_t possible_enemies[] = {
 void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
 {
     int e_key = -1; // "emulated" key
-    cursor_t player_pos;
+    cursor_t *player_pos;
 
     if (enemy->pos->x > player->pos->x) {
         e_key = KEY_LEFT; 
@@ -41,8 +41,8 @@ void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
         e_key = KEY_DOWN;
     }
     player_pos = move_charac(e_key, enemy->pos, enemy->pos_bak, map);
-    if (player_pos.x > -1 && player_pos.y > -1) {
-        attack(enemies, &player_pos, player);
+   if (player_pos->x > -1 && player_pos->y > -1) {
+        attack(enemies, player_pos, enemy);
     }
 }
 
@@ -61,6 +61,8 @@ void add_enemy(enemy_t **enemies)
     srand(time(NULL));
     index = rand() % 4; 
     enemy->name = possible_enemies[index].name;
+    enemy->charac = malloc(sizeof(charac_t));
+    enemy->charac->hp = possible_enemies[index].charac->hp;
     enemy->charac = possible_enemies[index].charac;
     enemy->pos = malloc(sizeof(cursor_t));
     enemy->pos->x = 50;
@@ -69,4 +71,5 @@ void add_enemy(enemy_t **enemies)
     enemy->pos_bak->x = 50;
     enemy->pos_bak->y = 20;
     enemies[0] = enemy;
+    enemies[1] = &possible_enemies[4];
 }
