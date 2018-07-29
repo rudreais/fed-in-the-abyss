@@ -70,9 +70,24 @@ int get_width(void);
  */
 int get_height(void);
 
-
+/****************/
+/* src/player.c */
+/****************/
+/**
+ * @param actual map
+ * @return double char ptr
+ * @purpose copy state of the map
+ */
 char **cpy_state(file_t *map);
+/**
+ * @param double char ptr x2, cursor ptr x2
+ * @return nothing
+ * @purpose assign player to map and backup map's state
+ */
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
 
+/***************/
+/* src/main.c */
+/***************/
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 

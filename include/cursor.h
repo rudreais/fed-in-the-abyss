@@ -11,6 +11,10 @@
 
 typedef struct cursor_s cursor_t;
 
+/**
+ * see cursor struct as a position's object
+ * these "methods" shouldn't be touched 
+ */
 struct cursor_s {
     int x;
     int y;
