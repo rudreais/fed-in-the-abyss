@@ -50,9 +50,10 @@ int border_cam(cursor_t *cam)
 	return 0;
 }
 
-void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
+cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 {
     char c_char;
+    cursor_t ret = {.x = -1, .y = -1};
 
 	switch (key) {
 	case KEY_LEFT:
@@ -79,9 +80,12 @@ void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
         if (c_char == possible_enemies[i].name || c_char == '@') {
             pos->x = cam->x;
             pos->y = cam->y;
-            return;
+            ret.x = pos->x;
+            ret.y = pos->y;
+            return ret;
         }
     }
+    return ret;
 }
 
 void loop(files_t *maps, char **old_state)
@@ -94,11 +98,13 @@ void loop(files_t *maps, char **old_state)
     enemy_t **enemies = malloc(sizeof(enemy_t) * 10);
 	int c = 0; // key pressed
 	int border = 0; // define if fixed cam pos is used or not
+    cursor_t enemy_pos;
 
+    (void)enemy_pos;
 	cursor_copy(fixed, player->pos); // between cursors
     add_enemy(enemies);
 	while (c != 'q') {
-		move_charac(c, player->pos, player->pos_bak, maps->files[0]->map);
+		enemy_pos = move_charac(c,player->pos,player->pos_bak,maps->files[0]->map);
 		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
 		cursor_copy(player->pos_bak, player->pos);
         enemy_turn(player->pos, enemies[0], maps->files[0]->map);

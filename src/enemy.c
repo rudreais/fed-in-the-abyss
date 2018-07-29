@@ -40,7 +40,8 @@ void enemy_turn(cursor_t *player, enemy_t *enemy, char **map)
     } else if (enemy->pos->y < player->y) {
         e_key = KEY_DOWN;
     }
-    move_charac(e_key, enemy->pos, enemy->pos_bak, map);
+    pos_player = move_charac(e_key, enemy->pos, enemy->pos_bak, map);
+    (void)pos_player;
 }
 
 void assign_enemy(char **map, char **old_state, enemy_t *enemy)
