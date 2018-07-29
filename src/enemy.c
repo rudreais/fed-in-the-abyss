@@ -26,22 +26,24 @@ enemy_t possible_enemies[] = {
     {'\0', NULL, NULL, NULL}
 };
 
-void enemy_turn(cursor_t *player, enemy_t *enemy, char **map)
+void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
 {
     int e_key = -1; // "emulated" key
-    cursor_t pos_player;
+    cursor_t player_pos;
 
-    if (enemy->pos->x > player->x) {
+    if (enemy->pos->x > player->pos->x) {
         e_key = KEY_LEFT; 
-    } else if (enemy->pos->y > player->y) {
+    } else if (enemy->pos->y > player->pos->y) {
         e_key = KEY_UP;
-    } else if (enemy->pos->x < player->x) {
+    } else if (enemy->pos->x < player->pos->x) {
         e_key = KEY_RIGHT;
-    } else if (enemy->pos->y < player->y) {
+    } else if (enemy->pos->y < player->pos->y) {
         e_key = KEY_DOWN;
     }
-    pos_player = move_charac(e_key, enemy->pos, enemy->pos_bak, map);
-    (void)pos_player;
+    player_pos = move_charac(e_key, enemy->pos, enemy->pos_bak, map);
+    if (player_pos.x > -1 && player_pos.y > -1) {
+        attack(enemies, &player_pos, player);
+    }
 }
 
 void assign_enemy(char **map, char **old_state, enemy_t *enemy)

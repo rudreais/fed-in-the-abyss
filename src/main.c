@@ -88,6 +88,14 @@ cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
     return ret;
 }
 
+// enemy_t turn => see include/enemy.h for details
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn)
+{
+    (void)enemies;
+    (void)defender;
+    (void)turn;
+}
+
 void loop(files_t *maps, char **old_state)
 {
 	int width = get_width();
@@ -107,7 +115,7 @@ void loop(files_t *maps, char **old_state)
 		enemy_pos = move_charac(c,player->pos,player->pos_bak,maps->files[0]->map);
 		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
 		cursor_copy(player->pos_bak, player->pos);
-        enemy_turn(player->pos, enemies[0], maps->files[0]->map);
+        enemy_turn(player, enemies[0], maps->files[0]->map, enemies);
         assign_enemy(maps->files[0]->map, old_state, enemies[0]);
 		if ((border = border_cam(player->pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
@@ -125,6 +133,9 @@ void loop(files_t *maps, char **old_state)
         wprintw(win, "%d\t%d", player->pos->x, player->pos->y);
 		refresh();
 		wrefresh(win);
+        if (enemy_pos.x != -1 && enemy_pos.y != -1) {
+            attack(enemies, &enemy_pos, player);
+        }
 		c = getch();
 	}
 	free(player->pos);

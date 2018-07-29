@@ -24,6 +24,7 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
     map[charac->y][charac->x] = '@';
 }
 
+// SHOULD BE CALLED ONLY ONCE
 player_t *create_player()
 {
 	int width = get_width();

@@ -40,7 +40,7 @@ player_t *create_player(void);
  * @return nothing
  * @purpose play the enemy turn
  */
-void enemy_turn(cursor_t *player, enemy_t *enemy, char **map);
+void enemy_turn(enemy_t *player, enemy_t *enemy, char **map, enemy_t **enemies);
 
 /**
  *

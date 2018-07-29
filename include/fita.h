@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include "cursor.h"
 #include "files.h"
+#include "enemy.h"
 
 #define N_COLS (COLS - 40) // the width
 #define N_LINES (LINES - 10) // the height
@@ -89,5 +90,6 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 /***************/
 /* src/main.c */
 /***************/
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn);
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 
