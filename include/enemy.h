@@ -30,6 +30,6 @@ struct enemy_s {
 
 player_t *create_player(void);
 
-void enemy_turn(enemy_t *enemy);
+void enemy_turn(cursor_t *player, enemy_t *enemy, char **map);
 void assign_enemy(char **map, char **old_state, enemy_t *enemy);
 void add_enemy(enemy_t **enemies);

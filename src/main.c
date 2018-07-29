@@ -99,9 +99,9 @@ void loop(files_t *maps, char **old_state)
     add_enemy(enemies);
 	while (c != 'q') {
 		move_charac(c, player->pos, player->pos_bak, maps->files[0]->map);
-		assign_player(maps->files[0]->map, old_state, player->pos, player->pos_bak);
+		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
 		cursor_copy(player->pos_bak, player->pos);
-        enemy_turn(enemies[0]);
+        enemy_turn(player->pos, enemies[0], maps->files[0]->map);
         assign_enemy(maps->files[0]->map, old_state, enemies[0]);
 		if ((border = border_cam(player->pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right

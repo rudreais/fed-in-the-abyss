@@ -74,3 +74,5 @@ int get_height(void);
 char **cpy_state(file_t *map);
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
 
+void move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
+

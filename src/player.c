@@ -36,4 +36,5 @@ player_t *create_player()
 	cursor_copy(cam, charac); // before the first iteration, copy everything
     player->pos = charac;
     player->pos_bak = cam;
+    return player;
 }
