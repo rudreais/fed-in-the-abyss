@@ -1,6 +1,6 @@
 # Fed in the Abyss
 
-read the online wiki on [the website](http://rudreais.ddns.net)
+read the online wiki on [the website](http://fita.rudreais.com)
 
 ## want to help ?
 
