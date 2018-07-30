@@ -47,7 +47,7 @@ void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies,
     }
     player_pos = move_charac(e_key, enemy->pos, enemy->pos_bak, map);
    if (player_pos->x > -1 && player_pos->y > -1) {
-        attack(enemies, player_pos, enemy);
+        attack(enemies, player_pos, enemy, player);
     }
 }
 

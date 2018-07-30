@@ -91,7 +91,7 @@ cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 }
 
 // enemy_t turn => see include/enemy.h for details
-void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn)
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player)
 {
     int is_player = -1;
     cursor_t backup = {.x = defender->x, .y = defender->y};
@@ -107,6 +107,8 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn)
                 enemies[i]->charac->hp = enemies[i]->charac->hp- turn->charac->str;
             }
         }
+    } else {
+        player->charac->hp--;
     }
 }
 
@@ -132,9 +134,9 @@ void loop(files_t *maps, char **old_state)
         assign_enemy(maps->files[0]->map, old_state, enemies[0]);
         // if an enemy is killed, the player disappear
 		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
-        if (enemy_pos->x != -1 && enemy_pos->y != -1) {
-            attack(enemies, enemy_pos, player);
-        }
+        if (enemy_pos->x != -1 && enemy_pos->y != -1)
+            attack(enemies, enemy_pos, player, player);
+        screen_charac(player);
 		if ((border = border_cam(player->pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
 				fixed->y = player->pos->y;

@@ -37,6 +37,16 @@ char *read_line(int fd);
  */
 void gen_map(int level);
 
+/*****************************/
+/* src/screens/player_info.c */
+/*****************************/
+/**
+ * @param 
+ * @return 
+ * @purpose
+ */
+void screen_charac(player_t *player);
+
 /****************/
 /* src/prints.c */
 /****************/
@@ -90,6 +100,6 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 /***************/
 /* src/main.c */
 /***************/
-void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn);
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
 cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 

@@ -15,16 +15,17 @@ DIRLIB		+=		./lib/
 DIRSRC		+=		./src/
 
 
-SRC		+=		$(DIRLIB)paths.c			\
-					$(DIRLIB)readline.c		\
-					$(DIRLIB)objects/*.c		\
-					$(DIRSRC)core/files.c		\
-					$(DIRSRC)core/gen_map.c	\
-					$(DIRSRC)prints.c			\
-					$(DIRSRC)attr.c			\
-					$(DIRSRC)cursor.c			\
-					$(DIRSRC)player.c			\
-					$(DIRSRC)enemy.c			\
+SRC		+=		$(DIRLIB)paths.c				\
+					$(DIRLIB)readline.c			\
+					$(DIRLIB)objects/*.c			\
+					$(DIRSRC)core/files.c			\
+					$(DIRSRC)core/gen_map.c		\
+					$(DIRSRC)screens/player_info.c	\
+					$(DIRSRC)prints.c				\
+					$(DIRSRC)attr.c				\
+					$(DIRSRC)cursor.c				\
+					$(DIRSRC)player.c				\
+					$(DIRSRC)enemy.c				\
 					$(DIRSRC)main.c
 
 OBJ		=		$(SRC:.c=.o)
