@@ -48,7 +48,7 @@ void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
 
 void assign_enemy(char **map, char **old_state, enemy_t *enemy)
 {
-    map[enemy->pos_bak->y][enemy->pos_bak->x] = old_state[enemy->pos->y][enemy->pos->x];
+    map[enemy->pos_bak->y][enemy->pos_bak->x] = old_state[enemy->pos_bak->y][enemy->pos_bak->x];
     map[enemy->pos->y][enemy->pos->x] = enemy->name;
     cursor_copy(enemy->pos_bak, enemy->pos);
 }
