@@ -131,12 +131,15 @@ void loop(files_t *maps, char **old_state)
 		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
 		cursor_copy(player->pos_bak, player->pos);
         enemy_turn(player, enemies[0], maps->files[0]->map, enemies, old_state);
+        if (player->charac->hp <= 0) {
+            screen_death();
+            return;
+        }
         assign_enemy(maps->files[0]->map, old_state, enemies[0]);
         // if an enemy is killed, the player disappear
 		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
         if (enemy_pos->x != -1 && enemy_pos->y != -1)
             attack(enemies, enemy_pos, player, player);
-        screen_charac(player);
 		if ((border = border_cam(player->pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
 				fixed->y = player->pos->y;
@@ -149,6 +152,8 @@ void loop(files_t *maps, char **old_state)
 			cursor_copy(fixed, player->pos_bak);
 			centered_map(win, player->pos, maps);
 		}
+        screen_charac(player);
+        screen_logs();
 		refresh();
 		wrefresh(win);
 		c = getch();

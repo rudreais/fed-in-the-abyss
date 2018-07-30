@@ -47,6 +47,15 @@ void gen_map(int level);
  */
 void screen_charac(player_t *player);
 
+/**
+ *
+ *
+ *
+ */
+void screen_logs(void);
+
+void screen_death(void);
+
 /****************/
 /* src/prints.c */
 /****************/
