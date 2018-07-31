@@ -19,7 +19,7 @@ DIRSRC		+=	src/
 DIRINC		+=	include/
 
 SRC		+=	$(DIRLIB)paths.c		\
-			$(DIRLIB)readline.c		\
+    			$(DIRLIB)readline.c		\
 			$(DIRLIB)objects/string.c	\
 			$(DIRLIB)objects/o_strings.c	\
 			$(DIRSRC)core/files.c		\
