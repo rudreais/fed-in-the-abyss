@@ -12,15 +12,16 @@ CFLAGS		+=	-I $(DIRINC)	\
 
 LDFLAGS		+=	-lncurses
 
-DIRLIB		+=	./lib/
+DIRLIB		+=	lib/
 
-DIRSRC		+=	./src/
+DIRSRC		+=	src/
 
-DIRINC		+=	./include/
+DIRINC		+=	include/
 
 SRC		+=	$(DIRLIB)paths.c		\
 			$(DIRLIB)readline.c		\
-			$(DIRLIB)objects/*.c		\
+			$(DIRLIB)objects/string.c	\
+			$(DIRLIB)objects/o_strings.c	\
 			$(DIRSRC)core/files.c		\
 			$(DIRSRC)core/gen_map.c		\
 			$(DIRSRC)prints.c		\
