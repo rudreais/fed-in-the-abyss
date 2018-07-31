@@ -21,7 +21,6 @@ SRC		+=		$(DIRLIB)paths.c			\
 					$(DIRSRC)core/files.c		\
 					$(DIRSRC)core/gen_map.c	\
 					$(DIRSRC)prints.c			\
-					$(DIRSRC)attr.c			\
 					$(DIRSRC)cursor.c			\
 					$(DIRSRC)player.c			\
 					$(DIRSRC)enemy.c			\
