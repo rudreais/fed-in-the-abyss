@@ -104,14 +104,14 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
     else
         is_player = 1;
     if (is_player == 1) {
-	for (int i = 0; enemies[i]->name; i++) {
+	for (int i = 0; enemies[i]; i++) {
 	    if (enemies[i]->pos.x == backup.x &&
 		enemies[i]->pos.y == backup.y) {
 		enemies[i]->charac.hp = enemies[i]->charac.hp - turn->charac.str;
 	    }
 	}
     } else {
-        player->charac->hp--;
+        player->charac.hp--;
     }
 }
 
@@ -132,14 +132,14 @@ void loop(files_t *maps, char **old_state)
 		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps->files[0]->map);
 		assign_player(maps->files[0]->map, old_state, &player.pos, &player.pos_bak);
 		player.pos_bak = player.pos;
-		enemy_turn(&player, enemies[0], maps->files[0]->map, enemies);
+		enemy_turn(&player, enemies[0], maps->files[0]->map, enemies, old_state);
 		if (player.charac.hp <= 0) {
 			screen_death();
 			return;
 		}
 		assign_enemy(maps->files[0]->map, old_state, enemies[0]);
 	        // if an enemy is killed, the player disappear
-		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
+		assign_player(maps->files[0]->map,old_state,&player.pos,&player.pos_bak);
 		if (enemy_pos->x != -1 && enemy_pos->y != -1)
 		         attack(enemies, enemy_pos, &player, &player);
 		if ((border = border_cam(&player.pos)) > 0) {
@@ -158,7 +158,7 @@ void loop(files_t *maps, char **old_state)
 		wprintw(win, "%d", enemies[0]->charac.hp);
 		wprintw(win, "\t%d\t%d", enemy_pos->x, enemy_pos->y);
 
-        screen_charac(player);
+        screen_charac(&player);
         screen_logs();
 		refresh();
 		wrefresh(win);

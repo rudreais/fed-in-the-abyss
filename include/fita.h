@@ -28,6 +28,8 @@
  */
 #define GET_HEIGHT	(((N_LINES % 2) == 0) ? N_LINES - 1 : N_LINES)
 
+#define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
+
 /******************/
 /* lib/readline.c */
 /******************/
