@@ -78,14 +78,14 @@ cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 	pos->y = (pos->y < 0) ? 0 : pos->y;
 	pos->y = (pos->y > 511) ? 511 : pos->y;
     for (int i = 0; possible_enemies[i].name; i++) {
-        c_char = map[pos->y][pos->x];
-        if (c_char == possible_enemies[i].name || c_char == '@') {
-            ret->x = pos->x;
-            ret->y = pos->y;
-            pos->x = cam->x;
-            pos->y = cam->y;
-            return ret;
-        }
+	c_char = map[pos->y][pos->x];
+	if (c_char == possible_enemies[i].name || c_char == '@') {
+	    ret->x = pos->x;
+	    ret->y = pos->y;
+	    pos->x = cam->x;
+	    pos->y = cam->y;
+	    return ret;
+	}
     }
     return ret;
 }
@@ -94,19 +94,22 @@ cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player)
 {
     int is_player = -1;
-    cursor_t backup = {.x = defender->x, .y = defender->y};
+    cursor_t backup = {
+	    .x = defender->x,
+	    .y = defender->y
+    };
 
     if (turn->name != '@')
 		is_player = 0;
     else
         is_player = 1;
     if (is_player == 1) {
-        for (int i = 0; enemies[i]->name; i++) {
-            if (enemies[i]->pos->x == backup.x && \
-                enemies[i]->pos->y == backup.y) {
-                enemies[i]->charac->hp = enemies[i]->charac->hp- turn->charac->str;
-            }
-        }
+	for (int i = 0; enemies[i]->name; i++) {
+	    if (enemies[i]->pos.x == backup.x &&
+		enemies[i]->pos.y == backup.y) {
+		enemies[i]->charac.hp = enemies[i]->charac.hp - turn->charac.str;
+	    }
+	}
     } else {
         player->charac->hp--;
     }
@@ -115,85 +118,86 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
 void loop(files_t *maps, char **old_state)
 {
 	WINDOW *win = newwin(GET_HEIGHT, GET_WIDTH, 0, 0);
-	cursor_t *fixed = malloc(sizeof(cursor_t)); // fixed cam pos
-    player_t *player = create_player();
-    enemy_t **enemies = malloc(sizeof(enemy_t) * 10);
+	cursor_t fixed;
+	player_t player;
+	enemy_t **enemies = malloc(sizeof(enemy_t) * 10);
 	int c = 0; // key pressed
 	int border = 0; // define if fixed cam pos is used or not
-    cursor_t *enemy_pos;
+	cursor_t *enemy_pos;
 
-	cursor_copy(fixed, player->pos); // between cursors
-    add_enemy(enemies);
+	create_player(&player);
+	fixed = player.pos;
+	add_enemy(enemies);
 	while (c != 'q') {
-		enemy_pos = move_charac(c,player->pos,player->pos_bak,maps->files[0]->map);
+		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps->files[0]->map);
+		assign_player(maps->files[0]->map, old_state, &player.pos, &player.pos_bak);
+		player.pos_bak = player.pos;
+		enemy_turn(&player, enemies[0], maps->files[0]->map, enemies);
+		if (player.charac.hp <= 0) {
+			screen_death();
+			return;
+		}
+		assign_enemy(maps->files[0]->map, old_state, enemies[0]);
+	        // if an enemy is killed, the player disappear
 		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
-		cursor_copy(player->pos_bak, player->pos);
-        enemy_turn(player, enemies[0], maps->files[0]->map, enemies, old_state);
-        if (player->charac->hp <= 0) {
-            screen_death();
-            return;
-        }
-        assign_enemy(maps->files[0]->map, old_state, enemies[0]);
-        // if an enemy is killed, the player disappear
-		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
-        if (enemy_pos->x != -1 && enemy_pos->y != -1)
-            attack(enemies, enemy_pos, player, player);
-		if ((border = border_cam(player->pos)) > 0) {
+		if (enemy_pos->x != -1 && enemy_pos->y != -1)
+		         attack(enemies, enemy_pos, &player, &player);
+		if ((border = border_cam(&player.pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
-				fixed->y = player->pos->y;
+				fixed.y = player.pos.y;
 			if (border == 1 || border == 3) // border on top/bottom
-				fixed->x = player->pos->x;
-			centered_map(win, fixed, maps);
+				fixed.x = player.pos.x;
+			centered_map(win, &fixed, maps);
 			refresh();
 			wrefresh(win);
 		} else {
-			cursor_copy(fixed, player->pos_bak);
-			centered_map(win, player->pos, maps);
+			fixed = player.pos_bak;
+			centered_map(win, &player.pos, maps);
 		}
+		wmove(win, 1, 1); // test purpose
+		wprintw(win, "%d", enemies[0]->charac.hp);
+		wprintw(win, "\t%d\t%d", enemy_pos->x, enemy_pos->y);
+
         screen_charac(player);
         screen_logs();
 		refresh();
 		wrefresh(win);
 		c = getch();
 	}
-	free(player->pos);
-	free(player->pos_bak);
-	free(fixed);
 	delwin(win);
 }
 
 void start_level(void)
 {
-	files_t *maps = malloc(sizeof(files_t));
+	files_t maps;
 	char **old_state = NULL;
 	char *path = getpath("maps");
 
-    if (FAST_RUN == 1) {
-        for (int i = 0; i < 7; i++) {
-            gen_map(i + 1);
-            sleep(1);
-        }
-    }
-	files_init(maps, path);
-	old_state = cpy_state(maps->files[0]);
+	if (FAST_RUN == 1) {
+		for (int i = 0; i < 7; i++) {
+			gen_map(i + 1);
+			sleep(1);
+		}
+	}
+	files_init(&maps, path);
+	old_state = cpy_state(maps.files[0]);
 	init_curses();
-    move(0, 0);
-	loop(maps, old_state);//win, maps);
+	move(0, 0);
+	loop(&maps, old_state);//win, maps);
 	endwin();
 	for (int i = 0; i < 512; i++)
 		free(old_state[i]);
 	free(old_state);
-	destroy_files(maps);
-	free(maps);
+	destroy_files(&maps);
 	free(path);
 }
 
 int main(int ac, char **av)
 {
     if (ac > 1) {
-        if (av[1][0] == '1') {
-            FAST_RUN = 1;
-        }
+	if (av[1][0] == '1') {
+	    FAST_RUN = 1;
+	}
     }
 	start_level();
 	return 0;

@@ -5,7 +5,13 @@
 typedef struct enemy_s enemy_t;
 typedef struct charac_s charac_t;
 
-#define player_t enemy_t // use player_t instead of enemy_t for player
+typedef enemy_t player_t;
+
+/*
+ * I'm not sure it's a good practice to differentiate 2 variables of the same
+ * type, by creating a type "copy". I think differents variables names are enough.
+ * I keep it while waiting for an explanation/justification/details from you
+ */
 
 struct charac_s {
     int level;
@@ -17,20 +23,20 @@ struct charac_s {
 
 struct enemy_s {
     char name;
-    cursor_t *pos;
-    cursor_t *pos_bak;
-    charac_t *charac;
+    cursor_t pos;
+    cursor_t pos_bak;
+    charac_t charac;
 };
 
 /****************/
 /* src/player.c */
 /****************/
 /**
- * @param nothing
- * @return player ptr newly allocated
+ * @param ptr to player_t
+ * @return void
  * @purpose create player (assigning pointers as charac and pos)
  */
-player_t *create_player(void);
+void create_player(player_t *player);
 
 /****************/
 /* src/enemy.c */
