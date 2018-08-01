@@ -130,7 +130,6 @@ void loop(files_t *maps, char **old_state)
 
 	create_player(&player);
 	fixed = player.pos;
-//	cursor_copy(fixed, &player->pos); // between cursors
 	add_enemy(enemies);
 	while (c != 'q') {
 		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps->files[0]->map);
