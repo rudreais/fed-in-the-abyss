@@ -20,7 +20,7 @@ const charac_t possible_charac[] = {
  * I remove the terminating element in array because of when array are declared
  * in the stack, you can get array size (usefull in loop for exemple) with this
  * macro :
- *		#define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x))
+ *		#define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
  *
  *		x is array
  */
