@@ -61,6 +61,18 @@ void move_file(int level)
 	free(newav);
 }
 
+void create_dir(void)
+{
+		char *path = getroot();
+		char *filename = "/maps";
+		int len = strlen(path) + strlen(filename);
+
+		path = realloc(path, sizeof(char) * (len + 1));
+		for (int i = strlen(path), j = 0; i < len; i++, j++)
+				path[i] = filename[j];
+		path[len] = '\0';
+}
+
 void gen_map(int level)
 {
 	char *path = getpath("map_gen/rust_gen");
@@ -87,6 +99,7 @@ void gen_map(int level)
 		execv(full_path, newav);
 	else
 		wait(NULL);
+	create_dir();
 	move_file(level);
 	free(full_path);
 	free(newav);

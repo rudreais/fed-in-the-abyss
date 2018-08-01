@@ -16,7 +16,7 @@
 #include "files.h"
 #include "enemy.h"
 
-static int FAST_RUN = 0;
+static int FAST_RUN = 1;
 
 extern enemy_t possible_enemies[];
 
@@ -196,7 +196,7 @@ int main(int ac, char **av)
 {
     if (ac > 1) {
 	if (av[1][0] == '1') {
-	    FAST_RUN = 1;
+	    FAST_RUN = 0;
 	}
     }
 	start_level();
