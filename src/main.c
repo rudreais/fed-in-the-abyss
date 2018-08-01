@@ -168,14 +168,14 @@ void start_level(void)
 	char **old_state = NULL;
 	char *path = getpath("maps");
 
-	files_init(maps, path);
-	old_state = cpy_state(maps->files[0]);
     if (FAST_RUN == 1) {
         for (int i = 0; i < 7; i++) {
             gen_map(i + 1);
             sleep(1);
         }
     }
+	files_init(maps, path);
+	old_state = cpy_state(maps->files[0]);
 	init_curses();
     move(0, 0);
 	loop(maps, old_state);//win, maps);
