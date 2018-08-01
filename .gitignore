@@ -8,3 +8,5 @@
 *.so
 node_modules
 fita
+map_generator
+maps/
