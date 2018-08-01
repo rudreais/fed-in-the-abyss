@@ -19,7 +19,7 @@ DIRSRC		+=	src/
 DIRINC		+=	include/
 
 SRC		+=	$(DIRLIB)paths.c		\
-    			$(DIRLIB)readline.c		\
+			$(DIRLIB)readline.c		\
 			$(DIRLIB)objects/string.c	\
 			$(DIRLIB)objects/o_strings.c	\
 			$(DIRSRC)core/files.c		\
@@ -27,7 +27,6 @@ SRC		+=	$(DIRLIB)paths.c		\
 			$(DIRSRC)screens/logs.c		\
 		    $(DIRSRC)screens/player_info.c	\
 			$(DIRSRC)prints.c		\
-			$(DIRSRC)cursor.c		\
 			$(DIRSRC)player.c		\
 			$(DIRSRC)enemy.c		\
 			$(DIRSRC)main.c
@@ -40,8 +39,6 @@ all:		$(EXEC)
 
 $(EXEC):	$(OBJ)
 		$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS)
-#		make clean
-#		mv $(EXEC) bin/
 
 clean:
 		rm -f $(OBJ)

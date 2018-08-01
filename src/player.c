@@ -25,22 +25,24 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 }
 
 // SHOULD BE CALLED ONLY ONCE
-player_t *create_player()
+void create_player(player_t *player)
 {
-	cursor_t *charac = malloc(sizeof(cursor_t)); // player pos
-	cursor_t *cam = malloc(sizeof(cursor_t)); // cam pos
-    player_t *player = malloc(sizeof(player_t));
-
-    player->charac = malloc(sizeof(charac_t));
-    player->charac->level = 1;
-    player->charac->hp = 10;
-    player->charac->mp = 10;
-    player->charac->str = 5;
-    player->charac->def = 3;
-    player->name = '@';
-	cursor_modify(charac, (GET_WIDTH / 2) + 1, (GET_HEIGHT / 2) + 1);
-	cursor_copy(cam, charac); // before the first iteration, copy everything
-    player->pos = charac;
-    player->pos_bak = cam;
-    return player;
+	*player = (player_t) {
+		.charac = {
+			.level = 1,
+			.hp = 10,
+			.mp = 10,
+			.str = 5,
+			.def = 3
+		},
+		.name = '@',
+		.pos = {
+			.x = (GET_WIDTH / 2) + 1,
+			.y = (GET_HEIGHT / 2) + 1
+		},
+		.pos_bak = {
+			.x = (GET_WIDTH / 2) + 1,
+			.y = (GET_HEIGHT / 2) + 1
+		}
+	};
 }
