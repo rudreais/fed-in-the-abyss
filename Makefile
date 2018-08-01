@@ -4,46 +4,50 @@
 ##
 ##
 
-CC			=		gcc
+CC		=	gcc
 
-CFLAGS		+=		-I include -Wall -Wextra -W -g3
+CFLAGS		+=	-I $(DIRINC)	\
+			-Wall -Wextra -W	\
+			-g
 
-LDFLAGS	+=		-lncurses
+LDFLAGS		+=	-lncurses
 
-DIRLIB		+=		./lib/
+DIRLIB		+=	lib/
 
-DIRSRC		+=		./src/
+DIRSRC		+=	src/
 
+DIRINC		+=	include/
 
-SRC		+=		$(DIRLIB)paths.c				\
-					$(DIRLIB)readline.c			\
-					$(DIRLIB)objects/*.c			\
-					$(DIRSRC)core/files.c			\
-					$(DIRSRC)core/gen_map.c		\
-					$(DIRSRC)screens/player_info.c	\
-					$(DIRSRC)screens/logs.c		\
-					$(DIRSRC)prints.c				\
-					$(DIRSRC)attr.c				\
-					$(DIRSRC)cursor.c				\
-					$(DIRSRC)player.c				\
-					$(DIRSRC)enemy.c				\
-					$(DIRSRC)main.c
+SRC		+=	$(DIRLIB)paths.c		\
+    			$(DIRLIB)readline.c		\
+			$(DIRLIB)objects/string.c	\
+			$(DIRLIB)objects/o_strings.c	\
+			$(DIRSRC)core/files.c		\
+			$(DIRSRC)core/gen_map.c		\
+			$(DIRSRC)prints.c		\
+			$(DIRSRC)attr.c			\
+			$(DIRSRC)cursor.c		\
+			$(DIRSRC)player.c		\
+			$(DIRSRC)enemy.c		\
+			$(DIRSRC)main.c
 
-OBJ		=		$(SRC:.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
-EXEC		=		fita
+EXEC		=	fita
 
-all:				$(EXEC)
+all:		$(EXEC)
 
-$(EXEC):			$(OBJ)
-					$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) $(CFLAGS)
-					make clean
-					mv $(EXEC) bin/
+$(EXEC):	$(OBJ)
+		$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS)
+#		make clean
+#		mv $(EXEC) bin/
 
 clean:
-					rm -f $(OBJ)
+		rm -f $(OBJ)
 
-fclean:			clean
-					rm -f $(EXEC)
+fclean:		clean
+		rm -f $(EXEC)
 
-re:				clean all
+re:		fclean all
+
+.PHONY:		all clean fclean re

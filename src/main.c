@@ -31,8 +31,8 @@ void init_curses(void)
 
 int border_cam(cursor_t *cam)
 {
-	int width = get_width();
-	int height = get_height();
+	int width = GET_WIDTH;
+	int height = GET_HEIGHT;
 
 	if ((cam->x < ((width / 2) + 1) && cam->y < ((height / 2) + 1)) ||
 		(cam->x < ((width / 2) + 1) && cam->y > 512 - (height / 2)) ||
@@ -97,7 +97,7 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
     cursor_t backup = {.x = defender->x, .y = defender->y};
 
     if (turn->name != '@')
-        is_player = 0;
+		is_player = 0;
     else
         is_player = 1;
     if (is_player == 1) {
@@ -114,9 +114,7 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
 
 void loop(files_t *maps, char **old_state)
 {
-	int width = get_width();
-	int height = get_height();
-	WINDOW *win = newwin(height, width, 0, 0);
+	WINDOW *win = newwin(GET_HEIGHT, GET_WIDTH, 0, 0);
 	cursor_t *fixed = malloc(sizeof(cursor_t)); // fixed cam pos
     player_t *player = create_player();
     enemy_t **enemies = malloc(sizeof(enemy_t) * 10);

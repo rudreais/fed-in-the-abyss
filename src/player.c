@@ -27,8 +27,6 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 // SHOULD BE CALLED ONLY ONCE
 player_t *create_player()
 {
-	int width = get_width();
-	int height = get_height();
 	cursor_t *charac = malloc(sizeof(cursor_t)); // player pos
 	cursor_t *cam = malloc(sizeof(cursor_t)); // cam pos
     player_t *player = malloc(sizeof(player_t));
@@ -40,7 +38,7 @@ player_t *create_player()
     player->charac->str = 5;
     player->charac->def = 3;
     player->name = '@';
-	cursor_modify(charac, (width / 2) + 1, (height / 2) + 1);
+	cursor_modify(charac, (GET_WIDTH / 2) + 1, (GET_HEIGHT / 2) + 1);
 	cursor_copy(cam, charac); // before the first iteration, copy everything
     player->pos = charac;
     player->pos_bak = cam;
