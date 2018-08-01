@@ -46,7 +46,7 @@ void create_player(player_t *player);
  * @return nothing
  * @purpose play the enemy turn
  */
-void enemy_turn(enemy_t *player, enemy_t *enemy, char **map, enemy_t **enemies);
+void enemy_turn(enemy_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state);
 
 /**
  *

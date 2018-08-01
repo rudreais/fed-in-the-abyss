@@ -91,30 +91,27 @@ cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map)
 }
 
 // enemy_t turn => see include/enemy.h for details
-void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn)
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player)
 {
     int is_player = -1;
-    cursor_t backup = {.x = defender->x, .y = defender->y};
+    cursor_t backup = {
+	    .x = defender->x,
+	    .y = defender->y
+    };
 
     if (turn->name != '@')
-	is_player = 0;
+		is_player = 0;
     else
-	is_player = 1;
-    move(N_LINES + 1, 1);
-    printw("%d", 1);
-    refresh();
+        is_player = 1;
     if (is_player == 1) {
 	for (int i = 0; enemies[i]->name; i++) {
-	    move(N_LINES + 1, 1);
-	    printw("%d\t%d\t%d\t%d", backup.x, backup.y,
-	    enemies[i]->pos.x, enemies[i]->pos.y);
-	    refresh();
 	    if (enemies[i]->pos.x == backup.x &&
 		enemies[i]->pos.y == backup.y) {
 		enemies[i]->charac.hp = enemies[i]->charac.hp - turn->charac.str;
-		refresh();
 	    }
 	}
+    } else {
+        player->charac->hp--;
     }
 }
 
@@ -136,9 +133,15 @@ void loop(files_t *maps, char **old_state)
 		assign_player(maps->files[0]->map, old_state, &player.pos, &player.pos_bak);
 		player.pos_bak = player.pos;
 		enemy_turn(&player, enemies[0], maps->files[0]->map, enemies);
+		if (player.charac.hp <= 0) {
+			screen_death();
+			return;
+		}
 		assign_enemy(maps->files[0]->map, old_state, enemies[0]);
+	        // if an enemy is killed, the player disappear
+		assign_player(maps->files[0]->map,old_state,player->pos,player->pos_bak);
 		if (enemy_pos->x != -1 && enemy_pos->y != -1)
-			attack(enemies, enemy_pos, &player);
+		         attack(enemies, enemy_pos, &player, &player);
 		if ((border = border_cam(&player.pos)) > 0) {
 			if (border == 2 || border == 4) // border on left/right
 				fixed.y = player.pos.y;
@@ -154,6 +157,9 @@ void loop(files_t *maps, char **old_state)
 		wmove(win, 1, 1); // test purpose
 		wprintw(win, "%d", enemies[0]->charac.hp);
 		wprintw(win, "\t%d\t%d", enemy_pos->x, enemy_pos->y);
+
+        screen_charac(player);
+        screen_logs();
 		refresh();
 		wrefresh(win);
 		c = getch();

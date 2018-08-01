@@ -33,12 +33,16 @@ enemy_t possible_enemies[] = {
 	{'O', {0}, {0}, possible_charac[3]}
 };
 
-void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
+void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state)
 {
     int e_key = -1; // "emulated" key
     cursor_t *player_pos;
 
-    if (enemy->pos.x > player->pos.x) {
+    if (enemy->charac->hp <= 0) {
+        enemy->name = state[enemy->pos_bak->y][enemy->pos_bak->x];
+        assign_enemy(map, state, enemy);
+        return;
+    }    if (enemy->pos.x > player->pos.x) {
 	e_key = KEY_LEFT;
     } else if (enemy->pos.y > player->pos.y) {
 	e_key = KEY_UP;
@@ -49,7 +53,7 @@ void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
     }
     player_pos = move_charac(e_key, &enemy->pos, &enemy->pos_bak, map);
    if (player_pos->x > -1 && player_pos->y > -1) {
-	attack(enemies, player_pos, enemy);
+        attack(enemies, player_pos, enemy, player);
     }
 }
 
