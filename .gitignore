@@ -7,4 +7,6 @@
 *.o
 *.so
 node_modules
+vgcore.*
+
 fita

@@ -14,16 +14,23 @@ const charac_t possible_charac[] = {
    {1, 14, 2, 5, 0}, // W
    {1,  8, 5, 1, 3}, // Z
    {1, 10, 3, 2, 2}, // O
-   {-1, -1, -1, -1, -1} // null
 };
+
+/*
+ * I remove the terminating element in array because of when array are declared
+ * in the stack, you can get array size (usefull in loop for exemple) with this
+ * macro :
+ *		#define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x))
+ *
+ *		x is array
+ */
 
 enemy_t possible_enemies[] = {
 	// {char name, pos, pos_bak, charac}
 	{'R', {0}, {0}, possible_charac[0]},
 	{'W', {0}, {0}, possible_charac[1]},
 	{'Z', {0}, {0}, possible_charac[2]},
-	{'O', {0}, {0}, possible_charac[3]},
-	{'\0', {0}, {0}, {0}}
+	{'O', {0}, {0}, possible_charac[3]}
 };
 
 void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies)
@@ -74,5 +81,5 @@ void add_enemy(enemy_t **enemies)
 	};
 
 	enemies[0] = enemy;
-	enemies[1] = &possible_enemies[4];
+	enemies[1] = NULL;
 }

@@ -149,7 +149,7 @@ void loop(files_t *maps, char **old_state)
 			refresh();
 			wrefresh(win);
 		} else {
-		        fixed = player.pos_bak;
+			fixed = player.pos_bak;
 			centered_map(win, &player.pos, maps);
 		}
 		wmove(win, 1, 1); // test purpose
@@ -164,27 +164,26 @@ void loop(files_t *maps, char **old_state)
 
 void start_level(void)
 {
-	files_t *maps = malloc(sizeof(files_t));
+	files_t maps;
 	char **old_state = NULL;
 	char *path = getpath("maps");
 
-	files_init(maps, path);
-	old_state = cpy_state(maps->files[0]);
-    if (FAST_RUN == 1) {
-	for (int i = 0; i < 7; i++) {
-	    gen_map(i + 1);
-	    sleep(1);
+	if (FAST_RUN == 1) {
+		for (int i = 0; i < 7; i++) {
+			gen_map(i + 1);
+			sleep(1);
+		}
 	}
-    }
+	files_init(&maps, path);
+	old_state = cpy_state(maps.files[0]);
 	init_curses();
-    move(0, 0);
-	loop(maps, old_state);//win, maps);
+	move(0, 0);
+	loop(&maps, old_state);//win, maps);
 	endwin();
 	for (int i = 0; i < 512; i++)
 		free(old_state[i]);
 	free(old_state);
-	destroy_files(maps);
-	free(maps);
+	destroy_files(&maps);
 	free(path);
 }
 

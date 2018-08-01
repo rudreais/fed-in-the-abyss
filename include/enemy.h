@@ -7,6 +7,12 @@ typedef struct charac_s charac_t;
 
 typedef enemy_t player_t;
 
+/*
+ * I'm not sure it's a good practice to differentiate 2 variables of the same
+ * type, by creating a type "copy". I think differents variables names are enough.
+ * I keep it while waiting for an explanation/justification/details from you
+ */
+
 struct charac_s {
     int level;
     int hp;
