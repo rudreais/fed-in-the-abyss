@@ -12,7 +12,6 @@ void screen_death()
     char died[] = "You died.";
     char press[] = "press any key to exit";
 
-    clear();
     move(LINES / 2, (COLS / 2) - (strlen(died) / 2));
     printw("You died.\n");
     move((LINES / 2) + 2, (COLS / 2) - (strlen(press) / 2));

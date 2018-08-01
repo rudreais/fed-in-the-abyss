@@ -17,21 +17,14 @@
 #define N_COLS		(COLS - 40) // the width
 #define N_LINES		(LINES - 10) // the height
 
-/**************/
-/* include/fita.h */	// don't know if you want to keep this
-/**************/
 /**
- * @param nothing
- * @return nothing
- * @purpose get a good width for the main WINDOW (use with #include <ncurses.h>)
+ * @purpose get a good width for the main WINDOW
  */
 
 #define GET_WIDTH	(((N_COLS % 2) == 0) ? N_COLS - 1 : N_COLS)
 
 /**
- * @param nothing
- * @return nothing
- * @purpose get a good height for the main WINDOW (use with #include <ncurses.h>)
+ * @purpose get a good height for the main WINDOW
  */
 #define GET_HEIGHT	(((N_LINES % 2) == 0) ? N_LINES - 1 : N_LINES)
 
@@ -112,3 +105,8 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 /***************/
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
 cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
+
+
+void screen_charac(player_t *player);
+void screen_death();
+void screen_logs();

@@ -24,6 +24,8 @@ SRC		+=	$(DIRLIB)paths.c		\
 			$(DIRLIB)objects/o_strings.c	\
 			$(DIRSRC)core/files.c		\
 			$(DIRSRC)core/gen_map.c		\
+			$(DIRSRC)screens/logs.c		\
+		    $(DIRSRC)screens/player_info.c	\
 			$(DIRSRC)prints.c		\
 			$(DIRSRC)cursor.c		\
 			$(DIRSRC)player.c		\
