@@ -30,6 +30,14 @@
 
 #define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
+void	init_level(files_t *maps, char ***old_state);
+void	destroy_level(files_t *maps, char **old_state);
+void	game_loop(files_t *maps, char **old_state);
+int	border_cam(cursor_t *cam);
+
+cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
+
 /******************/
 /* lib/readline.c */
 /******************/
@@ -54,8 +62,8 @@ void gen_map(int level);
 /* src/screens/player_info.c */
 /*****************************/
 /**
- * @param 
- * @return 
+ * @param
+ * @return
  * @purpose
  */
 void screen_charac(player_t *player);
@@ -112,3 +120,5 @@ cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 void screen_charac(player_t *player);
 void screen_death();
 void screen_logs();
+
+extern enemy_t possible_enemies[];
