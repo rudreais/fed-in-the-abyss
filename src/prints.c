@@ -3,8 +3,6 @@
 //
 
 #include <ncurses.h>
-#include "cursor.h"
-#include "files.h"
 #include "fita.h"
 
 void print_char(WINDOW *win, char c)
@@ -40,12 +38,17 @@ void print_char(WINDOW *win, char c)
 	}
 }
 
-void centered_map(WINDOW *win, cursor_t *cam, files_t *maps)
+void centered_map(WINDOW *win, cursor_t *cam, map_t **maps)
 {
-	file_t *map = maps->files[0];
+	map_t *map = maps[0];
 	int cam_i = (cam->y - (N_LINES / 2)) - 1;
 	int cam_j = (cam->x - (N_COLS / 2)) - 1;
 
+	if (cam_i < 0 || cam_j < 0) {
+		wmove(win, 10, 10);
+		wprintw(win, "mdr");
+		return;
+	}
 	for (int i = 0; i < N_LINES; i++) {
 		for (int j = 0; j < N_COLS; j++) {
 			wmove(win, i, j);

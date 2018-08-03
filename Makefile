@@ -18,10 +18,11 @@ DIRSRC		+=	src/
 
 DIRINC		+=	include/
 
-SRC		+=	$(DIRLIB)paths.c		\
-			$(DIRLIB)readline.c		\
-			$(DIRLIB)objects/string.c	\
-			$(DIRLIB)objects/o_strings.c	\
+SRC		+=	$(DIRLIB)readline.c		\
+			$(DIRLIB)my_snprintf.c		\
+			$(DIRLIB)my_strcat.c		\
+			$(DIRLIB)my_tabdup.c		\
+			$(DIRLIB)my_str_to_word_array.c	\
 			$(DIRSRC)main.c			\
 			$(DIRSRC)init_level.c		\
 			$(DIRSRC)destroy_level.c	\
@@ -29,7 +30,7 @@ SRC		+=	$(DIRLIB)paths.c		\
 			$(DIRSRC)border_cam.c		\
 			$(DIRSRC)move_charac.c		\
 			$(DIRSRC)attack.c		\
-			$(DIRSRC)core/files.c		\
+			$(DIRSRC)core/init_maps.c	\
 			$(DIRSRC)core/gen_map.c		\
 			$(DIRSRC)screens/logs.c		\
 			$(DIRSRC)screens/player_info.c	\

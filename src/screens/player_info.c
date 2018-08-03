@@ -4,7 +4,6 @@
  *
  */
 
-#include <ncurses.h>
 #include "fita.h"
 
 void screen_charac(player_t *player)
