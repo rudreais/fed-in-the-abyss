@@ -24,8 +24,7 @@ SRC		+=	$(DIRLIB)my_snprintf.c		\
 			$(DIRLIB)my_tabdup.c		\
 			$(DIRLIB)my_str_to_word_array.c	\
 			$(DIRSRC)main.c			\
-			$(DIRSRC)init_level.c		\
-			$(DIRSRC)destroy_level.c	\
+			$(DIRSRC)level.c		\
 			$(DIRSRC)game_loop.c		\
 			$(DIRSRC)border_cam.c		\
 			$(DIRSRC)move_charac.c		\
