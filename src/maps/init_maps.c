@@ -6,19 +6,21 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "fita.h"
+#include "my.h"
 
 static char *get_file_content(int fd)
 {
 	struct stat file;
 	char *buffer;
+	ssize_t len;
 
 	fstat(fd, &file);
 	buffer = malloc(sizeof(char) * (file.st_size + 1));
 	assert(buffer != NULL);
-	if (read(fd, buffer, file.st_size) < file.st_size)
-		return (NULL);
+	len = read(fd, buffer, file.st_size);
+	assert(len == file.st_size);
 	buffer[file.st_size] = '\0';
-	return (buffer);
+	return buffer;
 }
 
 static map_t *create_map(char *filename)
@@ -29,12 +31,12 @@ static map_t *create_map(char *filename)
 
 	assert(map != NULL);
 	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (NULL);
+	assert(fd != -1);
 	file = get_file_content(fd);
 	map->map = my_str_to_word_array(file, '\n');
 	map->name = filename;
-	return (map);
+	free(file);
+	return map;
 }
 
 size_t get_maps_nb(map_t **tab)
@@ -43,7 +45,7 @@ size_t get_maps_nb(map_t **tab)
 
 	if (tab != NULL)
 		for (; tab[i] != NULL; i++);
-	return (i);
+	return i;
 }
 
 map_t **append_new_map(map_t **maps, char *filename)
@@ -58,7 +60,7 @@ map_t **append_new_map(map_t **maps, char *filename)
 	new[i] = create_map(my_strcat("./maps/", filename));
 	new[i + 1] = NULL;
 	free(maps);
-	return (new);
+	return new;
 }
 
 map_t **init_maps(const char *path)
@@ -74,5 +76,5 @@ map_t **init_maps(const char *path)
 		maps = append_new_map(maps, file->d_name);
 	}
 	closedir(dir);
-	return (maps);
+	return maps;
 }

@@ -15,11 +15,11 @@ LDFLAGS		+=	-lncurses
 DIRLIB		+=	lib/
 
 DIRSRC		+=	src/
+DIRMAPS		+=	$(DIRSRC)maps/
 
 DIRINC		+=	include/
 
-SRC		+=	$(DIRLIB)readline.c		\
-			$(DIRLIB)my_snprintf.c		\
+SRC		+=	$(DIRLIB)my_snprintf.c		\
 			$(DIRLIB)my_strcat.c		\
 			$(DIRLIB)my_tabdup.c		\
 			$(DIRLIB)my_str_to_word_array.c	\
@@ -30,13 +30,14 @@ SRC		+=	$(DIRLIB)readline.c		\
 			$(DIRSRC)border_cam.c		\
 			$(DIRSRC)move_charac.c		\
 			$(DIRSRC)attack.c		\
-			$(DIRSRC)core/init_maps.c	\
-			$(DIRSRC)core/gen_map.c		\
 			$(DIRSRC)screens/logs.c		\
 			$(DIRSRC)screens/player_info.c	\
 			$(DIRSRC)prints.c		\
 			$(DIRSRC)player.c		\
-			$(DIRSRC)enemy.c
+			$(DIRSRC)enemy.c		\
+			$(DIRMAPS)init_maps.c		\
+			$(DIRMAPS)generate_maps.c	\
+			$(DIRMAPS)destroy_maps.c
 
 OBJ		=	$(SRC:.c=.o)
 

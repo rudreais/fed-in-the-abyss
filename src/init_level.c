@@ -4,6 +4,8 @@ map_t **init_level(const char *path)
 {
 	map_t **maps = init_maps(path);
 
+	if (!maps)
+		return NULL;
 	initscr();
 	raw();
 	keypad(stdscr, TRUE);
