@@ -44,11 +44,8 @@ void centered_map(WINDOW *win, cursor_t *cam, map_t **maps)
 	int cam_i = (cam->y - (N_LINES / 2)) - 1;
 	int cam_j = (cam->x - (N_COLS / 2)) - 1;
 
-	if (cam_i < 0 || cam_j < 0) {
-		wmove(win, 10, 10);
-		wprintw(win, "mdr");
-		return;
-	}
+		cam_i = (cam_i < 0) ? 0 : cam_i;
+		cam_j = (cam_j < 0) ? 0 : cam_j;
 	for (int i = 0; i < N_LINES; i++) {
 		for (int j = 0; j < N_COLS; j++) {
 			wmove(win, i, j);
