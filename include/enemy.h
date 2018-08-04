@@ -1,32 +1,23 @@
 #pragma once
 
-#include "fita.h"
-
-typedef struct enemy_s enemy_t;
-typedef struct charac_s charac_t;
-
-typedef enemy_t player_t;
-
-/*
- * I'm not sure it's a good practice to differentiate 2 variables of the same
- * type, by creating a type "copy". I think differents variables names are enough.
- * I keep it while waiting for an explanation/justification/details from you
- */
-
-struct charac_s {
+typedef struct
+{
     int level;
     int hp;
     int mp;
     int str;
     int def;
-};
+} charac_t;
 
-struct enemy_s {
+typedef struct
+{
     char name;
     cursor_t pos;
     cursor_t pos_bak;
     charac_t charac;
-};
+} enemy_t;
+
+typedef enemy_t player_t;
 
 /****************/
 /* src/player.c */

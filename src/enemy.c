@@ -5,9 +5,7 @@
  */
 
 #include <stdlib.h>
-#include <time.h>
 #include "fita.h"
-#include "enemy.h"
 
 const charac_t possible_charac[] = {
    {1, 10, 4, 3, 1}, // R
@@ -16,15 +14,6 @@ const charac_t possible_charac[] = {
    {1, 10, 3, 2, 2}, // O
 };
 
-/*
- * I remove the terminating element in array because of when array are declared
- * in the stack, you can get array size (usefull in loop for exemple) with this
- * macro :
- *		#define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
- *
- *		x is array
- */
-
 enemy_t possible_enemies[] = {
 	// {char name, pos, pos_bak, charac}
 	{'R', {0}, {0}, possible_charac[0]},
@@ -32,29 +21,29 @@ enemy_t possible_enemies[] = {
 	{'Z', {0}, {0}, possible_charac[2]},
 	{'O', {0}, {0}, possible_charac[3]}
 };
+int enemies_nb = GET_ARRAY_SIZE(possible_enemies);
 
 void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state)
 {
-    int e_key = -1; // "emulated" key
-    cursor_t *player_pos;
+	int e_key = -1;
+	cursor_t player_pos;
 
-    if (enemy->charac.hp <= 0) {
-        enemy->name = state[enemy->pos_bak.y][enemy->pos_bak.x];
-        assign_enemy(map, state, enemy);
-        return;
-    }    if (enemy->pos.x > player->pos.x) {
-	e_key = KEY_LEFT;
-    } else if (enemy->pos.y > player->pos.y) {
-	e_key = KEY_UP;
-    } else if (enemy->pos.x < player->pos.x) {
-	e_key = KEY_RIGHT;
-    } else if (enemy->pos.y < player->pos.y) {
-	e_key = KEY_DOWN;
-    }
-    player_pos = move_charac(e_key, &enemy->pos, &enemy->pos_bak, map);
-   if (player_pos->x > -1 && player_pos->y > -1) {
-        attack(enemies, player_pos, enemy, player);
-    }
+	if (enemy->charac.hp <= 0) {
+		enemy->name = state[enemy->pos_bak.y][enemy->pos_bak.x];
+		assign_enemy(map, state, enemy);
+		return;
+	}
+	if (enemy->pos.x > player->pos.x)
+		e_key = KEY_LEFT;
+	else if (enemy->pos.y > player->pos.y)
+		e_key = KEY_UP;
+	else if (enemy->pos.x < player->pos.x)
+		e_key = KEY_RIGHT;
+	else if (enemy->pos.y < player->pos.y)
+		e_key = KEY_DOWN;
+	player_pos = move_charac(e_key, &enemy->pos, &enemy->pos_bak, map);
+	if (player_pos.x > -1 && player_pos.y > -1)
+		attack(enemies, &player_pos, enemy, player);
 }
 
 void assign_enemy(char **map, char **old_state, enemy_t *enemy)
@@ -69,7 +58,6 @@ void add_enemy(enemy_t **enemies)
 	int index = 0;
 	enemy_t *enemy = malloc(sizeof(enemy_t));
 
-	srand(time(NULL));
 	index = rand() % 4;
 	*enemy = (enemy_t) {
 		.name = possible_enemies[index].name,
