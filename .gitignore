@@ -8,7 +8,4 @@
 *.so
 node_modules
 vgcore.*
-
 fita
-map_generator
-maps/
