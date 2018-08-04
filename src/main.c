@@ -154,10 +154,6 @@ void loop(files_t *maps, char **old_state)
 			fixed = player.pos_bak;
 			centered_map(win, &player.pos, maps);
 		}
-		wmove(win, 1, 1); // test purpose
-		wprintw(win, "%d", enemies[0]->charac.hp);
-		wprintw(win, "\t%d\t%d", enemy_pos->x, enemy_pos->y);
-
         screen_charac(&player);
         screen_logs();
 		refresh();
