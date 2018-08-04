@@ -1,4 +1,4 @@
-# TODO
+ # TODO
 `refactoring` is what you can do to help me.
 
 `dev` is what I have to do (implementing features)
@@ -9,8 +9,8 @@
 
 ## dev
 - add enemies:
-		- random generation based on the player position
-		- difficulty increasing based on the player level
+	- random generation based on the player position
+	- difficulty increasing based on the player level
 - use experience gained to level up:
-		- stop experience at a certain level based on the actual floor
+	- stop experience at a certain level based on the actual floor
 - make a minimap (mostly for fun lol)

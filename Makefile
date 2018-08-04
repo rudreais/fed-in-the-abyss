@@ -22,14 +22,20 @@ SRC		+=	$(DIRLIB)paths.c		\
 			$(DIRLIB)readline.c		\
 			$(DIRLIB)objects/string.c	\
 			$(DIRLIB)objects/o_strings.c	\
+			$(DIRSRC)main.c			\
+			$(DIRSRC)init_level.c		\
+			$(DIRSRC)destroy_level.c	\
+			$(DIRSRC)game_loop.c		\
+			$(DIRSRC)border_cam.c		\
+			$(DIRSRC)move_charac.c		\
+			$(DIRSRC)attack.c		\
 			$(DIRSRC)core/files.c		\
 			$(DIRSRC)core/gen_map.c		\
 			$(DIRSRC)screens/logs.c		\
-		    $(DIRSRC)screens/player_info.c	\
+			$(DIRSRC)screens/player_info.c	\
 			$(DIRSRC)prints.c		\
 			$(DIRSRC)player.c		\
-			$(DIRSRC)enemy.c		\
-			$(DIRSRC)main.c
+			$(DIRSRC)enemy.c
 
 OBJ		=	$(SRC:.c=.o)
 
