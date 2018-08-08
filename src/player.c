@@ -13,9 +13,11 @@ void create_player(player_t *player)
 		.charac = {
 			.level = 1,
 			.hp = 10,
+			.hp_max = 10,
 			.mp = 10,
 			.str = 5,
-			.def = 3
+			.def = 3,
+			.xp = 0
 		},
 		.name = '@',
 		.pos = {

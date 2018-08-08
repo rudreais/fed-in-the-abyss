@@ -1,10 +1,15 @@
+/*
+ * src/game_loop.c
+ *
+ * main game loop
+ */
+
 #include <ncurses.h>
 #include <stdlib.h>
 #include "fita.h"
 
-void game_loop(map_t **maps, char **old_state)
+void game_loop(properties_t *prop, map_t **maps, char **old_state)
 {
-	WINDOW *win = newwin(GET_HEIGHT, GET_WIDTH, 0, 0);
 	cursor_t fixed;
 	player_t player;
 	enemy_t *enemies[10];
@@ -14,7 +19,7 @@ void game_loop(map_t **maps, char **old_state)
 
 	create_player(&player);
 	fixed = player.pos;
-	add_enemy(enemies);
+	add_enemy(enemies, prop->level);
 	while (c != 'q') {
 		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps[0]->map);
 		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
@@ -34,22 +39,18 @@ void game_loop(map_t **maps, char **old_state)
 				fixed.y = player.pos.y;
 			if (border == 1 || border == 3) // border on top/bottom
 				fixed.x = player.pos.x;
-			centered_map(win, &fixed, maps);
+			centered_map(prop->win, &fixed, maps);
 			refresh();
-			wrefresh(win);
+			wrefresh(prop->win);
 		} else {
 			fixed = player.pos_bak;
-			centered_map(win, &player.pos, maps);
+			centered_map(prop->win, &player.pos, maps);
 		}
-		wmove(win, 1, 1); // test purpose
-		wprintw(win, "%d", enemies[0]->charac.hp);
-		wprintw(win, "\t%d\t%d", enemy_pos.x, enemy_pos.y);
-
 		screen_charac(&player);
 		screen_logs();
 		refresh();
-		wrefresh(win);
+		wrefresh(prop->win);
 		c = getch();
 	}
-	delwin(win);
+	delwin(prop->win);
 }

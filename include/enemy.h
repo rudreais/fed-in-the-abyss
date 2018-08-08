@@ -2,11 +2,13 @@
 
 typedef struct
 {
-    int level;
-    int hp;
-    int mp;
-    int str;
-    int def;
+		int level;
+		int hp;
+		int hp_max;
+		int mp;
+		int str;
+		int def;
+		int xp;
 } charac_t;
 
 typedef struct
@@ -51,4 +53,4 @@ void assign_enemy(char **map, char **old_state, enemy_t *enemy);
  *
  *
  */
-void add_enemy(enemy_t **enemies);
+void add_enemy(enemy_t **enemies, int level);

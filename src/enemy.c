@@ -8,10 +8,11 @@
 #include "fita.h"
 
 const charac_t possible_charac[] = {
-   {1, 10, 4, 3, 1}, // R
-   {1, 14, 2, 5, 0}, // W
-   {1,  8, 5, 1, 3}, // Z
-   {1, 10, 3, 2, 2}, // O
+  //level, hp, hp_max, mp, str, def, xp 
+   {1, 10, 10, 4, 3, 1, 0}, // R
+   {1, 14, 14, 2, 5, 0, 0}, // W
+   {1,  8, 8,  5, 1, 3, 0}, // Z
+   {1, 10, 10, 3, 2, 2, 0}, // O
 };
 
 enemy_t possible_enemies[] = {
@@ -53,7 +54,7 @@ void assign_enemy(char **map, char **old_state, enemy_t *enemy)
     enemy->pos_bak = enemy->pos;
 }
 
-void add_enemy(enemy_t **enemies)
+void add_enemy(enemy_t **enemies, int level)
 {
 	int index = 0;
 	enemy_t *enemy = malloc(sizeof(enemy_t));
@@ -71,7 +72,7 @@ void add_enemy(enemy_t **enemies)
 			.y = 20
 		}
 	};
-
+	enemy->charac.level = level;
 	enemies[0] = enemy;
 	enemies[1] = NULL;
 }

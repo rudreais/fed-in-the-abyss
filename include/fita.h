@@ -17,6 +17,11 @@
 #define N_COLS		(COLS - 40) // the width
 #define N_LINES		(LINES - 10) // the height
 
+typedef struct {
+		WINDOW *win;
+		int level;
+} properties_t;
+
 /**
  * @purpose get a good width for the main WINDOW
  */
@@ -32,7 +37,7 @@
 map_t	**init_level(const char *path);
 void	destroy_level(map_t **maps, char **old_state);
 
-void	game_loop(map_t **maps, char **old_state);
+void	game_loop(properties_t *prop, map_t **maps, char **old_state);
 int	border_cam(cursor_t *cam);
 
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
