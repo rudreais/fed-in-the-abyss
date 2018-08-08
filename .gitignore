@@ -9,4 +9,5 @@
 node_modules
 vgcore.*
 fita
-maps/
+maps/*
+!maps/map_generator
