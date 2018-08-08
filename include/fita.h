@@ -29,11 +29,20 @@
 
 #define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
+enum direction
+{
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
+};
+
 map_t	**init_level(const char *path);
 void	destroy_level(map_t **maps, char **old_state);
 
 void	game_loop(map_t **maps, char **old_state);
-int	border_cam(cursor_t *cam);
+enum direction	border_cam(cursor_t *cam);
+void camera(player_t *player, WINDOW *win, map_t **map);
 
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);

@@ -8,10 +8,10 @@
 #include "fita.h"
 
 const charac_t possible_charac[] = {
-   {1, 10, 4, 3, 1}, // R
-   {1, 14, 2, 5, 0}, // W
-   {1,  8, 5, 1, 3}, // Z
-   {1, 10, 3, 2, 2}, // O
+	{1, 10, 4, 3, 1}, // R
+	{1, 14, 2, 5, 0}, // W
+	{1,  8, 5, 1, 3}, // Z
+	{1, 10, 3, 2, 2}, // O
 };
 
 enemy_t possible_enemies[] = {
@@ -48,9 +48,9 @@ void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies,
 
 void assign_enemy(char **map, char **old_state, enemy_t *enemy)
 {
-    map[enemy->pos_bak.y][enemy->pos_bak.x] = old_state[enemy->pos_bak.y][enemy->pos_bak.x];
-    map[enemy->pos.y][enemy->pos.x] = enemy->name;
-    enemy->pos_bak = enemy->pos;
+	map[enemy->pos_bak.y][enemy->pos_bak.x] = old_state[enemy->pos_bak.y][enemy->pos_bak.x];
+	map[enemy->pos.y][enemy->pos.x] = enemy->name;
+	enemy->pos_bak = enemy->pos;
 }
 
 void add_enemy(enemy_t **enemies)
