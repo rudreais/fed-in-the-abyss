@@ -8,7 +8,7 @@ size_t my_tablen(char **tab)
 
 	if (tab != NULL)
 		for (; tab[i] != NULL; i++);
-	return (i);
+	return i;
 }
 
 char **my_tabdup(char **tab)
@@ -23,5 +23,5 @@ char **my_tabdup(char **tab)
 		assert(new[i] != NULL);
 	}
 	new[i] = NULL;
-	return (new);
+	return new;
 }

@@ -14,8 +14,6 @@
 #include "maps.h"
 #include "enemy.h"
 
-#define MAP_GENERATOR	("./maps/map_generator")
-#define MAP_SIZE	(512)
 #define N_COLS		(COLS - 40) // the width
 #define N_LINES		(LINES - 10) // the height
 
@@ -39,31 +37,6 @@ int	border_cam(cursor_t *cam);
 
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
-
-char	*my_snprintf(const char *format, ...);
-char	*my_strcat(char *dest, char *src);
-char	**my_tabdup(char **tab);
-char	**my_str_to_word_array(char *line, char delim);
-
-/******************/
-/* lib/readline.c */
-/******************/
-/**
- * @param file descriptor
- * @return a complete line
- * @purpose read a line until a \n or EOF is encoutered
- */
-char *read_line(int fd);
-
-/**********************/
-/* src/core/gen_map.c */
-/**********************/
-/**
- * @param the current level of the game
- * @return nothing
- * @purpose execute the rust map generator
- */
-void gen_map(int level);
 
 /*****************************/
 /* src/screens/player_info.c */
