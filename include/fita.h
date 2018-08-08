@@ -11,7 +11,7 @@
 
 #include <ncurses.h>
 #include "cursor.h"
-#include "files.h"
+#include "maps.h"
 #include "enemy.h"
 
 #define N_COLS		(COLS - 40) // the width
@@ -20,7 +20,6 @@
 /**
  * @purpose get a good width for the main WINDOW
  */
-
 #define GET_WIDTH	(((N_COLS % 2) == 0) ? N_COLS - 1 : N_COLS)
 
 /**
@@ -30,32 +29,21 @@
 
 #define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
-/******************/
-/* lib/readline.c */
-/******************/
-/**
- * @param file descriptor
- * @return a complete line
- * @purpose read a line until a \n or EOF is encoutered
- */
-char *read_line(int fd);
+map_t	**init_level(const char *path);
+void	destroy_level(map_t **maps, char **old_state);
 
-/**********************/
-/* src/core/gen_map.c */
-/**********************/
-/**
- * @param the current level of the game
- * @return nothing
- * @purpose execute the rust map generator
- */
-void gen_map(int level);
+void	game_loop(map_t **maps, char **old_state);
+int	border_cam(cursor_t *cam);
+
+cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
 
 /*****************************/
 /* src/screens/player_info.c */
 /*****************************/
 /**
- * @param 
- * @return 
+ * @param
+ * @return
  * @purpose
  */
 void screen_charac(player_t *player);
@@ -84,17 +72,11 @@ void print_charac(WINDOW *win, cursor_t *pos);
  * @return nothing
  * @purpose print the map and refresh the screen
  */
-void centered_map(WINDOW *win, cursor_t *cam, files_t *maps);
+void centered_map(WINDOW *win, cursor_t *cam, map_t **maps);
 
 /****************/
 /* src/player.c */
 /****************/
-/**
- * @param actual map
- * @return double char ptr
- * @purpose copy state of the map
- */
-char **cpy_state(file_t *map);
 /**
  * @param double char ptr x2, cursor ptr x2
  * @return nothing
@@ -106,9 +88,11 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 /* src/main.c */
 /***************/
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
-cursor_t *move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
 
 
 void screen_charac(player_t *player);
 void screen_death();
 void screen_logs();
+
+extern enemy_t possible_enemies[];
+extern int enemies_nb;
