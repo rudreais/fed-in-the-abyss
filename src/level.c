@@ -12,7 +12,6 @@ map_t **init_level(const char *path)
 	keypad(stdscr, TRUE);
 	noecho();
 	curs_set(0);
-	move(0, 0);
 	return maps;
 }
 
