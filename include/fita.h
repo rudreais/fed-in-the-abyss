@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <limits.h>
 #include <ncurses.h>
 #include "cursor.h"
 #include "maps.h"
@@ -21,6 +22,8 @@ typedef struct {
 		WINDOW *win;
 		int level;
 } properties_t;
+
+#define ABS(x) (x < 0 ? x * -1 : x)
 
 /**
  * @purpose get a good width for the main WINDOW
@@ -58,7 +61,7 @@ void screen_charac(player_t *player);
  *
  *
  */
-void screen_logs(void);
+void screen_logs(int who_is, char *f_name, int atk);
 
 void screen_death(void);
 
@@ -94,10 +97,6 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 /***************/
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
 
-
-void screen_charac(player_t *player);
-void screen_death();
-void screen_logs();
-
+extern const char *names[];
 extern enemy_t possible_enemies[];
 extern int enemies_nb;

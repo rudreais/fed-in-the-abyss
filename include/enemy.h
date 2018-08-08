@@ -13,10 +13,11 @@ typedef struct
 
 typedef struct
 {
-    char name;
-    cursor_t pos;
-    cursor_t pos_bak;
-    charac_t charac;
+	char name;
+	const char *f_name;
+	cursor_t pos;
+	cursor_t pos_bak;
+	charac_t charac;
 } enemy_t;
 
 typedef enemy_t player_t;

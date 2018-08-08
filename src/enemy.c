@@ -8,20 +8,28 @@
 #include "fita.h"
 
 const charac_t possible_charac[] = {
-  //level, hp, hp_max, mp, str, def, xp 
+  //level, hp, hp_max, mp, str, def, xp
    {1, 10, 10, 4, 3, 1, 0}, // R
    {1, 14, 14, 2, 5, 0, 0}, // W
    {1,  8, 8,  5, 1, 3, 0}, // Z
    {1, 10, 10, 3, 2, 2, 0}, // O
 };
 
+const char *names[] = {
+		       "ROGUE",
+		       "WARRIOR",
+		       "MONSTER",
+		       "OGRE"
+};
+
 enemy_t possible_enemies[] = {
 	// {char name, pos, pos_bak, charac}
-	{'R', {0}, {0}, possible_charac[0]},
-	{'W', {0}, {0}, possible_charac[1]},
-	{'Z', {0}, {0}, possible_charac[2]},
-	{'O', {0}, {0}, possible_charac[3]}
+			      {'R', NULL, {0}, {0}, possible_charac[0]},
+	{'W', NULL, {0}, {0}, possible_charac[1]},
+	{'M', NULL, {0}, {0}, possible_charac[2]},
+	{'O', NULL, {0}, {0}, possible_charac[3]}
 };
+
 int enemies_nb = GET_ARRAY_SIZE(possible_enemies);
 
 void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state)
@@ -62,6 +70,7 @@ void add_enemy(enemy_t **enemies, int level)
 	index = rand() % 4;
 	*enemy = (enemy_t) {
 		.name = possible_enemies[index].name,
+		.f_name = names[index],
 		.charac = possible_enemies[index].charac,
 		.pos = {
 			.x = 50,

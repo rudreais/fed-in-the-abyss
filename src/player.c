@@ -16,7 +16,7 @@ void create_player(player_t *player)
 			.hp_max = 10,
 			.mp = 10,
 			.str = 5,
-			.def = 3,
+			.def = 5,
 			.xp = 0
 		},
 		.name = '@',
