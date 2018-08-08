@@ -4,44 +4,55 @@
 ##
 ##
 
-CC			=		gcc
+CC		=	gcc
 
-CFLAGS		+=		-I include -Wall -Wextra -W -g3
+CFLAGS		+=	-I $(DIRINC)	\
+			-Wall -Wextra -W	\
+			-g
 
-LDFLAGS	+=		-lncurses
+LDFLAGS		+=	-lncurses
 
-DIRLIB		+=		./lib/
+DIRLIB		+=	lib/
 
-DIRSRC		+=		./src/
+DIRSRC		+=	src/
+DIRMAPS		+=	$(DIRSRC)maps/
 
+DIRINC		+=	include/
 
-SRC		+=		$(DIRLIB)paths.c			\
-					$(DIRLIB)readline.c		\
-					$(DIRLIB)objects/*.c		\
-					$(DIRSRC)core/files.c		\
-					$(DIRSRC)core/gen_map.c	\
-					$(DIRSRC)prints.c			\
-					$(DIRSRC)attr.c			\
-					$(DIRSRC)cursor.c			\
-					$(DIRSRC)player.c			\
-					$(DIRSRC)enemy.c			\
-					$(DIRSRC)main.c
+SRC		+=	$(DIRLIB)my_snprintf.c		\
+			$(DIRLIB)my_strcat.c		\
+			$(DIRLIB)my_tabdup.c		\
+			$(DIRLIB)my_str_to_word_array.c	\
+			$(DIRSRC)main.c			\
+			$(DIRSRC)level.c		\
+			$(DIRSRC)game_loop.c		\
+			$(DIRSRC)border_cam.c		\
+			$(DIRSRC)move_charac.c		\
+			$(DIRSRC)attack.c		\
+			$(DIRSRC)screens/logs.c		\
+			$(DIRSRC)screens/player_info.c	\
+			$(DIRSRC)prints.c		\
+			$(DIRSRC)player.c		\
+			$(DIRSRC)enemy.c		\
+			$(DIRMAPS)init_maps.c		\
+			$(DIRMAPS)generate_maps.c	\
+			$(DIRMAPS)destroy_maps.c
 
-OBJ		=		$(SRC:.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
-EXEC		=		fita
+EXEC		=	fita
 
-all:				$(EXEC)
+all:		$(EXEC)
 
-$(EXEC):			$(OBJ)
-					$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) $(CFLAGS)
-					make clean
-					mv $(EXEC) bin/
+$(EXEC):	$(OBJ)
+		$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS)
 
 clean:
-					rm -f $(OBJ)
+		rm -f $(OBJ)
 
-fclean:			clean
-					rm -f $(EXEC)
+fclean:		clean
+		rm -f $(EXEC)
 
-re:				clean all
+re:		fclean all
+
+.PHONY:		all clean fclean re

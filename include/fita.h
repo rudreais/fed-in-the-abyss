@@ -11,30 +11,51 @@
 
 #include <ncurses.h>
 #include "cursor.h"
-#include "files.h"
+#include "maps.h"
+#include "enemy.h"
 
-#define N_COLS (COLS - 40) // the width
-#define N_LINES (LINES - 10) // the height
+#define N_COLS		(COLS - 40) // the width
+#define N_LINES		(LINES - 10) // the height
 
-/******************/
-/* lib/readline.c */
-/******************/
 /**
- * @param file descriptor
- * @return a complete line
- * @purpose read a line until a \n or EOF is encoutered
+ * @purpose get a good width for the main WINDOW
  */
-char *read_line(int fd);
+#define GET_WIDTH	(((N_COLS % 2) == 0) ? N_COLS - 1 : N_COLS)
 
-/**********************/
-/* src/core/gen_map.c */
-/**********************/
 /**
- * @param the current level of the game
- * @return nothing
- * @purpose execute the rust map generator
+ * @purpose get a good height for the main WINDOW
  */
-void gen_map(int level);
+#define GET_HEIGHT	(((N_LINES % 2) == 0) ? N_LINES - 1 : N_LINES)
+
+#define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
+
+map_t	**init_level(const char *path);
+void	destroy_level(map_t **maps, char **old_state);
+
+void	game_loop(map_t **maps, char **old_state);
+int	border_cam(cursor_t *cam);
+
+cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
+
+/*****************************/
+/* src/screens/player_info.c */
+/*****************************/
+/**
+ * @param
+ * @return
+ * @purpose
+ */
+void screen_charac(player_t *player);
+
+/**
+ *
+ *
+ *
+ */
+void screen_logs(void);
+
+void screen_death(void);
 
 /****************/
 /* src/prints.c */
@@ -51,26 +72,27 @@ void print_charac(WINDOW *win, cursor_t *pos);
  * @return nothing
  * @purpose print the map and refresh the screen
  */
-void centered_map(WINDOW *win, cursor_t *cam, files_t *maps);
+void centered_map(WINDOW *win, cursor_t *cam, map_t **maps);
 
-/**************/
-/* src/attr.c */
-/**************/
+/****************/
+/* src/player.c */
+/****************/
 /**
- * @param nothing
+ * @param double char ptr x2, cursor ptr x2
  * @return nothing
- * @purpose get a good width for the main WINDOW
+ * @purpose assign player to map and backup map's state
  */
-int get_width(void);
-
-/**
- * @param nothing
- * @return nothing
- * @purpose get a good height for the main WINDOW
- */
-int get_height(void);
-
-
-char **cpy_state(file_t *map);
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
 
+/***************/
+/* src/main.c */
+/***************/
+void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
+
+
+void screen_charac(player_t *player);
+void screen_death();
+void screen_logs();
+
+extern enemy_t possible_enemies[];
+extern int enemies_nb;

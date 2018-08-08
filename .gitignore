@@ -1,0 +1,12 @@
+*~
+#*#
+.#*
+*mdr*
+*lol*
+*.a
+*.o
+*.so
+node_modules
+vgcore.*
+fita
+maps/
