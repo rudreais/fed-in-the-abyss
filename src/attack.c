@@ -3,9 +3,15 @@
  *
  * attack functions and algo's file
  */
+
+#include <math.h>
 #include "fita.h"
 
-// enemy_t turn => see include/enemy.h for details
+static void attr_exp(player_t *player)
+{
+	player->charac.level = cbrt(player->charac.xp / 1.25);
+}
+
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player)
 {
 	cursor_t backup = {.x = defender->x, .y = defender->y };
@@ -14,9 +20,9 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
 	if (turn->name != '@') {
 		hit_for = player->charac.hp - turn->charac.str;
 		player->charac.hp = hit_for;
-		player->charac.xp++;
+		player->charac.xp = 34;
 		screen_logs(1, turn->f_name, hit_for);
-		//attr_exp(player);
+		attr_exp(player);
 		return;
 	}
 	for (int i = 0; enemies[i]; i++) {
