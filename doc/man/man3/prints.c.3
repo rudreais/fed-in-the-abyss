@@ -1,0 +1,44 @@
+.TH "src/prints.c" 3 "Thu Aug 9 2018" "Version v0.3-alpha" "fed-in-the-abyss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/prints.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <ncurses\&.h>\fP
+.br
+\fC#include 'fita\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBprint_char\fP (WINDOW *win, char c)"
+.br
+.ti -1c
+.RI "void \fBcentered_map\fP (WINDOW *win, \fBcursor_t\fP *cam, \fBmap_t\fP **maps)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void centered_map (WINDOW * win, \fBcursor_t\fP * cam, \fBmap_t\fP ** maps)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIthe\fP current WINDOW, the camera position, the map to print 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing  print the map and refresh the screen 
+.RE
+.PP
+
+.SS "void print_char (WINDOW * win, char c)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fed-in-the-abyss from the source code\&.
