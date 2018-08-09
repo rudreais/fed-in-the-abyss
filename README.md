@@ -8,4 +8,4 @@ the branch `refactoring` needs help ! fork and improve the actual code to make i
 
 ## trying it
 
-AFTER COMPILATION, IT IS MANDATORY TO RUN IT FROM (at least) THE PROJECT ROOT'S DIRECTORY !
+just compile with `make` and feel free to try !
