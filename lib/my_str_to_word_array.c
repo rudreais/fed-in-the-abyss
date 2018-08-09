@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t word_counter(char *str, char delim)
+static size_t word_counter(char *str, char delim)
 {
 	size_t i = 0;
 	size_t nb = 0;
@@ -20,7 +20,7 @@ size_t word_counter(char *str, char delim)
 	return nb + 1;
 }
 
-char *get_word(char *line, char delim)
+static char *get_word(char *line, char delim)
 {
 	size_t i = 0;
 
@@ -30,6 +30,15 @@ char *get_word(char *line, char delim)
 		i++;
 	return strndup(line, i);
 }
+
+/**
+ * my_str_to_word_array() function extract tokens from line by delim.
+ * The token array is created by malloc(3).
+ * \param line : string to be parsed
+ * \param delim : delimiter with which line will be parsed
+ * \return A array of tokens (NULL terminated).
+ */
+
 
 char **my_str_to_word_array(char *line, char delim)
 {

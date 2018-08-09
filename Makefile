@@ -26,7 +26,7 @@ SRC		+=	$(DIRLIB)my_snprintf.c		\
 			$(DIRSRC)main.c			\
 			$(DIRSRC)level.c		\
 			$(DIRSRC)game_loop.c		\
-			$(DIRSRC)border_cam.c		\
+			$(DIRSRC)camera.c		\
 			$(DIRSRC)move_charac.c		\
 			$(DIRSRC)attack.c		\
 			$(DIRSRC)screens/logs.c		\

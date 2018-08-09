@@ -9,15 +9,15 @@
 
 void screen_death()
 {
-    char died[] = "You died.";
-    char press[] = "press any key to exit";
+	char died[] = "You died.";
+	char press[] = "press any key to exit";
 
 	clear();
-    move(LINES / 2, (COLS / 2) - (strlen(died) / 2));
-    printw("You died.\n");
-    move((LINES / 2) + 2, (COLS / 2) - (strlen(press) / 2));
-    printw("press any key to exit");
-    getch();
+	move(LINES / 2, (COLS / 2) - (strlen(died) / 2));
+	printw("You died.\n");
+	move((LINES / 2) + 2, (COLS / 2) - (strlen(press) / 2));
+	printw("press any key to exit");
+	getch();
 }
 
 void screen_logs(int who_is, char *f_name, int atk)

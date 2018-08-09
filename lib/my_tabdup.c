@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t my_tablen(char **tab)
+static size_t my_tablen(char **tab)
 {
 	size_t i = 0;
 
@@ -10,6 +10,13 @@ size_t my_tablen(char **tab)
 		for (; tab[i] != NULL; i++);
 	return i;
 }
+
+/**
+ * my_tabdup() function return a pointer to a new string array which is a
+ * duplicate of the string array tab.
+ * \param tab : A string array
+ * \return A pointer to duplicated string array.
+ */
 
 char **my_tabdup(char **tab)
 {

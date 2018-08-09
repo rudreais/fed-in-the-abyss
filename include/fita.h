@@ -15,87 +15,107 @@
 #include "maps.h"
 #include "enemy.h"
 
-#define N_COLS		(COLS - 40) // the width
-#define N_LINES		(LINES - 10) // the height
+/** width for the main window */
+#define N_COLS		(COLS - 40)
 
 typedef struct {
 		WINDOW *win;
 		int level;
 } properties_t;
 
-#define ABS(x) (x < 0 ? x * -1 : x)
+/** height for the main window */
+#define N_LINES		(LINES - 10)
 
-/**
- * @purpose get a good width for the main WINDOW
- */
+/** get a good width for the main WINDOW */
 #define GET_WIDTH	(((N_COLS % 2) == 0) ? N_COLS - 1 : N_COLS)
 
-/**
- * @purpose get a good height for the main WINDOW
- */
+/** get a good height for the main WINDOW */
 #define GET_HEIGHT	(((N_LINES % 2) == 0) ? N_LINES - 1 : N_LINES)
 
+/** get array size */
 #define GET_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
+enum direction
+{
+ /** 1 */
+ UP = 1,
+ /** 2 */
+ RIGHT,
+ /** 3 */
+ DOWN,
+ /** 4 */
+ LEFT
+};
+
+/**
+ * @param const char * path to the maps
+ * @return map_t ** map_t allocated structure
+ */
 map_t	**init_level(const char *path);
+
+/**
+ * @param map_t ** map_t pointer to destroy
+ * @param char ** old state to free
+ * @return void
+ */
 void	destroy_level(map_t **maps, char **old_state);
 
-void	game_loop(properties_t *prop, map_t **maps, char **old_state);
-int	border_cam(cursor_t *cam);
+void	game_loop(map_t **maps, char **old_state);
+enum direction	border_cam(cursor_t *cam);
+void camera(player_t *player, WINDOW *win, map_t **map);
 
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
+
+/**
+ * @param enemy_t array of enemies
+ * @param cursor_t pointer to the character being attacked
+ * @param enemy_t pointer to the character attacking
+ * @param player_t pointer to the player
+ * @return void
+ */
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
 
-/*****************************/
-/* src/screens/player_info.c */
-/*****************************/
 /**
- * @param
- * @return
- * @purpose
+ * @param player_t pointer to player
+ * @return void
  */
 void screen_charac(player_t *player);
 
 /**
- *
- *
- *
+ * @param void
+ * @return void
  */
 void screen_logs(int who_is, char *f_name, int atk);
 
+/**
+ * @param void
+ * @return void
+ */
 void screen_death(void);
 
-/****************/
-/* src/prints.c */
-/****************/
 /**
- * @param the current WINDOW, the char to print
+ * @param WINDOW *
+ * @param char character to print
  * @return nothing
- * @purpose print pretty characters using attributes from ncurses
  */
 void print_charac(WINDOW *win, cursor_t *pos);
 
 /**
- * @param the current WINDOW, the camera position, the map to print
+ * @param WINDOW *
+ * @param cursor_t the camera position
+ * @param map_t the map to print
  * @return nothing
- * @purpose print the map and refresh the screen
  */
 void centered_map(WINDOW *win, cursor_t *cam, map_t **maps);
 
-/****************/
-/* src/player.c */
-/****************/
 /**
- * @param double char ptr x2, cursor ptr x2
+ * @param char ** current map
+ * @param char ** old state of the map
+ * @param cursor_t * player's position
+ * @param cursor_t * camera's position
  * @return nothing
- * @purpose assign player to map and backup map's state
  */
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
-
-/***************/
-/* src/main.c */
-/***************/
-void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
 
 extern const char *names[];
 extern enemy_t possible_enemies[];

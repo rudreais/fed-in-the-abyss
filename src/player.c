@@ -2,8 +2,8 @@
 
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam)
 {
-    map[cam->y][cam->x] = old_state[cam->y][cam->x];
-    map[charac->y][charac->x] = '@';
+	map[cam->y][cam->x] = old_state[cam->y][cam->x];
+	map[charac->y][charac->x] = '@';
 }
 
 // SHOULD BE CALLED ONLY ONCE
