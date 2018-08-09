@@ -1,0 +1,89 @@
+.TH "src/enemy.c" 3 "Thu Aug 9 2018" "Version v0.3-alpha" "fed-in-the-abyss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/enemy.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'fita\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBenemy_turn\fP (\fBplayer_t\fP *player, \fBenemy_t\fP *enemy, char **map, \fBenemy_t\fP **enemies, char **state)"
+.br
+.ti -1c
+.RI "void \fBassign_enemy\fP (char **map, char **old_state, \fBenemy_t\fP *enemy)"
+.br
+.ti -1c
+.RI "void \fBadd_enemy\fP (\fBenemy_t\fP **enemies)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const \fBcharac_t\fP \fBpossible_charac\fP []"
+.br
+.ti -1c
+.RI "\fBenemy_t\fP \fBpossible_enemies\fP []"
+.br
+.ti -1c
+.RI "int \fBenemies_nb\fP = \fBGET_ARRAY_SIZE\fP(\fBpossible_enemies\fP)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void add_enemy (\fBenemy_t\fP ** enemies)"
+
+.SS "void assign_enemy (char ** map, char ** old_state, \fBenemy_t\fP * enemy)"
+
+.SS "void enemy_turn (\fBenemy_t\fP * player, \fBenemy_t\fP * enemy, char ** map, \fBenemy_t\fP ** enemies, char ** state)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcursor\fP ptr, \fBenemy_t\fP ptr, double char ptr 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing  play the enemy turn 
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "int enemies_nb = \fBGET_ARRAY_SIZE\fP(\fBpossible_enemies\fP)"
+
+.SS "const \fBcharac_t\fP possible_charac[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    {1, 10, 4, 3, 1}, 
+    {1, 14, 2, 5, 0}, 
+    {1,  8, 5, 1, 3}, 
+    {1, 10, 3, 2, 2}, 
+}
+.fi
+.SS "\fBenemy_t\fP possible_enemies[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    
+    {'R', {0}, {0}, possible_charac[0]},
+    {'W', {0}, {0}, possible_charac[1]},
+    {'Z', {0}, {0}, possible_charac[2]},
+    {'O', {0}, {0}, possible_charac[3]}
+}
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fed-in-the-abyss from the source code\&.

@@ -1,0 +1,63 @@
+.TH "src/maps/init_maps.c" 3 "Thu Aug 9 2018" "Version v0.3-alpha" "fed-in-the-abyss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/maps/init_maps.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'fita\&.h'\fP
+.br
+\fC#include 'my\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBget_maps_nb\fP (\fBmap_t\fP **tab)"
+.br
+.ti -1c
+.RI "\fBmap_t\fP ** \fBappend_new_map\fP (\fBmap_t\fP **maps, char *filename)"
+.br
+.ti -1c
+.RI "\fBmap_t\fP ** \fBinit_maps\fP (const char *path)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBmap_t\fP** append_new_map (\fBmap_t\fP ** maps, char * filename)"
+
+.SS "size_t get_maps_nb (\fBmap_t\fP ** tab)"
+
+.SS "\fBmap_t\fP** init_maps (const char * path)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP to the directory to init 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+maps array  read maps in path, initialize maps 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fed-in-the-abyss from the source code\&.
