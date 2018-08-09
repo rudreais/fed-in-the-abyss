@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <limits.h>
 #include <ncurses.h>
 #include "cursor.h"
 #include "maps.h"
@@ -16,6 +17,11 @@
 
 /** width for the main window */
 #define N_COLS		(COLS - 40)
+
+typedef struct {
+		WINDOW *win;
+		int level;
+} properties_t;
 
 /** height for the main window */
 #define N_LINES		(LINES - 10)
@@ -54,7 +60,7 @@ map_t	**init_level(const char *path);
  */
 void	destroy_level(map_t **maps, char **old_state);
 
-void	game_loop(map_t **maps, char **old_state);
+void	game_loop(properties_t *prop, map_t **maps, char **old_state);
 enum direction	border_cam(cursor_t *cam);
 void camera(player_t *player, WINDOW *win, map_t **map);
 
@@ -79,7 +85,7 @@ void screen_charac(player_t *player);
  * @param void
  * @return void
  */
-void screen_logs(void);
+void screen_logs(int who_is, const char *f_name, int atk);
 
 /**
  * @param void
@@ -111,5 +117,8 @@ void centered_map(WINDOW *win, cursor_t *cam, map_t **maps);
  */
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
 
+extern const char *names[];
 extern enemy_t possible_enemies[];
 extern int enemies_nb;
+
+extern charac_t base_charac;

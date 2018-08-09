@@ -1,17 +1,48 @@
+/*
+ * src/game_loop.c
+ *
+ * main game loop
+ */
+
 #include <ncurses.h>
 #include <stdlib.h>
 #include "fita.h"
 
-void game_loop(map_t **maps, char **old_state)
+static void call_print(player_t *player, cursor_t *fixed, map_t **maps, properties_t *prop)
 {
-	WINDOW *win = newwin(GET_HEIGHT, GET_WIDTH, 0, 0);
+	int border = 0; // define if fixed cam pos is used or not
+
+	if ((border = border_cam(&player->pos)) > 0) {
+		if (border == 2 || border == 4) // border on left/right
+			fixed->y = player->pos.y;
+		if (border == 1 || border == 3) // border on top/bottom
+			fixed->x = player->pos.x;
+		centered_map(prop->win, fixed, maps);
+		refresh();
+		wrefresh(prop->win);
+	} else {
+		fixed = &player->pos_bak;
+		centered_map(prop->win, &player->pos, maps);
+	}
+}
+
+void parse_key(int key)
+{
+
+}
+
+void game_loop(properties_t *prop, map_t **maps, char **old_state)
+{
+	cursor_t fixed;
 	player_t player;
 	enemy_t *enemies[10];
 	int c = 0; // key pressed
 	cursor_t enemy_pos;
+	int turn = 0;
 
 	create_player(&player);
-	add_enemy(enemies);
+	fixed = player.pos;
+	add_enemy(enemies, prop->level);
 	while (c != 'q') {
 		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps[0]->map);
 		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
@@ -24,18 +55,20 @@ void game_loop(map_t **maps, char **old_state)
 		assign_enemy(maps[0]->map, old_state, enemies[0]);
 		// if an enemy is killed, the player disappear
 		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
-		if (enemy_pos.x != -1 && enemy_pos.y != -1)
+		if (enemy_pos.x != -1 && enemy_pos.y != -1) {
 			attack(enemies, &enemy_pos, &player, &player);
-		camera(&player, win, maps);
-		wmove(win, 1, 1); // test purpose
-		wprintw(win, "%d", enemies[0]->charac.hp);
-		wprintw(win, "\t%d\t%d", enemy_pos.x, enemy_pos.y);
-
+		}
+		call_print(&player, &fixed, maps, prop);
 		screen_charac(&player);
-		screen_logs();
+		parse_key(c);
+		if ((turn % 10) == 0) {
+			if (player.charac.hp < player.charac.hp_max)
+				player.charac.hp++;
+		}
 		refresh();
-		wrefresh(win);
+		wrefresh(prop->win);
 		c = getch();
+		turn++;
 	}
-	delwin(win);
+	delwin(prop->win);
 }
