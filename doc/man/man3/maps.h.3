@@ -1,0 +1,106 @@
+.TH "include/maps.h" 3 "Thu Aug 9 2018" "Version v0.3-alpha" "fed-in-the-abyss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/maps.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmap_t\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAP_SIZE\fP   (512)"
+.br
+.ti -1c
+.RI "#define \fBDEFAULT\fP   '\\e[0m'"
+.br
+.ti -1c
+.RI "#define \fBRED\fP   '\\e[31;1m'"
+.br
+.ti -1c
+.RI "#define \fBBOLD\fP   '\\e[1m'"
+.br
+.ti -1c
+.RI "#define \fBUNDERLINE\fP   '\\e[4m'"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgenerate_maps\fP (int nb)"
+.br
+.ti -1c
+.RI "\fBmap_t\fP ** \fBinit_maps\fP (const char *path)"
+.br
+.ti -1c
+.RI "void \fBdestroy_maps\fP (\fBmap_t\fP **maps)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BOLD   '\\e[1m'"
+
+.SS "#define DEFAULT   '\\e[0m'"
+
+.SS "#define MAP_SIZE   (512)"
+
+.SS "#define RED   '\\e[31;1m'"
+
+.SS "#define UNDERLINE   '\\e[4m'"
+
+.SH "Function Documentation"
+.PP 
+.SS "void destroy_maps (\fBmap_t\fP ** maps)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fImaps\fP array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing  destroy each map 
+.RE
+.PP
+
+.SS "void generate_maps (int nb)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIthe\fP number of maps you want to generate 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing  execute the rust map_generator 
+.RE
+.PP
+
+.SS "\fBmap_t\fP** init_maps (const char * path)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpath\fP to the directory to init 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+maps array  read maps in path, initialize maps 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fed-in-the-abyss from the source code\&.

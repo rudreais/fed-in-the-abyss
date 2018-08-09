@@ -1,0 +1,54 @@
+.TH "src/player.c" 3 "Thu Aug 9 2018" "Version v0.3-alpha" "fed-in-the-abyss" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/player.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'fita\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBassign_player\fP (char **map, char **old_state, \fBcursor_t\fP *charac, \fBcursor_t\fP *cam)"
+.br
+.ti -1c
+.RI "void \fBcreate_player\fP (\fBplayer_t\fP *player)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void assign_player (char ** map, char ** old_state, \fBcursor_t\fP * charac, \fBcursor_t\fP * cam)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdouble\fP char ptr x2, cursor ptr x2 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+nothing  assign player to map and backup map's state 
+.RE
+.PP
+
+.SS "void create_player (\fBplayer_t\fP * player)"
+
+.PP
+\fBParameters:\fP
+.RS 4
+\fIptr\fP to player_t 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+void  create player (assigning pointers as charac and pos) 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fed-in-the-abyss from the source code\&.
