@@ -15,13 +15,13 @@
 #include "maps.h"
 #include "enemy.h"
 
-/** width for the main window */
-#define N_COLS		(COLS - 40)
-
 typedef struct {
 		WINDOW *win;
 		int level;
 } properties_t;
+
+/** width for the main window */
+#define N_COLS		(COLS - 40)
 
 /** height for the main window */
 #define N_LINES		(LINES - 10)
@@ -60,8 +60,16 @@ map_t	**init_level(const char *path);
  */
 void	destroy_level(map_t **maps, char **old_state);
 
+/**
+ * @param properties_t * pointer to properties of the game
+ * @param map_t ** array of maps
+ * @param char ** old state of map
+ * @return void
+ */
 void	game_loop(properties_t *prop, map_t **maps, char **old_state);
+
 enum direction	border_cam(cursor_t *cam);
+
 void camera(player_t *player, WINDOW *win, map_t **map);
 
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);

@@ -28,7 +28,16 @@ static void call_print(player_t *player, cursor_t *fixed, map_t **maps, properti
 
 void parse_key(int key)
 {
-
+	switch (key) {
+	case 'i':
+		printw("inventory");
+		break;
+	case 's':
+		printw("spells");
+		break;
+	default:
+		break;
+	}
 }
 
 void game_loop(properties_t *prop, map_t **maps, char **old_state)
