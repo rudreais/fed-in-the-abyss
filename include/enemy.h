@@ -22,9 +22,6 @@ typedef struct
 
 typedef enemy_t player_t;
 
-/****************/
-/* src/player.c */
-/****************/
 /**
  * @param ptr to player_t
  * @return void
@@ -32,9 +29,6 @@ typedef enemy_t player_t;
  */
 void create_player(player_t *player);
 
-/****************/
-/* src/enemy.c */
-/****************/
 /**
  * @param cursor ptr, enemy_t ptr, double char ptr
  * @return nothing

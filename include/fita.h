@@ -120,3 +120,5 @@ void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam
 extern const char *names[];
 extern enemy_t possible_enemies[];
 extern int enemies_nb;
+
+extern charac_t base_charac;
