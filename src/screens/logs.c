@@ -20,7 +20,7 @@ void screen_death()
 	getch();
 }
 
-void screen_logs(int who_is, char *f_name, int atk)
+void screen_logs(int who_is, const char *f_name, int atk)
 {
 	move(N_LINES, 0);
     if (who_is == 1)

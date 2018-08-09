@@ -60,7 +60,7 @@ map_t	**init_level(const char *path);
  */
 void	destroy_level(map_t **maps, char **old_state);
 
-void	game_loop(map_t **maps, char **old_state);
+void	game_loop(properties_t *prop, map_t **maps, char **old_state);
 enum direction	border_cam(cursor_t *cam);
 void camera(player_t *player, WINDOW *win, map_t **map);
 
@@ -85,7 +85,7 @@ void screen_charac(player_t *player);
  * @param void
  * @return void
  */
-void screen_logs(int who_is, char *f_name, int atk);
+void screen_logs(int who_is, const char *f_name, int atk);
 
 /**
  * @param void
