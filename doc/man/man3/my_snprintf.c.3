@@ -25,6 +25,20 @@ lib/my_snprintf.c
 .SH "Function Documentation"
 .PP 
 .SS "char* my_snprintf (const char * format,  \&.\&.\&.)"
+\fBmy_snprintf()\fP is a high-level implementation of snprintf(3)\&. It create output string with malloc(3)\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIformat\fP : same format as printf(3) family 
+.br
+\fIva_arg\fP : argument list for format 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Output string\&. 
+.RE
+.PP
 
 .SH "Author"
 .PP 

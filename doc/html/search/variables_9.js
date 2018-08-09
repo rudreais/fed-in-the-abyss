@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x',['x',['../structcursor__t.html#a6150e0515f7202e2fb518f7206ed97dc',1,'cursor_t']]]
+  ['type',['Type',['../my_8h.html#a612794cf1ad5756901cd0ee311df0211',1,'my.h']]]
 ];

@@ -78,42 +78,10 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3be780b585289db8fcd4fd8956cf5c94"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="my__str__to__word__array_8c.html#a3be780b585289db8fcd4fd8956cf5c94">word_counter</a> (char *str, char delim)</td></tr>
-<tr class="separator:a3be780b585289db8fcd4fd8956cf5c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ecc8cfe7ca0473478d7c9068d320855"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="my__str__to__word__array_8c.html#a3ecc8cfe7ca0473478d7c9068d320855">get_word</a> (char *line, char delim)</td></tr>
-<tr class="separator:a3ecc8cfe7ca0473478d7c9068d320855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5697ab96dfae4c475a279f5b373e5d36"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="my__str__to__word__array_8c.html#a5697ab96dfae4c475a279f5b373e5d36">my_str_to_word_array</a> (char *line, char delim)</td></tr>
 <tr class="separator:a5697ab96dfae4c475a279f5b373e5d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3ecc8cfe7ca0473478d7c9068d320855"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ecc8cfe7ca0473478d7c9068d320855">&#9670;&nbsp;</a></span>get_word()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* get_word </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>line</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>delim</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a5697ab96dfae4c475a279f5b373e5d36"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5697ab96dfae4c475a279f5b373e5d36">&#9670;&nbsp;</a></span>my_str_to_word_array()</h2>
 
@@ -139,34 +107,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3be780b585289db8fcd4fd8956cf5c94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3be780b585289db8fcd4fd8956cf5c94">&#9670;&nbsp;</a></span>word_counter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t word_counter </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>str</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>delim</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p><a class="el" href="my__str__to__word__array_8c.html#a5697ab96dfae4c475a279f5b373e5d36">my_str_to_word_array()</a> function extract tokens from line by delim. The token array is created by malloc(3). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>: string to be parsed </td></tr>
+    <tr><td class="paramname">delim</td><td>: delimiter with which line will be parsed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A array of tokens (NULL terminated). </dd></dl>
 
 </div>
 </div>
