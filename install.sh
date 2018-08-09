@@ -3,7 +3,7 @@
 NCURSES_HEADER=/usr/include/ncurses.h
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 DESKTOP_APP_DIR='/usr/share/applications/'
-EXEC_PATH=$DIR'/fita'
+EXEC_COMMAND="bash -c 'cd $DIR; ./fita'"
 ICON_PATH=$DIR'/fita.png'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -13,7 +13,7 @@ create_desktop_app() {
     read -p "Do you want to add the game to your desktop ? y\N" -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        if printf "[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\nType=Application\nTerminal=true\nExec=%s\nName=fed-in-the-abyss\nIcon=%s\n" "$EXEC_PATH" "$ICON_PATH" > ${DESKTOP_APP_DIR}/fita.desktop; then
+        if printf "[Desktop Entry]\nEncoding=UTF-8\nVersion=1.0\nType=Application\nTerminal=true\nExec=%s\nName=fed-in-the-abyss\nIcon=%s\n" "$EXEC_COMMAND" "$ICON_PATH" > ${DESKTOP_APP_DIR}/fita.desktop; then
             return 0
         else
             return 1
