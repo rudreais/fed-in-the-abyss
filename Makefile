@@ -10,7 +10,7 @@ CFLAGS		+=	-I $(DIRINC)	\
 			-Wall -Wextra -W	\
 			-g
 
-LDFLAGS		+=	-lncurses
+LDFLAGS		+=	-lncurses -lm
 
 DIRLIB		+=	lib/
 
