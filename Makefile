@@ -23,8 +23,7 @@ DIRINC		+=	include/
 
 DIRTEST		+=	src/test/
 
-SRC		+=	$(DIRLIB)readline.c		\
-			$(DIRLIB)my_snprintf.c		\
+SRC		+=	$(DIRLIB)my_snprintf.c		\
 			$(DIRLIB)my_strcat.c		\
 			$(DIRLIB)my_tabdup.c		\
 			$(DIRLIB)my_str_to_word_array.c	\
