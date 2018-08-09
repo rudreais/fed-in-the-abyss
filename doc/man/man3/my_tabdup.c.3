@@ -17,17 +17,24 @@ lib/my_tabdup.c
 
 .in +1c
 .ti -1c
-.RI "size_t \fBmy_tablen\fP (char **tab)"
-.br
-.ti -1c
 .RI "char ** \fBmy_tabdup\fP (char **tab)"
 .br
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "char** my_tabdup (char ** tab)"
-
-.SS "size_t my_tablen (char ** tab)"
+\fBmy_tabdup()\fP function return a pointer to a new string array which is a duplicate of the string array tab\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItab\fP : A string array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A pointer to duplicated string array\&. 
+.RE
+.PP
 
 .SH "Author"
 .PP 
