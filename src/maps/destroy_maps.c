@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "fita.h"
+#include "maps.h"
 
 void destroy_maps(map_t **maps)
 {
@@ -11,13 +11,4 @@ void destroy_maps(map_t **maps)
 		free(maps[i]);
 	}
 	free(maps);
-}
-
-void destroy_level(map_t **maps, char **old_state)
-{
-	endwin();
-	for (int i = 0; old_state[i] != NULL; i++)
-		free(old_state[i]);
-	free(old_state);
-	destroy_maps(maps);
 }

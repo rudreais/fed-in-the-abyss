@@ -8,19 +8,28 @@
 #include "fita.h"
 
 const charac_t possible_charac[] = {
-   {1, 10, 4, 3, 1}, // R
-   {1, 14, 2, 5, 0}, // W
-   {1,  8, 5, 1, 3}, // Z
-   {1, 10, 3, 2, 2}, // O
+  //level, hp, hp_max, mp, str, def, xp
+   {1, 10, 10, 4, 3, 1, 0}, // R
+   {1, 14, 14, 2, 5, 0, 0}, // W
+   {1,  8, 8,  5, 1, 3, 0}, // Z
+   {1, 10, 10, 3, 2, 2, 0}, // O
+};
+
+const char *names[] = {
+		       "ROGUE",
+		       "WARRIOR",
+		       "MONSTER",
+		       "OGRE"
 };
 
 enemy_t possible_enemies[] = {
 	// {char name, pos, pos_bak, charac}
-	{'R', {0}, {0}, possible_charac[0]},
-	{'W', {0}, {0}, possible_charac[1]},
-	{'Z', {0}, {0}, possible_charac[2]},
-	{'O', {0}, {0}, possible_charac[3]}
+			      {'R', NULL, {0}, {0}, possible_charac[0]},
+	{'W', NULL, {0}, {0}, possible_charac[1]},
+	{'M', NULL, {0}, {0}, possible_charac[2]},
+	{'O', NULL, {0}, {0}, possible_charac[3]}
 };
+
 int enemies_nb = GET_ARRAY_SIZE(possible_enemies);
 
 void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state)
@@ -48,12 +57,12 @@ void enemy_turn(player_t *player, enemy_t *enemy, char **map, enemy_t **enemies,
 
 void assign_enemy(char **map, char **old_state, enemy_t *enemy)
 {
-    map[enemy->pos_bak.y][enemy->pos_bak.x] = old_state[enemy->pos_bak.y][enemy->pos_bak.x];
-    map[enemy->pos.y][enemy->pos.x] = enemy->name;
-    enemy->pos_bak = enemy->pos;
+	map[enemy->pos_bak.y][enemy->pos_bak.x] = old_state[enemy->pos_bak.y][enemy->pos_bak.x];
+	map[enemy->pos.y][enemy->pos.x] = enemy->name;
+	enemy->pos_bak = enemy->pos;
 }
 
-void add_enemy(enemy_t **enemies)
+void add_enemy(enemy_t **enemies, int level)
 {
 	int index = 0;
 	enemy_t *enemy = malloc(sizeof(enemy_t));
@@ -61,6 +70,7 @@ void add_enemy(enemy_t **enemies)
 	index = rand() % 4;
 	*enemy = (enemy_t) {
 		.name = possible_enemies[index].name,
+		.f_name = names[index],
 		.charac = possible_enemies[index].charac,
 		.pos = {
 			.x = 50,
@@ -71,7 +81,7 @@ void add_enemy(enemy_t **enemies)
 			.y = 20
 		}
 	};
-
+	enemy->charac.level = level;
 	enemies[0] = enemy;
 	enemies[1] = NULL;
 }

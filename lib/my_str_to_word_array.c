@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t word_counter(char *str, char delim)
+static size_t word_counter(char *str, char delim)
 {
 	size_t i = 0;
 	size_t nb = 0;
 
 	if (str[0] == '\0')
-		return (1);
+		return 1;
 	for (; *str == delim; str++);
 	for (i = strlen(str) - 1; i > 0 && str[i] == delim; i--)
 		str[i] = '\0';
@@ -17,19 +17,28 @@ size_t word_counter(char *str, char delim)
 			nb++;
 		for (; *str == delim; str++);
 	}
-	return (nb + 1);
+	return nb + 1;
 }
 
-char *get_word(char *line, char delim)
+static char *get_word(char *line, char delim)
 {
 	size_t i = 0;
 
 	if (*line == '\0')
-		return (strdup(line));
+		return strdup(line);
 	while (line[i] != delim && line[i] != '\0')
 		i++;
-	return (strndup(line, i));
+	return strndup(line, i);
 }
+
+/**
+ * my_str_to_word_array() function extract tokens from line by delim.
+ * The token array is created by malloc(3).
+ * \param line : string to be parsed
+ * \param delim : delimiter with which line will be parsed
+ * \return A array of tokens (NULL terminated).
+ */
+
 
 char **my_str_to_word_array(char *line, char delim)
 {
@@ -37,8 +46,7 @@ char **my_str_to_word_array(char *line, char delim)
 	size_t nb_word = 0;
 	char **tab;
 
-	if (!line)
-		return (NULL);
+	assert(line != NULL);
 	nb_word = word_counter(line, delim);
 	tab = malloc(sizeof(char *) * (nb_word + 1));
 	assert(tab != NULL);
@@ -49,5 +57,5 @@ char **my_str_to_word_array(char *line, char delim)
 		for (; *line != delim && *line; line++);
 	}
 	tab[i] = NULL;
-	return (tab);
+	return tab;
 }

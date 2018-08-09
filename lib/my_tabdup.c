@@ -2,14 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t my_tablen(char **tab)
+static size_t my_tablen(char **tab)
 {
 	size_t i = 0;
 
 	if (tab != NULL)
 		for (; tab[i] != NULL; i++);
-	return (i);
+	return i;
 }
+
+/**
+ * my_tabdup() function return a pointer to a new string array which is a
+ * duplicate of the string array tab.
+ * \param tab : A string array
+ * \return A pointer to duplicated string array.
+ */
 
 char **my_tabdup(char **tab)
 {
@@ -23,5 +30,5 @@ char **my_tabdup(char **tab)
 		assert(new[i] != NULL);
 	}
 	new[i] = NULL;
-	return (new);
+	return new;
 }
