@@ -22,7 +22,7 @@ void screen_death()
 
 void screen_logs(int who_is, char *f_name, int atk)
 {
-    move(N_LINES, 0);
+	move(N_LINES, 0);
     if (who_is == 1)
 	    printw("You hit %s for %d damages\n", f_name, atk);
     else
