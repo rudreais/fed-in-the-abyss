@@ -20,9 +20,11 @@ void screen_death()
 	getch();
 }
 
-void screen_logs()
+void screen_logs(int who_is, const char *f_name, int atk)
 {
 	move(N_LINES, 0);
-	printw("HERE IS LOGS\n");
-	printw("ON THE REST OF THE LINES");
+    if (who_is == 1)
+	    printw("You hit %s for %d damages\n", f_name, atk);
+    else
+	    printw("%s hit you for %d damages", f_name, atk);
 }
