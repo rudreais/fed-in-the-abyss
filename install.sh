@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+
+#TODO checker tous les includes
 NCURSES_HEADER=/usr/include/ncurses.h
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 DESKTOP_APP_DIR='/usr/share/applications/'
