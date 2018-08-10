@@ -31,15 +31,6 @@ static char *get_word(char *line, char delim)
 	return strndup(line, i);
 }
 
-/**
- * my_str_to_word_array() function extract tokens from line by delim.
- * The token array is created by malloc(3).
- * \param line : string to be parsed
- * \param delim : delimiter with which line will be parsed
- * \return A array of tokens (NULL terminated).
- */
-
-
 char **my_str_to_word_array(char *line, char delim)
 {
 	size_t i = 0;
