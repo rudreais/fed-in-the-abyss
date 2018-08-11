@@ -71,7 +71,15 @@ void add_enemy(enemy_t **enemies, int level)
 	*enemy = (enemy_t) {
 		.name = possible_enemies[index].name,
 		.f_name = names[index],
-		.charac = possible_enemies[index].charac,
+		.charac = {
+			.level = level,
+			.hp = possible_enemies[index].charac.hp,
+			.hp_max = possible_enemies[index].charac.hp_max,
+			.mp = possible_enemies[index].charac.mp,
+			.str = possible_enemies[index].charac.str,
+			.def = possible_enemies[index].charac.def,
+			.xp = possible_enemies[index].charac.xp
+		},
 		.pos = {
 			.x = 50,
 			.y = 20
@@ -81,7 +89,6 @@ void add_enemy(enemy_t **enemies, int level)
 			.y = 20
 		}
 	};
-	enemy->charac.level = level;
 	enemies[0] = enemy;
 	enemies[1] = NULL;
 }

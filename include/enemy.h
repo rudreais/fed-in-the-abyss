@@ -2,13 +2,13 @@
 
 typedef struct
 {
-		int level;
-		int hp;
-		int hp_max;
-		int mp;
-		int str;
-		int def;
-		int xp;
+	int level;
+	int hp;
+	int hp_max;
+	int mp;
+	int str;
+	int def;
+	int xp;
 } charac_t;
 
 typedef struct
@@ -37,15 +37,16 @@ void create_player(player_t *player);
 void enemy_turn(enemy_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state);
 
 /**
- *
- *
- *
+ * @param char ** current map
+ * @param char ** old state of the map
+ * @param enemy_t * enemy to assign
+ * @return void
  */
 void assign_enemy(char **map, char **old_state, enemy_t *enemy);
 
 /**
- *
- *
- *
+ * @param enemy_t ** array containing enemies
+ * @param int the current level we're at
+ * @return void
  */
 void add_enemy(enemy_t **enemies, int level);

@@ -11,13 +11,6 @@ static size_t my_tablen(char **tab)
 	return i;
 }
 
-/**
- * my_tabdup() function return a pointer to a new string array which is a
- * duplicate of the string array tab.
- * \param tab : A string array
- * \return A pointer to duplicated string array.
- */
-
 char **my_tabdup(char **tab)
 {
 	size_t i = 0;
