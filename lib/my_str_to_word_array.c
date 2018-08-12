@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t word_counter(char *str, char delim)
+static size_t word_counter(char *str, char delim)
 {
 	size_t i = 0;
 	size_t nb = 0;
@@ -20,7 +20,7 @@ size_t word_counter(char *str, char delim)
 	return nb + 1;
 }
 
-char *get_word(char *line, char delim)
+static char *get_word(char *line, char delim)
 {
 	size_t i = 0;
 

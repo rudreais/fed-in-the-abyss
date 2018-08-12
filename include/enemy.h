@@ -2,26 +2,26 @@
 
 typedef struct
 {
-    int level;
-    int hp;
-    int mp;
-    int str;
-    int def;
+	int level;
+	int hp;
+	int hp_max;
+	int mp;
+	int str;
+	int def;
+	int xp;
 } charac_t;
 
 typedef struct
 {
-    char name;
-    cursor_t pos;
-    cursor_t pos_bak;
-    charac_t charac;
+	char name;
+	const char *f_name;
+	cursor_t pos;
+	cursor_t pos_bak;
+	charac_t charac;
 } enemy_t;
 
 typedef enemy_t player_t;
 
-/****************/
-/* src/player.c */
-/****************/
 /**
  * @param ptr to player_t
  * @return void
@@ -29,9 +29,6 @@ typedef enemy_t player_t;
  */
 void create_player(player_t *player);
 
-/****************/
-/* src/enemy.c */
-/****************/
 /**
  * @param cursor ptr, enemy_t ptr, double char ptr
  * @return nothing
@@ -40,15 +37,16 @@ void create_player(player_t *player);
 void enemy_turn(enemy_t *player, enemy_t *enemy, char **map, enemy_t **enemies, char **state);
 
 /**
- *
- *
- *
+ * @param char ** current map
+ * @param char ** old state of the map
+ * @param enemy_t * enemy to assign
+ * @return void
  */
 void assign_enemy(char **map, char **old_state, enemy_t *enemy);
 
 /**
- *
- *
- *
+ * @param enemy_t ** array containing enemies
+ * @param int the current level we're at
+ * @return void
  */
-void add_enemy(enemy_t **enemies);
+void add_enemy(enemy_t **enemies, int level);

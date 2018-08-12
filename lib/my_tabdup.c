@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-size_t my_tablen(char **tab)
+static size_t my_tablen(char **tab)
 {
 	size_t i = 0;
 

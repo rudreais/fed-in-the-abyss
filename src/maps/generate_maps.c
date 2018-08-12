@@ -12,7 +12,7 @@
 #include "maps.h"
 #include "my.h"
 
-void exec_binary(char **av)
+static void exec_binary(char **av)
 {
 	switch (fork()) {
 	case -1:
@@ -25,10 +25,6 @@ void exec_binary(char **av)
 		wait(NULL);
 	}
 }
-
-/*
- * av = {"./maps/map_generator", level_name, seed, size}
- */
 
 void generate_maps(int nb)
 {

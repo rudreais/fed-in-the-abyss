@@ -39,7 +39,7 @@ static map_t *create_map(char *filename)
 	return map;
 }
 
-size_t get_maps_nb(map_t **tab)
+static size_t get_maps_nb(map_t **tab)
 {
 	size_t i = 0;
 
@@ -48,7 +48,7 @@ size_t get_maps_nb(map_t **tab)
 	return i;
 }
 
-map_t **append_new_map(map_t **maps, char *filename)
+static map_t **append_new_map(map_t **maps, char *filename)
 {
 	size_t i = 0;
 	map_t **new = malloc(sizeof(map_t *) * (get_maps_nb(maps) + 2));

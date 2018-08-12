@@ -10,7 +10,7 @@ CFLAGS		+=	-I $(DIRINC)	\
 			-Wall -Wextra -W	\
 			-g
 
-LDFLAGS		+=	-lncurses
+LDFLAGS		+=	-lncurses -lm
 
 DIRLIB		+=	lib/
 
@@ -31,7 +31,6 @@ SRC		+=	$(DIRLIB)my_snprintf.c		\
 			$(DIRSRC)attack.c		\
 			$(DIRSRC)screens/logs.c		\
 			$(DIRSRC)screens/player_info.c	\
-			$(DIRSRC)prints.c		\
 			$(DIRSRC)player.c		\
 			$(DIRSRC)enemy.c		\
 			$(DIRMAPS)init_maps.c		\

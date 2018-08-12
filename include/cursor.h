@@ -9,12 +9,8 @@
 
 #pragma once
 
-/**
- * see cursor struct as a position's object
- * these "methods" shouldn't be touched
- */
 typedef struct
 {
-    int x;
-    int y;
+	int x;
+	int y;
 } cursor_t;

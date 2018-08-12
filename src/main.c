@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <ncurses.h>
 #include "fita.h"
 #include "my.h"
 
@@ -24,6 +25,9 @@ int main(int ac, char **av)
 {
 	map_t **maps;
 	char **old_state;
+	properties_t prop = {
+		.level = 0
+	};
 
 	if (ac > 2) {
 		if (!strcmp(av[1], "--generate-maps"))
@@ -34,8 +38,9 @@ int main(int ac, char **av)
 	maps = init_level("./maps/");
 	if (!maps)
 		return usage("Maps not found in maps/");
+	prop.win = newwin(GET_HEIGHT, GET_WIDTH, 0, 0);
 	old_state = my_tabdup(maps[0]->map);
-	game_loop(maps, old_state);
+	game_loop(&prop, maps, old_state);
 	destroy_level(maps, old_state);
 	return 0;
 }

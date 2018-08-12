@@ -1,17 +1,37 @@
+/*
+ * src/game_loop.c
+ *
+ * main game loop
+ */
+
 #include <ncurses.h>
 #include <stdlib.h>
 #include "fita.h"
 
-void game_loop(map_t **maps, char **old_state)
+void parse_key(int key)
 {
-	WINDOW *win = newwin(GET_HEIGHT, GET_WIDTH, 0, 0);
+	switch (key) {
+	case 'i':
+		printw("inventory");
+		break;
+	case 's':
+		printw("spells");
+		break;
+	default:
+		break;
+	}
+}
+
+void game_loop(properties_t *prop, map_t **maps, char **old_state)
+{
 	player_t player;
 	enemy_t *enemies[10];
 	int c = 0; // key pressed
 	cursor_t enemy_pos;
+	int turn = 0;
 
 	create_player(&player);
-	add_enemy(enemies);
+	add_enemy(enemies, prop->level);
 	while (c != 'q') {
 		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps[0]->map);
 		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
@@ -24,18 +44,20 @@ void game_loop(map_t **maps, char **old_state)
 		assign_enemy(maps[0]->map, old_state, enemies[0]);
 		// if an enemy is killed, the player disappear
 		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
-		if (enemy_pos.x != -1 && enemy_pos.y != -1)
+		if (enemy_pos.x != -1 && enemy_pos.y != -1) {
 			attack(enemies, &enemy_pos, &player, &player);
-		camera(&player, win, maps);
-		wmove(win, 1, 1); // test purpose
-		wprintw(win, "%d", enemies[0]->charac.hp);
-		wprintw(win, "\t%d\t%d", enemy_pos.x, enemy_pos.y);
-
+		}
+		camera(&player, maps, prop);
 		screen_charac(&player);
-		screen_logs();
+		parse_key(c);
+		if ((turn % 10) == 0) {
+			if (player.charac.hp < player.charac.hp_max)
+				player.charac.hp++;
+		}
 		refresh();
-		wrefresh(win);
+		wrefresh(prop->win);
 		c = getch();
+		turn++;
 	}
-	delwin(win);
+	delwin(prop->win);
 }
