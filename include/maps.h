@@ -21,8 +21,8 @@
 
 typedef struct
 {
-	char **map;
-	char *name;
+	char	**map;
+	char	*name;
 } map_t;
 
 /**

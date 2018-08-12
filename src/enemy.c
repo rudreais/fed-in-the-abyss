@@ -8,23 +8,23 @@
 #include "fita.h"
 
 const charac_t possible_charac[] = {
-  //level, hp, hp_max, mp, str, def, xp
-   {1, 10, 10, 4, 3, 1, 0}, // R
-   {1, 14, 14, 2, 5, 0, 0}, // W
-   {1,  8, 8,  5, 1, 3, 0}, // Z
-   {1, 10, 10, 3, 2, 2, 0}, // O
+	//level, hp, hp_max, mp, str, def, xp
+	{1, 10, 10, 4, 3, 1, 0}, // R
+	{1, 14, 14, 2, 5, 0, 0}, // W
+	{1,  8, 8,  5, 1, 3, 0}, // Z
+	{1, 10, 10, 3, 2, 2, 0}, // O
 };
 
 const char *names[] = {
-		       "ROGUE",
-		       "WARRIOR",
-		       "MONSTER",
-		       "OGRE"
+	"ROGUE",
+	"WARRIOR",
+	"MONSTER",
+	"OGRE"
 };
 
 enemy_t possible_enemies[] = {
 	// {char name, pos, pos_bak, charac}
-			      {'R', NULL, {0}, {0}, possible_charac[0]},
+	{'R', NULL, {0}, {0}, possible_charac[0]},
 	{'W', NULL, {0}, {0}, possible_charac[1]},
 	{'M', NULL, {0}, {0}, possible_charac[2]},
 	{'O', NULL, {0}, {0}, possible_charac[3]}

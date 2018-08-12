@@ -11,8 +11,8 @@ the branch `refactoring` needs help ! fork and improve the actual code to make i
 To launch the game just run the following commands in a terminal:
 
 ```console
-git clone https://github.com/rudreais/fed-in-the-abyss.git
-cd fed-in-the-abyss
-chmod +x install.sh
-./install.sh
+$ git clone https://github.com/rudreais/fed-in-the-abyss.git
+$ cd fed-in-the-abyss
+$ chmod +x install.sh
+$ ./install.sh
 ```
