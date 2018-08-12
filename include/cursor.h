@@ -11,6 +11,6 @@
 
 typedef struct
 {
-    int x;
-    int y;
+	int x;
+	int y;
 } cursor_t;
