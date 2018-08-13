@@ -25,7 +25,7 @@ int main(int ac, char **av)
 {
 	map_t **maps;
 	char **old_state;
-	properties_t prop = {
+	fita_t prop = {
 		.level = 0
 	};
 

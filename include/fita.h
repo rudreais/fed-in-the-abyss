@@ -23,13 +23,13 @@ typedef struct
 {
 	WINDOW	*win;
 	int	level;
-} properties_t;
+} fita_t;
 
 /** Width for the main window */
 #define N_COLS		(COLS - 40)
 
 /** Height for the main window */
-#define N_LINES		(LINES - 10)
+#define N_LINES	(LINES - 10)
 
 /** Get a good width for the main WINDOW */
 #define GET_WIDTH	(((N_COLS % 2) == 0) ? N_COLS - 1 : N_COLS)
@@ -81,21 +81,26 @@ void	destroy_level(map_t **maps, char **old_state);
  * Basically : game loop. Call game's sub-routine.
  */
 
-void	game_loop(properties_t *prop, map_t **maps, char **old_state);
+void	game_loop(fita_t *prop, map_t **maps, char **old_state);
 
 /**
  * @param player : player structure
- * @param prop : properties_t containing current ncurses window
+ * @param prop : fita_t containing current ncurses window
  * @param maps : maps array
  *
  * Manage the camera during the game, compute player position,
  * center map on the player, and finally print map.
  */
 
-void camera(player_t *player, map_t **maps, properties_t *prop);
+void camera(player_t *player, map_t **maps, fita_t *prop);
 
 /**
- * Soon
+ * @param int key to parse
+ * @param cursor_t * position to move
+ * @param cursor_t * actual position
+ * @param char ** actual map
+ *
+ * Parsing the key to move player on the map
  */
 
 cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
@@ -106,7 +111,7 @@ cursor_t move_charac(int key, cursor_t *pos, cursor_t *cam, char **map);
  * @param enemy_t pointer to the character attacking
  * @param player_t pointer to the player
  *
- * Soon
+ * (well its attack)
  */
 
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player);
@@ -114,13 +119,13 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
 /**
  * @param player_t pointer to player
  *
- * Soon
+ * Screen showing stats of the player: level, strength, etc.
  */
 
 void screen_charac(player_t *player);
 
 /**
- * Soon
+ * Logs screen showing damage dealt, gold income, or any events.
  */
 
 void screen_logs(int who_is, const char *f_name, int atk);
@@ -140,12 +145,12 @@ void screen_death(void);
  * @param cursor_t * player's position
  * @param cursor_t * camera's position
  *
- * Soon
+ * Assigning player to the next position.
  */
 void assign_player(char **map, char **old_state, cursor_t *charac, cursor_t *cam);
 
-extern const char *names[];  /** Soon */
+extern const char *names[];  /** Enemies possible names */
 extern enemy_t possible_enemies[]; /** Array of all enemy possibilities */
 extern int enemies_nb; /** Number of possible_enemies */
 
-extern charac_t base_charac;  /** Soon */
+extern charac_t base_charac;  /** Characteristics at the begin */
