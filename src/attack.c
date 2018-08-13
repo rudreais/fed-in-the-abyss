@@ -9,7 +9,7 @@
 
 static void attr_exp(player_t *player)
 {
-	int level = player->charac.level;
+	int level;
 
 	player->charac.level = cbrt(player->charac.xp / 1.25);
 	level = player->charac.level;
@@ -21,7 +21,10 @@ static void attr_exp(player_t *player)
 
 void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *player)
 {
-	cursor_t backup = {.x = defender->x, .y = defender->y };
+	cursor_t backup = {
+		.x = defender->x,
+		.y = defender->y
+	};
 	int hit_for;
 
 	if (turn->name != '@') {
@@ -32,7 +35,7 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
 		attr_exp(player);
 		return;
 	}
-	for (int i = 0; enemies[i]; i++) {
+	for (int i = 0; enemies[i] != NULL; i++) {
 		if (enemies[i]->pos.x == backup.x && enemies[i]->pos.y == backup.y) {
 			hit_for = enemies[i]->charac.hp - turn->charac.str;
 			enemies[i]->charac.hp = hit_for;

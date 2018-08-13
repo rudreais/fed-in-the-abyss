@@ -22,7 +22,7 @@ void parse_key(int key)
 	}
 }
 
-void game_loop(properties_t *prop, map_t **maps, char **old_state)
+void game_loop(fita_t *prop, map_t **maps, char **old_state)
 {
 	player_t player;
 	enemy_t *enemies[10];
