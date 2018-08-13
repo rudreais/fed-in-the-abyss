@@ -23,6 +23,8 @@ typedef struct
 {
 	WINDOW	*win;
 	int	level;
+	player_t player;
+	enemy_t *enemies[10];
 } properties_t;
 
 /** Width for the main window */

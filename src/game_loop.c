@@ -24,39 +24,37 @@ void parse_key(int key)
 
 void game_loop(properties_t *prop, map_t **maps, char **old_state)
 {
-	player_t player;
-	enemy_t *enemies[10];
-	int c = 0; // key pressed
+	int key = 0;
 	cursor_t enemy_pos;
 	int turn = 0;
 
-	create_player(&player);
-	add_enemy(enemies, prop->level);
-	while (c != 'q') {
-		enemy_pos = move_charac(c, &player.pos, &player.pos_bak, maps[0]->map);
-		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
-		player.pos_bak = player.pos;
-		enemy_turn(&player, enemies[0], maps[0]->map, enemies, old_state);
-		if (player.charac.hp <= 0) {
+	create_player(&prop->player);
+	add_enemy(prop->enemies, prop->level);
+	while (key != 'q') {
+		enemy_pos = move_charac(key, &prop->player.pos, &prop->player.pos_bak, maps[0]->map);
+		assign_player(maps[0]->map, old_state, &prop->player.pos, &prop->player.pos_bak);
+		prop->player.pos_bak = prop->player.pos;
+		enemy_turn(&prop->player, prop->enemies[0], maps[0]->map, prop->enemies, old_state);
+		if (prop->player.charac.hp <= 0) {
 			screen_death();
 			return;
 		}
-		assign_enemy(maps[0]->map, old_state, enemies[0]);
+		assign_enemy(maps[0]->map, old_state, prop->enemies[0]);
 		// if an enemy is killed, the player disappear
-		assign_player(maps[0]->map, old_state, &player.pos, &player.pos_bak);
+		assign_player(maps[0]->map, old_state, &prop->player.pos, &prop->player.pos_bak);
 		if (enemy_pos.x != -1 && enemy_pos.y != -1) {
-			attack(enemies, &enemy_pos, &player, &player);
+			attack(prop->enemies, &enemy_pos, &prop->player, &prop->player);
 		}
-		camera(&player, maps, prop);
-		screen_charac(&player);
-		parse_key(c);
+		camera(&prop->player, maps, prop);
+		screen_charac(&prop->player);
+		parse_key(key);
 		if ((turn % 10) == 0) {
-			if (player.charac.hp < player.charac.hp_max)
-				player.charac.hp++;
+			if (prop->player.charac.hp < prop->player.charac.hp_max)
+				prop->player.charac.hp++;
 		}
 		refresh();
 		wrefresh(prop->win);
-		c = getch();
+		key = getch();
 		turn++;
 	}
 	delwin(prop->win);
