@@ -41,6 +41,7 @@ void game_loop(properties_t *prop, map_t **maps, char **old_state)
 		}
 		assign_enemy(maps[0]->map, old_state, prop->enemies[0]);
 		// if an enemy is killed, the player disappear
+		// to prevent, re-assign player to map
 		assign_player(maps[0]->map, old_state, &prop->player.pos, &prop->player.pos_bak);
 		if (enemy_pos.x != -1 && enemy_pos.y != -1) {
 			attack(prop->enemies, &enemy_pos, &prop->player, &prop->player);

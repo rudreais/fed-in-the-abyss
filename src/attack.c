@@ -30,8 +30,11 @@ void attack(enemy_t **enemies, cursor_t *defender, enemy_t *turn, player_t *play
 	if (turn->name != '@') {
 		hit_for = player->charac.hp - turn->charac.str;
 		player->charac.hp = hit_for;
-		player->charac.xp = 34;
 		screen_logs(1, turn->f_name, hit_for);
+		if (turn->charac.hp <= 0) {
+			player->charac.xp = 34;
+		}
+		printw("%d\n", turn->charac.hp);
 		attr_exp(player);
 		return;
 	}
