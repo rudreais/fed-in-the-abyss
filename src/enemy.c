@@ -24,10 +24,10 @@ const char *names[] = {
 
 enemy_t possible_enemies[] = {
 	// {char name, pos, pos_bak, charac}
-	{'R', NULL, {0}, {0}, possible_charac[0]},
-	{'W', NULL, {0}, {0}, possible_charac[1]},
-	{'M', NULL, {0}, {0}, possible_charac[2]},
-	{'O', NULL, {0}, {0}, possible_charac[3]}
+	{'R', NULL, {0}, {0}, {0}},
+	{'W', NULL, {0}, {0}, {0}},
+	{'M', NULL, {0}, {0}, {0}},
+	{'O', NULL, {0}, {0}, {0}}
 };
 
 int enemies_nb = GET_ARRAY_SIZE(possible_enemies);
