@@ -72,7 +72,7 @@ static enum direction border_cam(cursor_t *cam)
 	return -1;
 }
 
-void camera(player_t *player, map_t **maps, properties_t *prop)
+void camera(player_t *player, map_t **maps, fita_t *prop)
 {
 	int border; // define if fixed cam pos is used or not
 	cursor_t fixed = player->pos;
